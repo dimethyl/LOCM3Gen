@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Project environment parameters -->
+<environment name="EmBitz">
+  <templates>
+    <include project-directory="." project-hide="true">
+      EmBitz/*
+    </include>
+  </templates>
+</environment>

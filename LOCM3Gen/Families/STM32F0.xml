@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Microcontroller family definition -->
+<family name="STM32F0" core="cortex-m0" fp-type="soft">
+  <!-- Family-specific libopencm3 source files -->
+  <sources>
+    <include project-directory="libopencm3/cm3">
+      include/libopencm3/cm3/*.h
+    </include>
+    <include project-directory="libopencm3/dispatch">
+      include/libopencm3/dispatch/*.h
+    </include>
+    <include project-directory="libopencm3/usb">
+      include/libopencm3/usb/*.h
+    </include>
+    <include project-directory="libopencm3/usb/dwc">
+      include/libopencm3/usb/dwc/*.h
+    </include>
+    <include project-directory="libopencm3/stm32">
+      include/libopencm3/stm32/*.h
+    </include>
+    <include project-directory="libopencm3/stm32/common">
+      include/libopencm3/stm32/common/*.h
+    </include>
+    <include project-directory="libopencm3/stm32/f0">
+      include/libopencm3/stm32/f0/*.h
+    </include>
+    <include project-directory="libopencm3">
+      lib/cortex-m-generic.ld
+    </include>
+    <include project-directory="libopencm3">
+      lib/libopencm3_stm32f0.a
+    </include>
+  </sources>
+
+  <!-- Family-specific templates used for project generation -->
+  <templates>
+    <include project-directory="project" keep-existing="true">
+      STM32F0/*
+    </include>
+    <include project-directory=".">
+      linker.ld
+    </include>
+  </templates>
+  
+  <!-- Precompiled .a libraries (after being copied) -->
+  <libraries>
+    <library>
+      libopencm3/libopencm3_stm32f0.a
+    </library>
+  </libraries>
+  
+  <!-- Compiler definitions -->
+  <definitions>
+    <define>
+      STM32F0
+    </define>
+  </definitions>
+
+  <!-- SVD files archive -->
+  <svd-archive project-directory=".">
+    SVD/STM32F0.zip
+  </svd-archive>
+  
+  <!-- Devices list -->
+  <devices>
+    <device name="STM32F030C6" rom="32K"  ram="4K"  svd-file="STM32F0x0.svd" />
+    <device name="STM32F030C8" rom="64K"  ram="8K"  svd-file="STM32F0x0.svd" />
+    <device name="STM32F030CC" rom="256K" ram="32K" svd-file="STM32F0x0.svd" />
+    <device name="STM32F030F4" rom="16K"  ram="4K"  svd-file="STM32F0x0.svd" />
+    <device name="STM32F030K6" rom="32K"  ram="4K"  svd-file="STM32F0x0.svd" />
+    <device name="STM32F030R8" rom="64K"  ram="8K"  svd-file="STM32F0x0.svd" />
+    <device name="STM32F030RC" rom="256K" ram="32K" svd-file="STM32F0x0.svd" />
+    <device name="STM32F031C4" rom="16K"  ram="4K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F031C6" rom="32K"  ram="4K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F031E6" rom="32K"  ram="4K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F031F4" rom="16K"  ram="4K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F031F6" rom="32K"  ram="4K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F031G4" rom="16K"  ram="4K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F031G6" rom="32K"  ram="4K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F031K4" rom="16K"  ram="4K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F031K6" rom="32K"  ram="4K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F038C6" rom="32K"  ram="4K"  svd-file="STM32F0x8.svd" />
+    <device name="STM32F038E6" rom="32K"  ram="4K"  svd-file="STM32F0x8.svd" />
+    <device name="STM32F038F6" rom="32K"  ram="4K"  svd-file="STM32F0x8.svd" />
+    <device name="STM32F038G6" rom="32K"  ram="4K"  svd-file="STM32F0x8.svd" />
+    <device name="STM32F038K6" rom="32K"  ram="4K"  svd-file="STM32F0x8.svd" />
+    <device name="STM32F042C4" rom="16K"  ram="6K"  svd-file="STM32F0x2.svd" />
+    <device name="STM32F042C6" rom="32K"  ram="6K"  svd-file="STM32F0x2.svd" />
+    <device name="STM32F042F4" rom="16K"  ram="6K"  svd-file="STM32F0x2.svd" />
+    <device name="STM32F042F6" rom="32K"  ram="6K"  svd-file="STM32F0x2.svd" />
+    <device name="STM32F042G4" rom="16K"  ram="6K"  svd-file="STM32F0x2.svd" />
+    <device name="STM32F042G6" rom="32K"  ram="6K"  svd-file="STM32F0x2.svd" />
+    <device name="STM32F042K4" rom="16K"  ram="6K"  svd-file="STM32F0x2.svd" />
+    <device name="STM32F042K6" rom="32K"  ram="6K"  svd-file="STM32F0x2.svd" />
+    <device name="STM32F042T6" rom="32K"  ram="6K"  svd-file="STM32F0x2.svd" />
+    <device name="STM32F048C6" rom="32K"  ram="6K"  svd-file="STM32F0x8.svd" />
+    <device name="STM32F048G6" rom="32K"  ram="6K"  svd-file="STM32F0x8.svd" />
+    <device name="STM32F048T6" rom="32K"  ram="6K"  svd-file="STM32F0x8.svd" />
+    <device name="STM32F051C4" rom="16K"  ram="8K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F051C6" rom="32K"  ram="8K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F051C8" rom="64K"  ram="8K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F051K4" rom="16K"  ram="8K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F051K6" rom="32K"  ram="8K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F051K8" rom="64K"  ram="8K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F051R4" rom="16K"  ram="8K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F051R6" rom="32K"  ram="8K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F051R8" rom="64K"  ram="8K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F051T8" rom="64K"  ram="8K"  svd-file="STM32F0x1.svd" />
+    <device name="STM32F058C8" rom="64K"  ram="8K"  svd-file="STM32F0x8.svd" />
+    <device name="STM32F058R8" rom="64K"  ram="8K"  svd-file="STM32F0x8.svd" />
+    <device name="STM32F058T8" rom="64K"  ram="8K"  svd-file="STM32F0x8.svd" />
+    <device name="STM32F070C6" rom="32K"  ram="6K"  svd-file="STM32F0x0.svd" />
+    <device name="STM32F070CB" rom="128K" ram="16K" svd-file="STM32F0x0.svd" />
+    <device name="STM32F070F6" rom="32K"  ram="6K"  svd-file="STM32F0x0.svd" />
+    <device name="STM32F070RB" rom="128K" ram="16K" svd-file="STM32F0x0.svd" />
+    <device name="STM32F071C8" rom="64K"  ram="16K" svd-file="STM32F0x1.svd" />
+    <device name="STM32F071CB" rom="128K" ram="16K" svd-file="STM32F0x1.svd" />
+    <device name="STM32F071RB" rom="128K" ram="16K" svd-file="STM32F0x1.svd" />
+    <device name="STM32F071V8" rom="64K"  ram="16K" svd-file="STM32F0x1.svd" />
+    <device name="STM32F071VB" rom="128K" ram="16K" svd-file="STM32F0x1.svd" />
+    <device name="STM32F072C8" rom="64K"  ram="16K" svd-file="STM32F0x2.svd" />
+    <device name="STM32F072CB" rom="128K" ram="16K" svd-file="STM32F0x2.svd" />
+    <device name="STM32F072R8" rom="64K"  ram="16K" svd-file="STM32F0x2.svd" />
+    <device name="STM32F072RB" rom="128K" ram="16K" svd-file="STM32F0x2.svd" />
+    <device name="STM32F072V8" rom="64K"  ram="16K" svd-file="STM32F0x2.svd" />
+    <device name="STM32F072VB" rom="128K" ram="16K" svd-file="STM32F0x2.svd" />
+    <device name="STM32F078CB" rom="128K" ram="16K" svd-file="STM32F0x8.svd" />
+    <device name="STM32F078RB" rom="128K" ram="16K" svd-file="STM32F0x8.svd" />
+    <device name="STM32F078VB" rom="128K" ram="16K" svd-file="STM32F0x8.svd" />
+    <device name="STM32F091CB" rom="128K" ram="32K" svd-file="STM32F0x1.svd" />
+    <device name="STM32F091CC" rom="256K" ram="32K" svd-file="STM32F0x1.svd" />
+    <device name="STM32F091RB" rom="128K" ram="32K" svd-file="STM32F0x1.svd" />
+    <device name="STM32F091RC" rom="256K" ram="32K" svd-file="STM32F0x1.svd" />
+    <device name="STM32F091VB" rom="128K" ram="32K" svd-file="STM32F0x1.svd" />
+    <device name="STM32F091VC" rom="256K" ram="32K" svd-file="STM32F0x1.svd" />
+    <device name="STM32F098CC" rom="256K" ram="32K" svd-file="STM32F0x8.svd" />
+    <device name="STM32F098RC" rom="256K" ram="32K" svd-file="STM32F0x8.svd" />
+    <device name="STM32F098VC" rom="256K" ram="32K" svd-file="STM32F0x8.svd" />
+  </devices>
+</family>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Microcontroller family definition -->
+<family name="STM32L1" core="cortex-m3" fp-type="soft">
+  <!-- Family-specific libopencm3 source files -->
+  <sources>
+    <include project-directory="libopencm3/cm3">
+      include/libopencm3/cm3/*.h
+    </include>
+    <include project-directory="libopencm3/dispatch">
+      include/libopencm3/dispatch/*.h
+    </include>
+    <include project-directory="libopencm3/usb">
+      include/libopencm3/usb/*.h
+    </include>
+    <include project-directory="libopencm3/usb/dwc">
+      include/libopencm3/usb/dwc/*.h
+    </include>
+    <include project-directory="libopencm3/stm32">
+      include/libopencm3/stm32/*.h
+    </include>
+    <include project-directory="libopencm3/stm32/common">
+      include/libopencm3/stm32/common/*.h
+    </include>
+    <include project-directory="libopencm3/stm32/l1">
+      include/libopencm3/stm32/l1/*.h
+    </include>
+    <include project-directory="libopencm3">
+      lib/cortex-m-generic.ld
+    </include>
+    <include project-directory="libopencm3">
+      lib/libopencm3_stm32l1.a
+    </include>
+  </sources>
+
+  <!-- Family-specific templates used for project generation -->
+  <templates>
+    <include project-directory="project" keep-existing="true">
+      STM32L1/*
+    </include>
+    <include project-directory=".">
+      linker.ld
+    </include>
+  </templates>
+  
+  <!-- Precompiled .a libraries (after being copied) -->
+  <libraries>
+    <library>
+      libopencm3/libopencm3_stm32l1.a
+    </library>
+  </libraries>
+  
+  <!-- Compiler definitions -->
+  <definitions>
+    <define>
+      STM32L1
+    </define>
+  </definitions>
+
+  <!-- SVD files archive -->
+  <svd-archive project-directory=".">
+    SVD/STM32L1.zip
+  </svd-archive>
+
+  <!-- Devices list -->
+  <devices>
+    <device name="STM32L100C6"   rom="32K"  ram="4K"  svd-file="STM32L100.svd" />
+    <device name="STM32L100C6-A" rom="32K"  ram="4K"  svd-file="STM32L100.svd" />
+    <device name="STM32L100R8"   rom="64K"  ram="8K"  svd-file="STM32L100.svd" />
+    <device name="STM32L100R8-A" rom="64K"  ram="8K"  svd-file="STM32L100.svd" />
+    <device name="STM32L100RB"   rom="128K" ram="10K" svd-file="STM32L100.svd" />
+    <device name="STM32L100RB-A" rom="128K" ram="16K" svd-file="STM32L100.svd" />
+    <device name="STM32L100RC"   rom="256K" ram="16K" svd-file="STM32L100.svd" />
+    <device name="STM32L151C6"   rom="32K"  ram="10K" svd-file="STM32L151.svd" />
+    <device name="STM32L151C6-A" rom="32K"  ram="16K" svd-file="STM32L151.svd" />
+    <device name="STM32L151C8"   rom="64K"  ram="10K" svd-file="STM32L151.svd" />
+    <device name="STM32L151C8-A" rom="64K"  ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151CB"   rom="128K" ram="16K" svd-file="STM32L151.svd" />
+    <device name="STM32L151CB-A" rom="128K" ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151CC"   rom="256K" ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151QC"   rom="256K" ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151QD"   rom="384K" ram="48K" svd-file="STM32L151.svd" />
+    <device name="STM32L151QE"   rom="512K" ram="80K" svd-file="STM32L151.svd" />
+    <device name="STM32L151R6"   rom="32K"  ram="10K" svd-file="STM32L151.svd" />
+    <device name="STM32L151R6-A" rom="32K"  ram="16K" svd-file="STM32L151.svd" />
+    <device name="STM32L151R8"   rom="64K"  ram="10K" svd-file="STM32L151.svd" />
+    <device name="STM32L151R8-A" rom="64K"  ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151RB"   rom="128K" ram="16K" svd-file="STM32L151.svd" />
+    <device name="STM32L151RB-A" rom="128K" ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151RC"   rom="256K" ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151RC-A" rom="256K" ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151RD"   rom="384K" ram="48K" svd-file="STM32L151.svd" />
+    <device name="STM32L151RE"   rom="512K" ram="80K" svd-file="STM32L151.svd" />
+    <device name="STM32L151UC"   rom="256K" ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151V8"   rom="64K"  ram="10K" svd-file="STM32L151.svd" />
+    <device name="STM32L151V8-A" rom="64K"  ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151VB"   rom="128K" ram="16K" svd-file="STM32L151.svd" />
+    <device name="STM32L151VB-A" rom="128K" ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151VC"   rom="256K" ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151VC-A" rom="256K" ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151VD"   rom="384K" ram="48K" svd-file="STM32L151.svd" />
+    <device name="STM32L151VD-X" rom="384K" ram="80K" svd-file="STM32L151.svd" />
+    <device name="STM32L151VE"   rom="512K" ram="80K" svd-file="STM32L151.svd" />
+    <device name="STM32L151ZC"   rom="256K" ram="32K" svd-file="STM32L151.svd" />
+    <device name="STM32L151ZD"   rom="384K" ram="48K" svd-file="STM32L151.svd" />
+    <device name="STM32L151ZE"   rom="512K" ram="80K" svd-file="STM32L151.svd" />
+    <device name="STM32L152C6"   rom="32K"  ram="10K" svd-file="" />
+    <device name="STM32L152C6-A" rom="32K"  ram="16K" svd-file="" />
+    <device name="STM32L152C8"   rom="64K"  ram="10K" svd-file="" />
+    <device name="STM32L152C8-A" rom="64K"  ram="32K" svd-file="" />
+    <device name="STM32L152CB"   rom="128K" ram="16K" svd-file="" />
+    <device name="STM32L152CB-A" rom="128K" ram="32K" svd-file="" />
+    <device name="STM32L152CC"   rom="256K" ram="32K" svd-file="" />
+    <device name="STM32L152QC"   rom="256K" ram="32K" svd-file="" />
+    <device name="STM32L152QD"   rom="384K" ram="48K" svd-file="" />
+    <device name="STM32L152QE"   rom="512K" ram="80K" svd-file="" />
+    <device name="STM32L152R6"   rom="32K"  ram="10K" svd-file="" />
+    <device name="STM32L152R6-A" rom="32K"  ram="16K" svd-file="" />
+    <device name="STM32L152R8"   rom="64K"  ram="10K" svd-file="" />
+    <device name="STM32L152R8-A" rom="64K"  ram="32K" svd-file="" />
+    <device name="STM32L152RB"   rom="128K" ram="16K" svd-file="" />
+    <device name="STM32L152RB-A" rom="128K" ram="32K" svd-file="" />
+    <device name="STM32L152RC"   rom="256K" ram="32K" svd-file="" />
+    <device name="STM32L152RC-A" rom="256K" ram="32K" svd-file="" />
+    <device name="STM32L152RD"   rom="384K" ram="48K" svd-file="" />
+    <device name="STM32L152RE"   rom="512K" ram="80K" svd-file="" />
+    <device name="STM32L152UC"   rom="256K" ram="32K" svd-file="" />
+    <device name="STM32L152V8"   rom="64K"  ram="10K" svd-file="" />
+    <device name="STM32L152V8-A" rom="64K"  ram="32K" svd-file="" />
+    <device name="STM32L152VB"   rom="128K" ram="16K" svd-file="" />
+    <device name="STM32L152VB-A" rom="128K" ram="32K" svd-file="" />
+    <device name="STM32L152VC"   rom="256K" ram="32K" svd-file="" />
+    <device name="STM32L152VC-A" rom="256K" ram="32K" svd-file="" />
+    <device name="STM32L152VD"   rom="384K" ram="48K" svd-file="" />
+    <device name="STM32L152VD-X" rom="384K" ram="80K" svd-file="" />
+    <device name="STM32L152VE"   rom="512K" ram="80K" svd-file="" />
+    <device name="STM32L152ZC"   rom="256K" ram="32K" svd-file="" />
+    <device name="STM32L152ZD"   rom="384K" ram="48K" svd-file="" />
+    <device name="STM32L152ZE"   rom="512K" ram="80K" svd-file="" />
+    <device name="STM32L162QD"   rom="384K" ram="48K" svd-file="STM32L162.svd" />
+    <device name="STM32L162RC"   rom="256K" ram="32K" svd-file="STM32L162.svd" />
+    <device name="STM32L162RC-A" rom="256K" ram="32K" svd-file="STM32L162.svd" />
+    <device name="STM32L162RD"   rom="384K" ram="48K" svd-file="STM32L162.svd" />
+    <device name="STM32L162RE"   rom="512K" ram="80K" svd-file="STM32L162.svd" />
+    <device name="STM32L162VC"   rom="256K" ram="32K" svd-file="STM32L162.svd" />
+    <device name="STM32L162VC-A" rom="256K" ram="32K" svd-file="STM32L162.svd" />
+    <device name="STM32L162VD"   rom="384K" ram="48K" svd-file="STM32L162.svd" />
+    <device name="STM32L162VE"   rom="512K" ram="80K" svd-file="STM32L162.svd" />
+    <device name="STM32L162ZD"   rom="384K" ram="48K" svd-file="STM32L162.svd" />
+    <device name="STM32L162ZE"   rom="512K" ram="80K" svd-file="STM32L162.svd" />
+  </devices>
+</family>

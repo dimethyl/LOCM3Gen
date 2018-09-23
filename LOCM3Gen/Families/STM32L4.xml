@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Microcontroller family definition -->
+<family name="STM32L4" core="cortex-m4" fp-type="hard" fp-unit="fpv4-sp-d16">
+  <!-- Family-specific libopencm3 source files -->
+  <sources>
+    <include project-directory="libopencm3/cm3">
+      include/libopencm3/cm3/*.h
+    </include>
+    <include project-directory="libopencm3/dispatch">
+      include/libopencm3/dispatch/*.h
+    </include>
+    <include project-directory="libopencm3/usb">
+      include/libopencm3/usb/*.h
+    </include>
+    <include project-directory="libopencm3/usb/dwc">
+      include/libopencm3/usb/dwc/*.h
+    </include>
+    <include project-directory="libopencm3/stm32">
+      include/libopencm3/stm32/*.h
+    </include>
+    <include project-directory="libopencm3/stm32/common">
+      include/libopencm3/stm32/common/*.h
+    </include>
+    <include project-directory="libopencm3/stm32/l4">
+      include/libopencm3/stm32/l4/*.h
+    </include>
+    <include project-directory="libopencm3">
+      lib/cortex-m-generic.ld
+    </include>
+    <include project-directory="libopencm3">
+      lib/libopencm3_stm32l4.a
+    </include>
+  </sources>
+
+  <!-- Family-specific templates used for project generation -->
+  <templates>
+    <include project-directory="project" keep-existing="true">
+      STM32L4/*
+    </include>
+    <include project-directory=".">
+      linker.ld
+    </include>
+  </templates>
+  
+  <!-- Precompiled .a libraries (after being copied) -->
+  <libraries>
+    <library>
+      libopencm3/libopencm3_stm32l4.a
+    </library>
+  </libraries>
+  
+  <!-- Compiler definitions -->
+  <definitions>
+    <define>
+      STM32L4
+    </define>
+  </definitions>
+  
+  <!-- SVD files archive -->
+  <svd-archive project-directory=".">
+    SVD/STM32L4.zip
+  </svd-archive>
+  
+  <!-- Devices list -->
+  <devices>
+    <device name="STM32L431CB" rom="128K"  ram="64K"  svd-file="STM32L4x1.svd" />
+    <device name="STM32L431CC" rom="256K"  ram="64K"  svd-file="STM32L4x1.svd" />
+    <device name="STM32L431KB" rom="128K"  ram="64K"  svd-file="STM32L4x1.svd" />
+    <device name="STM32L431KC" rom="256K"  ram="64K"  svd-file="STM32L4x1.svd" />
+    <device name="STM32L431RB" rom="128K"  ram="64K"  svd-file="STM32L4x1.svd" />
+    <device name="STM32L431RC" rom="256K"  ram="64K"  svd-file="STM32L4x1.svd" />
+    <device name="STM32L431VC" rom="256K"  ram="64K"  svd-file="STM32L4x1.svd" />
+    <device name="STM32L432KB" rom="128K"  ram="64K"  svd-file="STM32L4x2.svd" />
+    <device name="STM32L432KC" rom="256K"  ram="64K"  svd-file="STM32L4x2.svd" />
+    <device name="STM32L433CB" rom="128K"  ram="64K"  svd-file="STM32L4x3.svd" />
+    <device name="STM32L433CC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
+    <device name="STM32L433RB" rom="128K"  ram="64K"  svd-file="STM32L4x3.svd" />
+    <device name="STM32L433RC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
+    <device name="STM32L433VC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
+    <device name="STM32L442KC" rom="256K"  ram="64K"  svd-file="STM32L4x2.svd" />
+    <device name="STM32L443CC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
+    <device name="STM32L443RC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
+    <device name="STM32L443VC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
+    <device name="STM32L451CC" rom="256K"  ram="160K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L451CE" rom="512K"  ram="160K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L451RC" rom="256K"  ram="160K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L451RE" rom="512K"  ram="160K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L451VC" rom="256K"  ram="160K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L451VE" rom="512K"  ram="160K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L452CC" rom="256K"  ram="160K" svd-file="STM32L4x2.svd" />
+    <device name="STM32L452CE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
+    <device name="STM32L452RC" rom="256K"  ram="160K" svd-file="STM32L4x2.svd" />
+    <device name="STM32L452RE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
+    <device name="STM32L452VC" rom="256K"  ram="160K" svd-file="STM32L4x2.svd" />
+    <device name="STM32L452VE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
+    <device name="STM32L462CE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
+    <device name="STM32L462RE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
+    <device name="STM32L462VE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
+    <device name="STM32L471QE" rom="512K"  ram="128K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L471QG" rom="1024K" ram="128K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L471RE" rom="512K"  ram="128K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L471RG" rom="1024K" ram="128K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L471VE" rom="512K"  ram="128K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L471VG" rom="1024K" ram="128K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L471ZE" rom="512K"  ram="128K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L471ZG" rom="1024K" ram="128K" svd-file="STM32L4x1.svd" />
+    <device name="STM32L475RC" rom="256K"  ram="128K" svd-file="STM32L4x5.svd" />
+    <device name="STM32L475RE" rom="512K"  ram="128K" svd-file="STM32L4x5.svd" />
+    <device name="STM32L475RG" rom="1024K" ram="128K" svd-file="STM32L4x5.svd" />
+    <device name="STM32L475VC" rom="256K"  ram="128K" svd-file="STM32L4x5.svd" />
+    <device name="STM32L475VE" rom="512K"  ram="128K" svd-file="STM32L4x5.svd" />
+    <device name="STM32L475VG" rom="1024K" ram="128K" svd-file="STM32L4x5.svd" />
+    <device name="STM32L476JE" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476JG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476ME" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476MG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476QE" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476QG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476RC" rom="256K"  ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476RE" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476RG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476VC" rom="256K"  ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476VE" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476VG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476ZE" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L476ZG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L486JG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L486QG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L486RG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L486VG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L486ZG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L496AE" rom="512K"  ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L496AG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L496QE" rom="512K"  ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L496QG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L496RE" rom="512K"  ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L496RG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L496VE" rom="512K"  ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L496VG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L496ZE" rom="512K"  ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L496ZG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L4A6AG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L4A6QG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L4A6RG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L4A6VG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
+    <device name="STM32L4A6ZG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
+  </devices>
+</family>

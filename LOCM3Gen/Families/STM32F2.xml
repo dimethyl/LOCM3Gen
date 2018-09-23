@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Microcontroller family definition -->
+<family name="STM32F2" core="cortex-m3" fp-type="soft">
+  <!-- Family-specific libopencm3 source files -->
+  <sources>
+    <include project-directory="libopencm3/cm3">
+      include/libopencm3/cm3/*.h
+    </include>
+    <include project-directory="libopencm3/dispatch">
+      include/libopencm3/dispatch/*.h
+    </include>
+    <include project-directory="libopencm3/ethernet">
+      include/libopencm3/ethernet/*.h
+    </include>
+    <include project-directory="libopencm3/usb">
+      include/libopencm3/usb/*.h
+    </include>
+    <include project-directory="libopencm3/usb/dwc">
+      include/libopencm3/usb/dwc/*.h
+    </include>
+    <include project-directory="libopencm3/stm32">
+      include/libopencm3/stm32/*.h
+    </include>
+    <include project-directory="libopencm3/stm32/common">
+      include/libopencm3/stm32/common/*.h
+    </include>
+    <include project-directory="libopencm3/stm32/f2">
+      include/libopencm3/stm32/f2/*.h
+    </include>
+    <include project-directory="libopencm3">
+      lib/cortex-m-generic.ld
+    </include>
+    <include project-directory="libopencm3">
+      lib/libopencm3_stm32f2.a
+    </include>
+  </sources>
+
+  <!-- Family-specific templates used for project generation -->
+  <templates>
+    <include project-directory="project" keep-existing="true">
+      STM32F2/*
+    </include>
+    <include project-directory=".">
+      linker.ld
+    </include>
+  </templates>
+  
+  <!-- Precompiled .a libraries (after being copied) -->
+  <libraries>
+    <library>
+      libopencm3/libopencm3_stm32f2.a
+    </library>
+  </libraries>
+  
+  <!-- Compiler definitions -->
+  <definitions>
+    <define>
+      STM32F2
+    </define>
+  </definitions>
+
+  <!-- SVD files archive -->
+  <svd-archive project-directory=".">
+    SVD/STM32F2.zip
+  </svd-archive>
+
+  <!-- Devices list -->
+  <devices>
+    <device name="STM32F205RB" rom="128K"  ram="64K"  svd-file="STM32F20x.svd" />
+    <device name="STM32F205RC" rom="256K"  ram="96K"  svd-file="STM32F20x.svd" />
+    <device name="STM32F205RE" rom="512K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F205RF" rom="768K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F205RG" rom="1024K" ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F205VB" rom="128K"  ram="64K"  svd-file="STM32F20x.svd" />
+    <device name="STM32F205VC" rom="256K"  ram="96K"  svd-file="STM32F20x.svd" />
+    <device name="STM32F205VE" rom="512K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F205VF" rom="768K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F205VG" rom="1024K" ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F205ZC" rom="256K"  ram="96K"  svd-file="STM32F20x.svd" />
+    <device name="STM32F205ZE" rom="512K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F205ZF" rom="768K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F205ZG" rom="1024K" ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207IC" rom="256K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207IE" rom="512K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207IF" rom="768K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207IG" rom="1024K" ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207VC" rom="256K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207VE" rom="512K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207VF" rom="768K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207VG" rom="1024K" ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207ZC" rom="256K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207ZE" rom="512K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207ZF" rom="768K"  ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F207ZG" rom="1024K" ram="128K" svd-file="STM32F20x.svd" />
+    <device name="STM32F215RE" rom="512K"  ram="128K" svd-file="STM32F215.svd" />
+    <device name="STM32F215RG" rom="1024K" ram="128K" svd-file="STM32F215.svd" />
+    <device name="STM32F215VE" rom="512K"  ram="128K" svd-file="STM32F215.svd" />
+    <device name="STM32F215VG" rom="1024K" ram="128K" svd-file="STM32F215.svd" />
+    <device name="STM32F215ZE" rom="512K"  ram="128K" svd-file="STM32F215.svd" />
+    <device name="STM32F215ZG" rom="1024K" ram="128K" svd-file="STM32F215.svd" />
+    <device name="STM32F217IE" rom="512K"  ram="128K" svd-file="STM32F217.svd" />
+    <device name="STM32F217IG" rom="1024K" ram="128K" svd-file="STM32F217.svd" />
+    <device name="STM32F217VE" rom="512K"  ram="128K" svd-file="STM32F217.svd" />
+    <device name="STM32F217VG" rom="1024K" ram="128K" svd-file="STM32F217.svd" />
+    <device name="STM32F217ZE" rom="512K"  ram="128K" svd-file="STM32F217.svd" />
+    <device name="STM32F217ZG" rom="1024K" ram="128K" svd-file="STM32F217.svd" />
+  </devices>
+</family>

@@ -1,5 +1,5 @@
 ﻿/*
- * {$ProjectName$}
+ * Project: {$ProjectName$}
  *
  * Created at {$Date$} {$Time$}
  * by {$UserName$}
@@ -12,10 +12,10 @@
 
 int main(void)
 {
-  //
+  // Initialization code
 
   while(1)
   {
-    //
+    // Main loop code
   }
 }

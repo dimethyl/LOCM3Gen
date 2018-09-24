@@ -10,7 +10,7 @@
 
 As for now the only supported target environment is **EmBitz** IDE.
 
-The generator supports *STM32* microcontrollers of listed families
+The generator supports *STM32* microcontrollers of listed families:
 
 * STM32F0
 * STM32F1

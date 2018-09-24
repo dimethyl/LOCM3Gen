@@ -35,7 +35,7 @@
   <!-- Family-specific templates used for project generation -->
   <templates>
     <include project-directory="project" keep-existing="true">
-      STM32L4/*
+      project/*
     </include>
     <include project-directory=".">
       linker.ld

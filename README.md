@@ -26,6 +26,10 @@ The generator supports *STM32* microcontrollers of listed families:
 
 The generator is customizable through the XML files and templates that contain neccessary information to correctly build the project. Through such XML files available support for microcontroller families and environments can be extended. Also it features almost all needed description *.svd* files for firmware debugging.
 
+# Downloads
+
+Archives with precompiled files for released versions are available for downloading [here](https://gitlab.com/Egiraht/locm3gen/tags).
+
 # Links
 
 * **libopencm3** library: <https://github.com/libopencm3>

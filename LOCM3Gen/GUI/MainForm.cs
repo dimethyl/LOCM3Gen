@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿/*
+ * Copyright (C) 2018 Maxim Yudin <i@hal.su>. All rights reserved.
+ * 
+ * This file is a part of the closed source section of LOCM3Gen project.
+ * You may NOT use, distribute, copy or modify this file without special author's permission.
+ */
+
+using System;
 using System.Windows.Forms;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Xml;
 using System.Xml.Linq;
 using System.IO;
 
-namespace LOCM3Gen
+namespace LOCM3Gen.GUI
 {
   /// <summary>
   /// Class of the GUI main form.
@@ -57,13 +61,13 @@ namespace LOCM3Gen
     /// </summary>
     private void BuildDevicesList(string familyName)
     {
-      var familyXMLFile = Path.Combine(Configuration.familiesDirectory, familyName + ".xml");
       devicesList.Items.Clear();
-      if (File.Exists(familyXMLFile))
+      var deviceNodes = XDocument.Load(Path.Combine(Configuration.familiesDirectory, familyName + ".xml"))?.Root?.Element("devices")?.Descendants("device") ?? new XElement[0];
+      foreach (var node in deviceNodes)
       {
-        var familyNode = XDocument.Load(familyXMLFile).Element("family");
-        foreach (var deviceNode in familyNode?.Element("devices")?.Elements("device") ?? new XElement[0])
-          devicesList.Items.Add(deviceNode.Attribute("name")?.Value ?? "Unknown");
+        var deviceName = node.Attribute("name")?.Value?.Trim();
+        if (deviceName != null)
+          devicesList.Items.Add(deviceName);
       }
 
       if (devicesList.Items.Count > 0)
@@ -282,23 +286,23 @@ namespace LOCM3Gen
       {
         generateButton.Enabled = false;
 
-        var family = new Family(Path.Combine(Configuration.familiesDirectory, familiesList.Text.Trim() + ".xml"));
-        var environment = new Environment(Path.Combine(Configuration.environmentsDirectory, environmentsList.Text.Trim() + ".xml"));
-        var generatorSettings = new ProjectGenerator.Settings
+        var parameters = new ProjectParameters
         {
           locm3Directory    = locm3DirectoryInput.Text.Trim(),
           projectDirectory  = projectSubdirectoryCheckbox.Checked ? Path.Combine(projectDirectoryInput.Text.Trim(), projectNameInput.Text.Trim()) : projectDirectoryInput.Text.Trim(),
           projectName       = projectNameInput.Text.Trim(),
-          environment       = environment,
-          family            = family,
           deviceName        = devicesList.Text.Trim()
         };
 
-        var generator = new ProjectGenerator(generatorSettings);
-        generator.GenerateAsync();
+        var settings = new GeneratorSettings();
+        settings.ReadControlFile(Path.Combine(Configuration.familiesDirectory, familiesList.Text.Trim() + ".xml"));
+        settings.ReadControlFile(Path.Combine(Configuration.environmentsDirectory, environmentsList.Text.Trim() + ".xml"));
+
+        var generator = new Generator(parameters, settings);
+        generator.Generate();
 
         //Showing generation success dialog.
-        MessageBox.Show("Project \"" + generator.settings.projectName + "\" has been successfully created in \"" + generator.settings.projectDirectory + "\".",
+        MessageBox.Show("Project \"" + parameters.projectName + "\" has been successfully created in \"" + parameters.projectDirectory + "\".",
           this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
       catch (Exception exception)
@@ -319,10 +323,7 @@ namespace LOCM3Gen
       {
         MessageBox.Show("libopencm3 Project Generator v" + Configuration.version.ToString(2) + "\n" +
           "Build " + Configuration.version.Build + "." + Configuration.version.Revision + "\n\n" +       
-          "Created by:\n" +
-          "Maxim Yudin (Egiraht)\n" +
-          "© 2018\n" +
-          "E-mail for feedback: i@hal.su",
+          "Copyright (c) 2018 Maxim Yudin <i@hal.su>",
           "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
       catch (Exception exception)

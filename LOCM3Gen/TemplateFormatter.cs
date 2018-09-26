@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright (C) 2018 Maxim Yudin <i@hal.su>. All rights reserved.
+ * 
+ * This file is a part of the closed source section of LOCM3Gen project.
+ * You may NOT use, distribute, copy or modify this file without special author's permission.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.IO;
@@ -17,9 +24,9 @@ namespace LOCM3Gen
     public Dictionary<string, List<string>> lists;
 
     /// <summary>
-    /// List of the key-value pairs of a parameter name and a replacing string to be replaced in template files.
+    /// List of the key-value pairs of a variable name and a replacing string to be replaced in template files.
     /// </summary>
-    public Dictionary<string, string> parameters;
+    public Dictionary<string, string> variables;
 
     /// <summary>
     /// Template instance constructor.
@@ -27,11 +34,11 @@ namespace LOCM3Gen
     public TemplateFormatter()
     {
       this.lists = new Dictionary<string, List<string>>();
-      this.parameters = new Dictionary<string, string>();
+      this.variables = new Dictionary<string, string>();
     }
 
     /// <summary>
-    /// Replace all <c>{$...$}</c> parameter tags with their values within the template file.
+    /// Replace all <c>{$...$}</c> variable tags with their values within the template file.
     /// </summary>
     /// <param name="templateFileName">Template file name to process.</param>
     public void ProcessFile(string templateFileName)
@@ -43,25 +50,28 @@ namespace LOCM3Gen
           return "";
       });
 
-      var parameterCallback = new MatchEvaluator(match => {
-        if (this.parameters.ContainsKey(match.Groups[1].Value))
-          return this.parameters[match.Groups[1].Value];
+      var variableCallback = new MatchEvaluator(match => {
+        if (this.variables.ContainsKey(match.Groups[1].Value))
+          return this.variables[match.Groups[1].Value];
         else
           return "";
       });
 
       if (File.Exists(templateFileName))
       {
-        //Reading template contents
+        //Reading template contents.
         var fileContents = File.ReadAllText(templateFileName);
 
-        //Processing {#...{$...$}...#} of lists
+        //Removing {%...%} patterns of comments.
+        fileContents = Regex.Replace(fileContents, @"\{\%(\w*)\%\}", "", RegexOptions.Compiled);
+
+        //Processing {#...{$...$}...#} patterns of lists.
         fileContents = Regex.Replace(fileContents, @"\{\#(.*?)\{\$(\w*)\$\}(.*?)\#\}", listCallback, RegexOptions.Compiled | RegexOptions.Singleline);
 
-        //Processing {$...$} patterns of parameters
-        fileContents = Regex.Replace(fileContents, @"\{\$(\w*)\$\}", parameterCallback, RegexOptions.Compiled);
+        //Processing {$...$} patterns of variables.
+        fileContents = Regex.Replace(fileContents, @"\{\$(\w*)\$\}", variableCallback, RegexOptions.Compiled);
 
-        //Writing processed template contents
+        //Writing processed template contents.
         File.WriteAllText(templateFileName, fileContents);
       }
     }

@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- Microcontroller family definition -->
-<family name="STM32F0" core="cortex-m0" fp-type="soft">
+<!--
+  This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+  If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/ .
+  
+  Copyright (C) 2018 Maxim Yudin <i@hal.su>. 
+-->
+<control-file>
+  <!-- Microcontroller family definition -->
+  <family name="STM32F0" core="cortex-m0" fp-type="soft" />
+  
   <!-- Family-specific libopencm3 source files -->
   <sources>
     <include project-directory="libopencm3/cm3">
@@ -137,4 +145,4 @@
     <device name="STM32F098RC" rom="256K" ram="32K" svd-file="STM32F0x8.svd" />
     <device name="STM32F098VC" rom="256K" ram="32K" svd-file="STM32F0x8.svd" />
   </devices>
-</family>
+</control-file>

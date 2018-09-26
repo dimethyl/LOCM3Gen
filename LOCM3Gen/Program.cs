@@ -1,7 +1,14 @@
-﻿using System;
+﻿/*
+ * Copyright (C) 2018 Maxim Yudin <i@hal.su>. All rights reserved.
+ * 
+ * This file is a part of the closed source section of LOCM3Gen project.
+ * You may NOT use, distribute, copy or modify this file without special author's permission.
+ */
+
+using System;
 using System.Windows.Forms;
 
-namespace LOCM3Gen
+namespace LOCM3Gen.GUI
 {
   /// <summary>
   /// Class with program entry point.

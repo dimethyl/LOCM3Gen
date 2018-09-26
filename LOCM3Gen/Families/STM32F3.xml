@@ -1,6 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!-- Microcontroller family definition -->
-<family name="STM32F3" core="cortex-m4" fp-type="hard" fp-unit="fpv4-sp-d16">
+<!--
+  This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+  If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/ .
+  
+  Copyright (C) 2018 Maxim Yudin <i@hal.su>. 
+-->
+<control-file>
+  <!-- Microcontroller family definition -->
+  <family name="STM32F3" core="cortex-m4" fp-type="hard" fp-unit="fpv4-sp-d16" />
+  
   <!-- Family-specific libopencm3 source files -->
   <sources>
     <include project-directory="libopencm3/cm3">
@@ -133,4 +141,4 @@
     <device name="STM32F378VC" rom="256K" ram="32K" svd-file="STM32F3x8.svd" />
     <device name="STM32F398VE" rom="512K" ram="80K" svd-file="STM32F3x8.svd" />
   </devices>
-</family>
+</control-file>

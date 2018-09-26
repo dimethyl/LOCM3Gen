@@ -1,4 +1,11 @@
-﻿namespace LOCM3Gen
+﻿/*
+ * Copyright (C) 2018 Maxim Yudin <i@hal.su>. All rights reserved.
+ * 
+ * This file is a part of the closed source section of LOCM3Gen project.
+ * You may NOT use, distribute, copy or modify this file without special author's permission.
+ */
+
+namespace LOCM3Gen.GUI
 {
   partial class MainForm
   {

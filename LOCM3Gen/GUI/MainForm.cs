@@ -62,12 +62,20 @@ namespace LOCM3Gen.GUI
     private void BuildDevicesList(string familyName)
     {
       devicesList.Items.Clear();
-      var deviceNodes = XDocument.Load(Path.Combine(Configuration.familiesDirectory, familyName + ".xml"))?.Root?.Element("devices")?.Descendants("device") ?? new XElement[0];
-      foreach (var node in deviceNodes)
+
+      if (familyName == "")
+        return;
+
+      var familyFileName = Path.Combine(Configuration.familiesDirectory, familyName + ".xml");
+      if (File.Exists(familyFileName))
       {
-        var deviceName = node.Attribute("name")?.Value?.Trim();
-        if (deviceName != null)
-          devicesList.Items.Add(deviceName);
+        var deviceNodes = XDocument.Load(Path.Combine(Configuration.familiesDirectory, familyName + ".xml")).Root?.Element("devices")?.Descendants("device") ?? new XElement[0];
+        foreach (var node in deviceNodes)
+        {
+          var deviceName = node.Attribute("name")?.Value?.Trim();
+          if (deviceName != null)
+            devicesList.Items.Add(deviceName);
+        }
       }
 
       if (devicesList.Items.Count > 0)

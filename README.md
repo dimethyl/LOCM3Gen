@@ -38,7 +38,7 @@ To function program requires:
 
 Copyright (C) 2018 Maxim Yudin <<i@hal.su>>
 
-Program's license statement can be found [here](LOCM3Gen/LICENSE.txt).
+Program's license statement can be found in [LICENSE.txt](LICENSE.txt).
 
 # Links
 

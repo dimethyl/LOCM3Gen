@@ -24,6 +24,10 @@ namespace SourceGen
         var value = ParseString(actionElement.Attribute("value")?.Value?.Trim() ?? "");
         variables.Add(name, value);
       }
+      else
+      {
+        // TODO: Wrong variable name.
+      }
     }
 
     /// <summary>
@@ -149,6 +153,8 @@ namespace SourceGen
             var destinationPath = Path.GetFullPath(ParseString(actionElement.Attribute("destination")?.Value?.Trim() ?? ""));
             var destinationFileName = Path.Combine(destinationPath, Path.GetFileName(entryPath));
             var keepExistingFiles = (actionElement.Attribute("keep-existing")?.Value?.Trim()?.ToLower() ?? "") == "true";
+            if (!Directory.Exists(destinationPath))
+              Directory.CreateDirectory(destinationPath);
             if (!File.Exists(destinationFileName) || !keepExistingFiles)
             {
               using (var svdFile = new StreamWriter(destinationFileName))

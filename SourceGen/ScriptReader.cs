@@ -107,10 +107,10 @@ namespace SourceGen
     }
 
     /// <summary>
-    /// Sequencially read SourceGen script XML file and process it.
+    /// Sequencially run SourceGen XML-based script.
     /// </summary>
     /// <param name="scriptFileName">SourceGen script file name to read.</param>
-    public void ReadScript(string scriptFileName)
+    public void RunScript(string scriptFileName)
     {
       var rootNode = XDocument.Load(scriptFileName).Root;
 
@@ -136,7 +136,7 @@ namespace SourceGen
         actionMethods[actionName](actionElement);
       else
       {
-        // TODO: Some possible wrong action processing.
+        // TODO: Wrong action processing.
       }
     }
 

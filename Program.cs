@@ -8,7 +8,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace LOCM3Gen.GUI
+namespace LOCM3Gen
 {
   /// <summary>
   /// Class with program entry point.

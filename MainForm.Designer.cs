@@ -5,7 +5,7 @@
  * You may NOT use, distribute, copy or modify this file without special author's permission.
  */
 
-namespace LOCM3Gen.GUI
+namespace LOCM3Gen
 {
   partial class MainForm
   {

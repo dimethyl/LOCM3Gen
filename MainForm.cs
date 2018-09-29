@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.IO;
 
-namespace LOCM3Gen.GUI
+namespace LOCM3Gen
 {
   /// <summary>
   /// Class of the GUI main form.
@@ -92,12 +92,18 @@ namespace LOCM3Gen.GUI
       var familyFileName = Path.Combine(Configuration.familiesDirectory, familyName + ".xml");
       if (File.Exists(familyFileName))
       {
-        var deviceNodes = XDocument.Load(Path.Combine(Configuration.familiesDirectory, familyName + ".xml")).Root?.Element("devices")?.Descendants("device") ?? new XElement[0];
-        foreach (var node in deviceNodes)
+        var rootNode = XDocument.Load(Path.Combine(Configuration.familiesDirectory, familyName + ".xml")).Root;
+        foreach (var element in rootNode?.Elements("list") ?? new XElement[0])
         {
-          var deviceName = node.Attribute("name")?.Value?.Trim();
-          if (deviceName != null)
-            devicesList.Items.Add(deviceName);
+          if (element.Attribute("name")?.Value?.Trim() == "DevicesList")
+          {
+            foreach (var deviceNode in element.Elements("add"))
+            {
+              var deviceName = deviceNode.Attribute("value")?.Value?.Trim() ?? "";
+              if (deviceName != "")
+                devicesList.Items.Add(deviceName);
+            }
+          }
         }
       }
 
@@ -308,27 +314,10 @@ namespace LOCM3Gen.GUI
         generator.variables.Add("Time", DateTime.Now.ToShortTimeString());
         generator.variables.Add("UserName", Environment.UserName);
         generator.variables.Add("MachineName", Environment.MachineName);
-                
-        //HACK: Processing temporary script files.
-        generator.ReadScript(@"D:\Projects\C#\LOCM3Gen\SourceGen\STM32F0.xml");
-        generator.ReadScript(@"D:\Projects\C#\LOCM3Gen\SourceGen\EmBitz.xml");
-
-        /*
-        var parameters = new ProjectParameters
-        {
-          locm3Directory    = locm3DirectoryInput.Text.Trim(),
-          projectDirectory  = projectSubdirectoryCheckbox.Checked ? Path.Combine(projectDirectoryInput.Text.Trim(), projectNameInput.Text.Trim()) : projectDirectoryInput.Text.Trim(),
-          projectName       = projectNameInput.Text.Trim(),
-          deviceName        = devicesList.Text.Trim()
-        };
-
-        var settings = new GeneratorSettings();
-        settings.ReadControlFile(Path.Combine(Configuration.familiesDirectory, familiesList.Text.Trim() + ".xml"));
-        settings.ReadControlFile(Path.Combine(Configuration.environmentsDirectory, environmentsList.Text.Trim() + ".xml"));
-
-        var generator = new Generator(parameters, settings);
-        generator.Generate();
-        */
+        
+        // Reading script files.
+        generator.RunScript(Path.Combine(Configuration.familiesDirectory, familiesList.Text.Trim() + ".xml"));
+        generator.RunScript(Path.Combine(Configuration.environmentsDirectory, environmentsList.Text.Trim() + ".xml"));
 
         // Showing generation success dialog.
         MessageBox.Show("Project \"" + projectNameInput.Text.Trim() + "\" has been successfully created in \"" + projectDirectoryInput.Text.Trim() + "\".",

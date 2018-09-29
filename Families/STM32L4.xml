@@ -5,152 +5,602 @@
   
   Copyright (C) 2018 Maxim Yudin <i@hal.su>. 
 -->
-<control-file>
-  <!-- Microcontroller family definition -->
-  <family name="STM32L4" core="cortex-m4" fp-type="hard" fp-unit="fpv4-sp-d16" />
-    
-  <!-- Family-specific libopencm3 source files -->
-  <sources>
-    <include project-directory="libopencm3/cm3">
-      include/libopencm3/cm3/*.h
-    </include>
-    <include project-directory="libopencm3/dispatch">
-      include/libopencm3/dispatch/*.h
-    </include>
-    <include project-directory="libopencm3/usb">
-      include/libopencm3/usb/*.h
-    </include>
-    <include project-directory="libopencm3/usb/dwc">
-      include/libopencm3/usb/dwc/*.h
-    </include>
-    <include project-directory="libopencm3/stm32">
-      include/libopencm3/stm32/*.h
-    </include>
-    <include project-directory="libopencm3/stm32/common">
-      include/libopencm3/stm32/common/*.h
-    </include>
-    <include project-directory="libopencm3/stm32/l4">
-      include/libopencm3/stm32/l4/*.h
-    </include>
-    <include project-directory="libopencm3">
-      lib/cortex-m-generic.ld
-    </include>
-    <include project-directory="libopencm3">
-      lib/libopencm3_stm32l4.a
-    </include>
-  </sources>
+<sourcegen-script version="1.0">
+  <!-- Microcontroller family definition. -->
+  <var name="FamilyName"  value="STM32L4" />
+  <var name="Core"        value="cortex-m4" />
+  <var name="FPType"      value="hard" />
+  <var name="FPUnit"      value="fpv4-sp-d16" />
+  
+  <!-- Family-specific libopencm3 copy-routes. -->
+  <copy source="{$LOCM3Dir$}/include/libopencm3/cm3/*.h"          destination="{$ProjectDir$}/libopencm3/cm3" />
+  <copy source="{$LOCM3Dir$}/include/libopencm3/dispatch/*.h"     destination="{$ProjectDir$}/libopencm3/dispatch" />
+  <copy source="{$LOCM3Dir$}/include/libopencm3/usb/*.h"          destination="{$ProjectDir$}/libopencm3/usb"           recursive="true" />
+  <copy source="{$LOCM3Dir$}/include/libopencm3/stm32/*.h"        destination="{$ProjectDir$}/libopencm3/stm32" />
+  <copy source="{$LOCM3Dir$}/include/libopencm3/stm32/common/*.h" destination="{$ProjectDir$}/libopencm3/stm32/common" />
+  <copy source="{$LOCM3Dir$}/include/libopencm3/stm32/l4/*.h"     destination="{$ProjectDir$}/libopencm3/stm32/l4" />
+  <copy source="{$LOCM3Dir$}/lib/cortex-m-generic.ld"             destination="{$ProjectDir$}/libopencm3" />
+  <copy source="{$LOCM3Dir$}/lib/libopencm3_stm32l4.a"            destination="{$ProjectDir$}/libopencm3" />
+  
+  <!-- Compiler definitions. -->
+  <list name="Definitions">
+    <add value="STM32L4" />
+  </list>
+  
+  <!-- Devices list. -->
+  <list name="DevicesList">
+    <add value="STM32L431CB" />
+    <add value="STM32L431CC" />
+    <add value="STM32L431KB" />
+    <add value="STM32L431KC" />
+    <add value="STM32L431RB" />
+    <add value="STM32L431RC" />
+    <add value="STM32L431VC" />
+    <add value="STM32L432KB" />
+    <add value="STM32L432KC" />
+    <add value="STM32L433CB" />
+    <add value="STM32L433CC" />
+    <add value="STM32L433RB" />
+    <add value="STM32L433RC" />
+    <add value="STM32L433VC" />
+    <add value="STM32L442KC" />
+    <add value="STM32L443CC" />
+    <add value="STM32L443RC" />
+    <add value="STM32L443VC" />
+    <add value="STM32L451CC" />
+    <add value="STM32L451CE" />
+    <add value="STM32L451RC" />
+    <add value="STM32L451RE" />
+    <add value="STM32L451VC" />
+    <add value="STM32L451VE" />
+    <add value="STM32L452CC" />
+    <add value="STM32L452CE" />
+    <add value="STM32L452RC" />
+    <add value="STM32L452RE" />
+    <add value="STM32L452VC" />
+    <add value="STM32L452VE" />
+    <add value="STM32L462CE" />
+    <add value="STM32L462RE" />
+    <add value="STM32L462VE" />
+    <add value="STM32L471QE" />
+    <add value="STM32L471QG" />
+    <add value="STM32L471RE" />
+    <add value="STM32L471RG" />
+    <add value="STM32L471VE" />
+    <add value="STM32L471VG" />
+    <add value="STM32L471ZE" />
+    <add value="STM32L471ZG" />
+    <add value="STM32L475RC" />
+    <add value="STM32L475RE" />
+    <add value="STM32L475RG" />
+    <add value="STM32L475VC" />
+    <add value="STM32L475VE" />
+    <add value="STM32L475VG" />
+    <add value="STM32L476JE" />
+    <add value="STM32L476JG" />
+    <add value="STM32L476ME" />
+    <add value="STM32L476MG" />
+    <add value="STM32L476QE" />
+    <add value="STM32L476QG" />
+    <add value="STM32L476RC" />
+    <add value="STM32L476RE" />
+    <add value="STM32L476RG" />
+    <add value="STM32L476VC" />
+    <add value="STM32L476VE" />
+    <add value="STM32L476VG" />
+    <add value="STM32L476ZE" />
+    <add value="STM32L476ZG" />
+    <add value="STM32L486JG" />
+    <add value="STM32L486QG" />
+    <add value="STM32L486RG" />
+    <add value="STM32L486VG" />
+    <add value="STM32L486ZG" />
+    <add value="STM32L496AE" />
+    <add value="STM32L496AG" />
+    <add value="STM32L496QE" />
+    <add value="STM32L496QG" />
+    <add value="STM32L496RE" />
+    <add value="STM32L496RG" />
+    <add value="STM32L496VE" />
+    <add value="STM32L496VG" />
+    <add value="STM32L496ZE" />
+    <add value="STM32L496ZG" />
+    <add value="STM32L4A6AG" />
+    <add value="STM32L4A6QG" />
+    <add value="STM32L4A6RG" />
+    <add value="STM32L4A6VG" />
+    <add value="STM32L4A6ZG" />
+  </list>
 
-  <!-- Family-specific templates used for project generation -->
-  <templates>
-    <include project-directory="project" keep-existing="true">
-      project/*
-    </include>
-    <include project-directory=".">
-      linker.ld
-    </include>
-  </templates>
+  <!-- Devices parameters -->
+  <if-eq a="{$DeviceName$}" b="STM32L431CB">
+    <var name="ROMSize" value="128K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L431CC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L431KB">
+    <var name="ROMSize" value="128K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L431KC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L431RB">
+    <var name="ROMSize" value="128K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L431RC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L431VC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L432KB">
+    <var name="ROMSize" value="128K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L432KC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L433CB">
+    <var name="ROMSize" value="128K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x3.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x3.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L433CC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x3.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x3.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L433RB">
+    <var name="ROMSize" value="128K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x3.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x3.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L433RC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x3.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x3.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L433VC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x3.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x3.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L442KC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L443CC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x3.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x3.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L443RC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x3.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x3.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L443VC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="64K" />
+    <var name="SVDFile" value="STM32L4x3.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x3.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L451CC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L451CE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L451RC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L451RE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L451VC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L451VE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L452CC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L452CE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L452RC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L452RE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L452VC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L452VE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L462CE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L462RE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L462VE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="160K" />
+    <var name="SVDFile" value="STM32L4x2.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x2.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L471QE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L471QG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L471RE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L471RG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L471VE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L471VG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L471ZE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L471ZG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x1.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x1.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L475RC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x5.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x5.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L475RE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x5.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x5.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L475RG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x5.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x5.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L475VC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x5.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x5.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L475VE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x5.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x5.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L475VG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x5.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x5.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476JE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476JG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476ME">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476MG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476QE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476QG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476RC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476RE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476RG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476VC">
+    <var name="ROMSize" value="256K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476VE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476VG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476ZE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L476ZG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L486JG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L486QG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L486RG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L486VG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L486ZG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="128K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L496AE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L496AG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L496QE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L496QG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L496RE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L496RG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L496VE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L496VG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L496ZE">
+    <var name="ROMSize" value="512K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L496ZG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L4A6AG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L4A6QG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L4A6RG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L4A6VG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
+  <if-eq a="{$DeviceName$}" b="STM32L4A6ZG">
+    <var name="ROMSize" value="1024K" />
+    <var name="RAMSize" value="320K" />
+    <var name="SVDFile" value="STM32L4x6.svd" />
+    <unzip archive="{$ProgramDir$}/SVD/STM32L4.zip" entry="STM32L4x6.svd" destination="{$ProjectDir$}" />
+  </if-eq>
   
-  <!-- Precompiled .a libraries (after being copied) -->
-  <libraries>
-    <library>
-      libopencm3/libopencm3_stm32l4.a
-    </library>
-  </libraries>
-  
-  <!-- Compiler definitions -->
-  <definitions>
-    <define>
-      STM32L4
-    </define>
-  </definitions>
-  
-  <!-- SVD files archive -->
-  <svd-archive project-directory=".">
-    SVD/STM32L4.zip
-  </svd-archive>
-  
-  <!-- Devices list -->
-  <devices>
-    <device name="STM32L431CB" rom="128K"  ram="64K"  svd-file="STM32L4x1.svd" />
-    <device name="STM32L431CC" rom="256K"  ram="64K"  svd-file="STM32L4x1.svd" />
-    <device name="STM32L431KB" rom="128K"  ram="64K"  svd-file="STM32L4x1.svd" />
-    <device name="STM32L431KC" rom="256K"  ram="64K"  svd-file="STM32L4x1.svd" />
-    <device name="STM32L431RB" rom="128K"  ram="64K"  svd-file="STM32L4x1.svd" />
-    <device name="STM32L431RC" rom="256K"  ram="64K"  svd-file="STM32L4x1.svd" />
-    <device name="STM32L431VC" rom="256K"  ram="64K"  svd-file="STM32L4x1.svd" />
-    <device name="STM32L432KB" rom="128K"  ram="64K"  svd-file="STM32L4x2.svd" />
-    <device name="STM32L432KC" rom="256K"  ram="64K"  svd-file="STM32L4x2.svd" />
-    <device name="STM32L433CB" rom="128K"  ram="64K"  svd-file="STM32L4x3.svd" />
-    <device name="STM32L433CC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
-    <device name="STM32L433RB" rom="128K"  ram="64K"  svd-file="STM32L4x3.svd" />
-    <device name="STM32L433RC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
-    <device name="STM32L433VC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
-    <device name="STM32L442KC" rom="256K"  ram="64K"  svd-file="STM32L4x2.svd" />
-    <device name="STM32L443CC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
-    <device name="STM32L443RC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
-    <device name="STM32L443VC" rom="256K"  ram="64K"  svd-file="STM32L4x3.svd" />
-    <device name="STM32L451CC" rom="256K"  ram="160K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L451CE" rom="512K"  ram="160K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L451RC" rom="256K"  ram="160K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L451RE" rom="512K"  ram="160K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L451VC" rom="256K"  ram="160K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L451VE" rom="512K"  ram="160K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L452CC" rom="256K"  ram="160K" svd-file="STM32L4x2.svd" />
-    <device name="STM32L452CE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
-    <device name="STM32L452RC" rom="256K"  ram="160K" svd-file="STM32L4x2.svd" />
-    <device name="STM32L452RE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
-    <device name="STM32L452VC" rom="256K"  ram="160K" svd-file="STM32L4x2.svd" />
-    <device name="STM32L452VE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
-    <device name="STM32L462CE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
-    <device name="STM32L462RE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
-    <device name="STM32L462VE" rom="512K"  ram="160K" svd-file="STM32L4x2.svd" />
-    <device name="STM32L471QE" rom="512K"  ram="128K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L471QG" rom="1024K" ram="128K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L471RE" rom="512K"  ram="128K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L471RG" rom="1024K" ram="128K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L471VE" rom="512K"  ram="128K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L471VG" rom="1024K" ram="128K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L471ZE" rom="512K"  ram="128K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L471ZG" rom="1024K" ram="128K" svd-file="STM32L4x1.svd" />
-    <device name="STM32L475RC" rom="256K"  ram="128K" svd-file="STM32L4x5.svd" />
-    <device name="STM32L475RE" rom="512K"  ram="128K" svd-file="STM32L4x5.svd" />
-    <device name="STM32L475RG" rom="1024K" ram="128K" svd-file="STM32L4x5.svd" />
-    <device name="STM32L475VC" rom="256K"  ram="128K" svd-file="STM32L4x5.svd" />
-    <device name="STM32L475VE" rom="512K"  ram="128K" svd-file="STM32L4x5.svd" />
-    <device name="STM32L475VG" rom="1024K" ram="128K" svd-file="STM32L4x5.svd" />
-    <device name="STM32L476JE" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476JG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476ME" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476MG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476QE" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476QG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476RC" rom="256K"  ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476RE" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476RG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476VC" rom="256K"  ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476VE" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476VG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476ZE" rom="512K"  ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L476ZG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L486JG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L486QG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L486RG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L486VG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L486ZG" rom="1024K" ram="128K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L496AE" rom="512K"  ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L496AG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L496QE" rom="512K"  ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L496QG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L496RE" rom="512K"  ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L496RG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L496VE" rom="512K"  ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L496VG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L496ZE" rom="512K"  ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L496ZG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L4A6AG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L4A6QG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L4A6RG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L4A6VG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
-    <device name="STM32L4A6ZG" rom="1024K" ram="320K" svd-file="STM32L4x6.svd" />
-  </devices>
-</control-file>
+  <!-- Common templates. -->
+  <copy source="{$TemplatesDir$}/linker.ld" destination="{$ProjectDir$}"          parse="true" />
+  <copy source="{$TemplatesDir$}/project/*" destination="{$ProjectDir$}/project"  parse="true" keep-existing="true" recursive="true" />
+</sourcegen-script>

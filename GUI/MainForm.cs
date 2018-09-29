@@ -19,6 +19,29 @@ namespace LOCM3Gen.GUI
   public partial class MainForm : Form
   {
     /// <summary>
+    /// Main form constructor.
+    /// </summary>
+    public MainForm()
+    {
+      try
+      {
+        InitializeComponent();
+
+        BuildEnvironmentsList();
+        BuildFamiliesList();
+        ReadXMLSettings();
+
+        foreach (Control control in this.Controls)
+          control.TextChanged += new System.EventHandler(AllControls_TextChanged);
+        AllControls_TextChanged(null, null);
+      }
+      catch(Exception exception)
+      {
+        CatchException(exception);
+      }
+    }
+    
+    /// <summary>
     /// Showing common exception description dialog.
     /// </summary>
     /// <param name="exception">Exception instance being described.</param>
@@ -133,34 +156,11 @@ namespace LOCM3Gen.GUI
     }
 
     /// <summary>
-    /// Main form constructor.
-    /// </summary>
-    public MainForm()
-    {
-      try
-      {
-        InitializeComponent();
-
-        BuildEnvironmentsList();
-        BuildFamiliesList();
-        ReadXMLSettings();
-
-        foreach (Control control in this.Controls)
-          control.TextChanged += new System.EventHandler(AllControls_TextChanged);
-        AllControls_TextChanged(null, null);
-      }
-      catch(Exception exception)
-      {
-        CatchException(exception);
-      }
-    }
-    
-    /// <summary>
     /// Showing libopencm3 directory selector dialog.
     /// </summary>
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>
-    void Locm3DirectoryButton_Click(object sender, EventArgs e)
+    private void Locm3DirectoryButton_Click(object sender, EventArgs e)
     {
       try
       {
@@ -181,7 +181,7 @@ namespace LOCM3Gen.GUI
     /// </summary>
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>
-    void ProjectDirectoryButton_Click(object sender, EventArgs e)
+    private void ProjectDirectoryButton_Click(object sender, EventArgs e)
     {
       try
       {
@@ -196,13 +196,13 @@ namespace LOCM3Gen.GUI
         CatchException(exception);
       }
     }
-    
+
     /// <summary>
     /// Project name input cleaning event for complying <c>[A-Za-z0-9_]</c> pattern.
     /// </summary>
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>
-    void ProjectNameInput_TextChanged(object sender, EventArgs e)
+    private void ProjectNameInput_TextChanged(object sender, EventArgs e)
     {   
       try
       {
@@ -239,7 +239,7 @@ namespace LOCM3Gen.GUI
     /// </summary>
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>
-    void NumberInputs_TextChanged(object sender, EventArgs e)
+    private void NumberInputs_TextChanged(object sender, EventArgs e)
     {   
       try
       {
@@ -259,7 +259,7 @@ namespace LOCM3Gen.GUI
     /// </summary>
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>
-    void AllControls_TextChanged(object sender, EventArgs e)
+    private void AllControls_TextChanged(object sender, EventArgs e)
     {
       try
       {
@@ -288,12 +288,32 @@ namespace LOCM3Gen.GUI
     /// </summary>
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>
-    void GenerateButton_Click(object sender, EventArgs e)
+    private void GenerateButton_Click(object sender, EventArgs e)
     {
       try
       {
         generateButton.Enabled = false;
 
+        // Filling general variables.
+        var generator = new SourceGen.ScriptReader();
+        generator.variables.Add("ProgramDir", Configuration.programDirectory);
+        generator.variables.Add("TemplatesDir", Configuration.templatesDirectory);
+        generator.variables.Add("FamiliesDir", Configuration.familiesDirectory);
+        generator.variables.Add("EnvironmentsDir", Configuration.environmentsDirectory);
+        generator.variables.Add("LOCM3Dir", locm3DirectoryInput.Text.Trim());
+        generator.variables.Add("ProjectDir", projectSubdirectoryCheckbox.Checked ? Path.Combine(projectDirectoryInput.Text.Trim(), projectNameInput.Text.Trim()) : projectDirectoryInput.Text.Trim());
+        generator.variables.Add("ProjectName", projectNameInput.Text.Trim());
+        generator.variables.Add("DeviceName", devicesList.Text.Trim());
+        generator.variables.Add("Date", DateTime.Now.ToShortDateString());
+        generator.variables.Add("Time", DateTime.Now.ToShortTimeString());
+        generator.variables.Add("UserName", Environment.UserName);
+        generator.variables.Add("MachineName", Environment.MachineName);
+                
+        //HACK: Processing temporary script files.
+        generator.ReadScript(@"D:\Projects\C#\LOCM3Gen\SourceGen\STM32F0.xml");
+        generator.ReadScript(@"D:\Projects\C#\LOCM3Gen\SourceGen\EmBitz.xml");
+
+        /*
         var parameters = new ProjectParameters
         {
           locm3Directory    = locm3DirectoryInput.Text.Trim(),
@@ -308,9 +328,10 @@ namespace LOCM3Gen.GUI
 
         var generator = new Generator(parameters, settings);
         generator.Generate();
+        */
 
-        //Showing generation success dialog.
-        MessageBox.Show("Project \"" + parameters.projectName + "\" has been successfully created in \"" + parameters.projectDirectory + "\".",
+        // Showing generation success dialog.
+        MessageBox.Show("Project \"" + projectNameInput.Text.Trim() + "\" has been successfully created in \"" + projectDirectoryInput.Text.Trim() + "\".",
           this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
       catch (Exception exception)
@@ -325,6 +346,11 @@ namespace LOCM3Gen.GUI
       }
     }
 
+    /// <summary>
+    /// Show program info on <i>About</i>> label click.
+    /// </summary>
+    /// <param name="sender">Event sender object.</param>
+    /// <param name="e">Event arguments.</param>
     private void AboutLabel_Click(object sender, EventArgs e)
     {
       try
@@ -340,6 +366,11 @@ namespace LOCM3Gen.GUI
       }
     }
 
+    /// <summary>
+    /// Close the main form and terminate the application.
+    /// </summary>
+    /// <param name="sender">Event sender object.</param>
+    /// <param name="e">Event arguments.</param>
     private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
     {
       try

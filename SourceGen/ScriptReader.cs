@@ -176,8 +176,8 @@ namespace SourceGen
       //Removing {%...%} patterns of comments.
       var result = Regex.Replace(str, @"\{\%(.*?)\%\}", "", RegexOptions.Compiled);
 
-      //Processing {#...{$...$}...#} patterns of lists.
-      result = Regex.Replace(result, @"\{\#(.*?)\{\$(\w*)\$\}(.*?)\#\}", ListCallback, RegexOptions.Compiled | RegexOptions.Singleline);
+      //Processing {#...{@...@}...#} patterns of lists.
+      result = Regex.Replace(result, @"\{\#(.*?)\{\@(\w*)\@\}(.*?)\#\}", ListCallback, RegexOptions.Compiled | RegexOptions.Singleline);
 
       //Processing {$...$} patterns of variables.
       result = Regex.Replace(result, @"\{\$(\w*)\$\}", VariableCallback, RegexOptions.Compiled);

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <EmBitz_project_file>
 	<EmBitzVersion release="1.11" revision="0" />
 	<FileVersion major="1" minor="0" />
@@ -71,7 +71,7 @@
 			<Add option="-mfloat-abi={$FPType$}" />
 			<Add option="-fno-strict-aliasing" />
       {#
-      <Add symbol="{$Definitions$}" />
+      <Add symbol="{@Definitions@}" />
       #}
       <Add directory="." />
       <Add directory=".\project" />
@@ -86,12 +86,12 @@
 			<Add option="-eb_lib=d" />
 			<Add option="-Wl,--gc-sections" />
       {#
-      <Add library="{$Libraries$}" />
+      <Add library="{@Libraries@}" />
       #}
       <Add directory="." />
 		</Linker>
     {#
-    <Unit filename="{$ProjectFiles$}" />
+    <Unit filename="{@ProjectFiles@}" />
     #}
     <Extensions>
 			<code_completion />

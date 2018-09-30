@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Project: {$ProjectName$}
  *
  * Created at {$Date$} {$Time$}

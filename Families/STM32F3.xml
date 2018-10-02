@@ -109,349 +109,354 @@
   <if-eq a="{$DeviceName$}" b="STM32F301C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F301.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F301.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F301C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F301.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F301.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F301K6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F301.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F301.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F301K8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F301.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F301.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F301R6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F301.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F301.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F301R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F301.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F301.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302CB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="32K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302CC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="40K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302K6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302K8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302R6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302RB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="32K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302RC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="40K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302RD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="64K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302RE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="64K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302VB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="32K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302VC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="40K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302VD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="64K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302VE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="64K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302ZD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="64K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F302ZE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="64K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F302.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F302.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303CB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="40K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303CC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="48K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303K6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303K8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303R6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303RB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="40K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303RC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="48K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303RD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="80K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303RE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303VB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="40K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303VC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="48K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303VD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="80K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303VE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303ZD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="80K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F303ZE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F303.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F303.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F318C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x8.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x8.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F318K8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x8.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x8.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F328C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x8.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x8.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F334C4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x4.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x4.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F334C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x4.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x4.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F334C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x4.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x4.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F334K4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x4.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x4.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F334K6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x4.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x4.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F334K8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x4.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x4.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F334R6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x4.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x4.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F334R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x4.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x4.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F358CC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="48K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x8.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x8.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F358RC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="48K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x8.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x8.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F358VC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="48K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x8.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x8.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F373C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F373.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F373.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F373CB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="24K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F373.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F373.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F373CC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F373.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F373.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F373R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F373.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F373.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F373RB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="24K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F373.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F373.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F373RC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F373.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F373.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F373V8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="16K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F373.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F373.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F373VB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="24K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F373.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F373.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F373VC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F373.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F373.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F378CC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x8.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x8.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F378RC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x8.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x8.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F378VC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x8.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x8.svd" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32F398VE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32F3.zip" entry="STM32F3x8.svd" target-dir="{$ProjectDir$}" />
+    <var name="SVDFile" value="STM32F3x8.svd" />
   </if-eq>
-  
+
+  <!-- Unzipping SVD file. -->
+  <if-neq a="{$SVDFile$}" b="">
+    <unzip archive="{$ProgramDir$}/SVD/{$FamilyName$}.zip" entry="{$SVDFile$}" target-dir="{$ProjectDir$}" />
+  </if-neq>
+
   <!-- Common templates. -->
   <copy source-dir="{$TemplatesDir$}"          target-dir="{$ProjectDir$}"         file-pattern="linker.ld"  parse="true" />
   <copy source-dir="{$TemplatesDir$}/project"  target-dir="{$ProjectDir$}/project" file-pattern="*"          parse="true" keep-existing="true" recursive="true" />

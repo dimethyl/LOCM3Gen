@@ -197,5 +197,30 @@ namespace SourceGen
         File.WriteAllText(fileName, ParseString(fileContents));
       }
     }
+
+    /// <summary>
+    /// Get action's name from the element.
+    /// </summary>
+    /// <param name="actionElement"><i>XElement</i> instance to get data from.</param>
+    /// <returns>String with the name of the action.</returns>
+    public string GetActionName(XElement actionElement)
+    {
+      return actionElement?.Name?.ToString()?.Trim() ?? "";
+    }
+
+    /// <summary>
+    /// Get action parameter's value from the element.
+    /// </summary>
+    /// <param name="actionElement"><i>XElement</i> instance to get data from.</param>
+    /// <param name="parameterName">Name of the parameter to get.</param>
+    /// <param name="parse">Parse the var patterns in the parameter value.</param>
+    /// <returns>String with the value of the action parameter.</returns>
+    public string GetActionParameter(XElement actionElement, string parameterName, bool parse = false)
+    {
+      var value = actionElement?.Attribute(parameterName)?.Value?.Trim() ?? "";
+      if (value != "" && parse)
+        value = ParseString(value);
+      return value;
+    }
   }
 }

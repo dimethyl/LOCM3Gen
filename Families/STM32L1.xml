@@ -125,507 +125,428 @@
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="4K" />
     <var name="SVDFile" value="STM32L100.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L100.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L100C6-A">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="4K" />
     <var name="SVDFile" value="STM32L100.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L100.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L100R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
     <var name="SVDFile" value="STM32L100.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L100.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L100R8-A">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
     <var name="SVDFile" value="STM32L100.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L100.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L100RB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="10K" />
     <var name="SVDFile" value="STM32L100.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L100.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L100RB-A">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="STM32L100.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L100.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L100RC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="STM32L100.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L100.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="10K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151C6-A">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="10K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151C8-A">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151CB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151CB-A">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151CC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151QC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151QD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151QE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151R6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="10K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151R6-A">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="10K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151R8-A">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151RB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151RB-A">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151RC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151RC-A">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151RD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151RE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151UC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151V8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="10K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151V8-A">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151VB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151VB-A">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151VC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151VC-A">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151VD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151VD-X">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151VE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151ZC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151ZD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L151ZE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="STM32L151.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L151.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="10K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152C6-A">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="10K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152C8-A">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152CB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152CB-A">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152CC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152QC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152QD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152QE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152R6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="10K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152R6-A">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="10K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152R8-A">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152RB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152RB-A">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152RC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152RC-A">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152RD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152RE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152UC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152V8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="10K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152V8-A">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152VB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="16K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152VB-A">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152VC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152VC-A">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152VD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152VD-X">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152VE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152ZC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152ZD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L152ZE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L162QD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="STM32L162.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L162.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L162RC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L162.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L162.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L162RC-A">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L162.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L162.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L162RD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="STM32L162.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L162.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L162RE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="STM32L162.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L162.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L162VC">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L162.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L162.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L162VC-A">
     <var name="ROMSize" value="256K" />
     <var name="RAMSize" value="32K" />
     <var name="SVDFile" value="STM32L162.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L162.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L162VD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="STM32L162.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L162.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L162VE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="STM32L162.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L162.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L162ZD">
     <var name="ROMSize" value="384K" />
     <var name="RAMSize" value="48K" />
     <var name="SVDFile" value="STM32L162.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L162.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L162ZE">
     <var name="ROMSize" value="512K" />
     <var name="RAMSize" value="80K" />
     <var name="SVDFile" value="STM32L162.svd" />
-    <unzip archive="{$ProgramDir$}/SVD/STM32L1.zip" entry="STM32L162.svd" target-dir="{$ProjectDir$}" />
   </if-eq>
-  
+
+  <!-- Unzipping SVD file. -->
+  <if-neq a="{$SVDFile$}" b="">
+    <unzip archive="{$ProgramDir$}/SVD/{$FamilyName$}.zip" entry="{$SVDFile$}" target-dir="{$ProjectDir$}" />
+  </if-neq>
+
   <!-- Common templates. -->
   <copy source-dir="{$TemplatesDir$}"          target-dir="{$ProjectDir$}"         file-pattern="linker.ld"  parse="true" />
   <copy source-dir="{$TemplatesDir$}/project"  target-dir="{$ProjectDir$}/project" file-pattern="*"          parse="true" keep-existing="true" recursive="true" />

@@ -25,12 +25,9 @@ namespace SourceGen
     [ActionNames("var")]
     public void VarAction(XElement actionElement)
     {
-      var name = actionElement.Attribute("name")?.Value?.Trim() ?? "";
+      var name = GetActionParameter(actionElement, "name");
       if (name != "")
-      {
-        var value = ParseString(actionElement.Attribute("value")?.Value?.Trim() ?? "");
-        variables.Add(name, value);
-      }
+        variables.Add(name, GetActionParameter(actionElement, "value", true));
       else
       {
         // TODO: Wrong variable name.
@@ -38,48 +35,56 @@ namespace SourceGen
     }
 
     /// <summary>
-    /// Action method for operating list.
+    /// Action method for maintaining lists.
     /// </summary>
     /// <param name="data">XML element containing action data.</param>
     [ActionNames("list")]
     public void ListAction(XElement actionElement)
     {
-      var listName = actionElement.Attribute("name")?.Value?.Trim() ?? "";
+      var listName = GetActionParameter(actionElement, "name");
       if (listName != "")
       {
         var list = new List<string>();
-        foreach (var nestedElement in actionElement.Elements())
+        foreach (var commandElement in actionElement.Elements())
         {
-          var childActionName = nestedElement.Name.ToString().Trim();
-          if (childActionName == "add")
+          switch (GetActionName(commandElement))
           {
-            var value = ParseString(nestedElement.Attribute("value")?.Value?.Trim() ?? "");
-            list.Add(value);
-          }
-          else if (childActionName == "remove")
-          {
-            var value = ParseString(nestedElement.Attribute("value")?.Value?.Trim() ?? "");
-            list.Remove(value);
-          }
-          else if (childActionName == "add-paths")
-          {
-            var sourcePath = ParseString(nestedElement.Attribute("source-dir")?.Value?.Trim() ?? "");
-            if (sourcePath != "" && Directory.Exists(sourcePath))
+            case "add":
             {
-              var fileNamePattern = nestedElement.Attribute("file-pattern")?.Value?.Trim() ?? "";
-              var recursive = (nestedElement.Attribute("recursive")?.Value?.Trim()?.ToLower() ?? "") == "true";
-              var relative = (nestedElement.Attribute("relative")?.Value?.Trim()?.ToLower() ?? "") == "true";
-              foreach (var fileName in Directory.EnumerateFiles(sourcePath, fileNamePattern, recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
-                list.Add(relative ? fileName.Replace(sourcePath, ".") : fileName);
+              list.Add(GetActionParameter(commandElement, "value", true));
             }
-            else
+            break;
+
+            case "remove":
             {
-              // TODO: Wrong source path.
+              list.Remove(GetActionParameter(commandElement, "value", true));
             }
-          }
-          else
-          {
-            // TODO: Wrong child action processing.
+            break;
+
+            case "add-paths":
+            {
+              var sourcePath = Path.GetFullPath(GetActionParameter(commandElement, "source-dir", true));
+              if (sourcePath != "" && Directory.Exists(sourcePath))
+              {
+                var fileNamePattern = GetActionParameter(commandElement, "file-pattern");
+                var recursive       = GetActionParameter(commandElement, "recursive").ToLower() == "true";
+                var relative        = GetActionParameter(commandElement, "relative").ToLower() == "true";
+
+                foreach (var fileName in Directory.EnumerateFiles(sourcePath, fileNamePattern, recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+                  list.Add(relative ? fileName.Replace(sourcePath, ".") : fileName);
+              }
+              else
+              {
+                // TODO: Wrong source path.
+              }
+            }
+            break;
+
+            default:
+            {
+              // TODO: Wrong child action processing.
+            }
+            break;
           }
         }
 
@@ -97,23 +102,27 @@ namespace SourceGen
     [ActionNames("copy")]
     public void CopyAction(XElement actionElement)
     {
-      var sourcePath = ParseString(actionElement.Attribute("source-dir")?.Value?.Trim() ?? "");
+      var sourcePath = Path.GetFullPath(GetActionParameter(actionElement, "source-dir", true));
       if (sourcePath != "" && Directory.Exists(sourcePath))
       {
-        var fileNamePattern = actionElement.Attribute("file-pattern")?.Value?.Trim() ?? "";
-        var destinationPath = Path.GetFullPath(ParseString(actionElement.Attribute("target-dir")?.Value?.Trim() ?? ""));
-        var recursive = (actionElement.Attribute("recursive")?.Value?.Trim()?.ToLower() ?? "") == "true";
-        var keepExistingFiles = (actionElement.Attribute("keep-existing")?.Value?.Trim()?.ToLower() ?? "") == "true";
-        var parseFiles = (actionElement.Attribute("parse")?.Value?.Trim()?.ToLower() ?? "") == "true";
+        var fileNamePattern   = GetActionParameter(actionElement, "file-pattern");
+        var destinationPath   = Path.GetFullPath(GetActionParameter(actionElement, "target-dir", true));
+        var recursive         = GetActionParameter(actionElement, "recursive").ToLower() == "true";
+        var keepExistingFiles = GetActionParameter(actionElement, "keep-existing").ToLower() == "true";
+        var parseFiles        = GetActionParameter(actionElement, "parse").ToLower() == "true";
+
         foreach (var fileName in Directory.EnumerateFiles(sourcePath, fileNamePattern, recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
         {
           var destinationFileName = fileName.Replace(sourcePath, destinationPath);
           var destinationDirectory = Path.GetDirectoryName(destinationFileName);
+
           if (!Directory.Exists(destinationDirectory))
             Directory.CreateDirectory(destinationDirectory);
+
           if (!File.Exists(destinationFileName) || !keepExistingFiles)
           {
             File.Copy(fileName, destinationFileName, true);
+
             if (parseFiles)
               ParseFile(destinationFileName);
           }
@@ -132,20 +141,22 @@ namespace SourceGen
     [ActionNames("unzip")]
     public void UnzipAction(XElement actionElement)
     {
-      var archivePath = Path.GetFullPath(ParseString(actionElement.Attribute("archive")?.Value?.Trim() ?? ""));
+      var archivePath = Path.GetFullPath(GetActionParameter(actionElement, "archive", true));
       if (File.Exists(archivePath))
       {
-        var entryPath = ParseString(actionElement.Attribute("entry")?.Value?.Trim() ?? "");
+        var entryPath = GetActionParameter(actionElement, "entry", true);
         using (var svdArchive = ZipFile.OpenRead(archivePath))
         {
           var svdStream = svdArchive.GetEntry(entryPath);
           if (svdStream != null)
           {
-            var destinationPath = Path.GetFullPath(ParseString(actionElement.Attribute("target-dir")?.Value?.Trim() ?? ""));
+            var destinationPath     = Path.GetFullPath(GetActionParameter(actionElement, "target-dir", true));
             var destinationFileName = Path.Combine(destinationPath, Path.GetFileName(entryPath));
-            var keepExistingFiles = (actionElement.Attribute("keep-existing")?.Value?.Trim()?.ToLower() ?? "") == "true";
+            var keepExistingFiles   = GetActionParameter(actionElement, "keep-existing").ToLower() == "true";
+
             if (!Directory.Exists(destinationPath))
               Directory.CreateDirectory(destinationPath);
+
             if (!File.Exists(destinationFileName) || !keepExistingFiles)
             {
               using (var svdFile = new StreamWriter(destinationFileName))
@@ -174,11 +185,12 @@ namespace SourceGen
     [ActionNames("parse")]
     public void ParseAction(XElement actionElement)
     {
-      var sourcePath = ParseString(actionElement.Attribute("source-dir")?.Value?.Trim() ?? "");
+      var sourcePath = Path.GetFullPath(GetActionParameter(actionElement, "source-dir", true));
       if (sourcePath != "" && Directory.Exists(sourcePath))
       {
-        var fileNamePattern = actionElement.Attribute("file-pattern")?.Value?.Trim() ?? "";
-        var recursive = (actionElement.Attribute("recursive")?.Value?.Trim()?.ToLower() ?? "") == "true";
+        var fileNamePattern = GetActionParameter(actionElement, "file-pattern");
+        var recursive       = GetActionParameter(actionElement, "recursive").ToLower() == "true";
+
         foreach (var fileName in Directory.EnumerateFiles(sourcePath, fileNamePattern, recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
           ParseFile(fileName);
       }
@@ -195,9 +207,10 @@ namespace SourceGen
     [ActionNames("if-eq", "if-neq")]
     public void IfAction(XElement actionElement)
     {
-      var a = ParseString(actionElement.Attribute("a")?.Value?.Trim() ?? "");
-      var b = ParseString(actionElement.Attribute("b")?.Value?.Trim() ?? "");
-      var negate = actionElement.Name.ToString().ToLower() == "if-neq";
+      var a       = GetActionParameter(actionElement, "a", true);
+      var b       = GetActionParameter(actionElement, "b", true);
+      var negate  = GetActionName(actionElement) == "if-neq";
+
       if ((a == b && !negate) || (a != b && negate))
       {
         foreach (var nestedElement in actionElement.Elements())

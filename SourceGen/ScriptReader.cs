@@ -169,7 +169,7 @@ namespace SourceGen
     /// Callback for processing list regex pattern.
     /// </summary>
     /// <param name="match">Regex match information.</param>
-    /// <returns></returns>
+    /// <returns>Replacement string for the pattern.</returns>
     private string ListCallback(Match match)
     {
       if (this.lists.ContainsKey(match.Groups[2].Value))
@@ -182,7 +182,7 @@ namespace SourceGen
     /// Callback for processing variable regex pattern.
     /// </summary>
     /// <param name="match">Regex match information.</param>
-    /// <returns></returns>
+    /// <returns>Replacement string for the pattern.</returns>
     private string VariableCallback(Match match)
     {
       if (this.variables.ContainsKey(match.Groups[1].Value))
@@ -195,7 +195,7 @@ namespace SourceGen
     /// Parse the patterns within the template string.
     /// </summary>
     /// <param name="str">String to parse.</param>
-    /// <returns></returns>
+    /// <returns>Parsed string with all patterns being replaced.</returns>
     public string ParseString(string str)
     {
       //Removing {%...%} patterns of comments.

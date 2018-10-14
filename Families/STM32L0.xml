@@ -32,7 +32,7 @@
     <add value="STM32L0" />
   </list>
   
-  <!-- Devices list. -->
+  <!-- Family's devices list. -->
   <list name="DevicesList">
     <add value="STM32L011D3" />
     <add value="STM32L011D4" />
@@ -127,371 +127,462 @@
     <add value="STM32L083VZ" />
   </list>
 
-  <!-- Devices parameters -->
+  <!-- Device variables definition. -->
   <if-eq a="{$DeviceName$}" b="STM32L011D3">
     <var name="ROMSize" value="8K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L011D4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L011E3">
     <var name="ROMSize" value="8K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L011E4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L011F3">
     <var name="ROMSize" value="8K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L011F4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L011G3">
     <var name="ROMSize" value="8K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L011G4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L011K3">
     <var name="ROMSize" value="8K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L011K4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L021D4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L021F4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L021G4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L021K4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="2K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L031C4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L031C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L031E4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L031E6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L031F4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L031F6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L031G4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L031G6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L031K4">
     <var name="ROMSize" value="16K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L031K6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L041C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L041E6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L041F6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L041G6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L041K6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L051C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L051C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L051K6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L051K8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L051R6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L051R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L051T6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L051T8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L052C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L052C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L052K6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L052K8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L052R6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L052R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L052T6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L052T8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L053C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L053C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L053R6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L053R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L062K8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L063C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L063R8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="8K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L071C8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L071CB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L071CZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L071K8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L071KB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L071KZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L071RB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L071RZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L071V8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L071VB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L071VZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L072CB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L072CZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L072KB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L072KZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L072RB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L072RZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L072V8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L072VB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L072VZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L073CB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L073CZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L073RB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L073RZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L073V8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L073VB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L073VZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L081CB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L081CZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L081KZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x1.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x1.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L082CZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L082KZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x2.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x2.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L083CB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L083CZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L083RB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L083RZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L083V8">
     <var name="ROMSize" value="64K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L083VB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
   <if-eq a="{$DeviceName$}" b="STM32L083VZ">
     <var name="ROMSize" value="192K" />
     <var name="RAMSize" value="20K" />
-    <var name="SVDFile" value="STM32L0x3.svd" />  </if-eq>
+    <var name="SVDFile" value="STM32L0x3.svd" />
+  </if-eq>
 
   <!-- Unzipping SVD file. -->
   <if-neq a="{$SVDFile$}" b="">

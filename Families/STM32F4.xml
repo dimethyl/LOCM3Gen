@@ -33,7 +33,7 @@
     <add value="STM32F4" />
   </list>
   
-  <!-- Devices list. -->
+  <!-- Family's devices list. -->
   <list name="DevicesList">
     <add value="STM32F401CB" />
     <add value="STM32F401CC" />
@@ -186,7 +186,7 @@
     <add value="STM32F479ZI" />
   </list>
 
-  <!-- Devices parameters -->
+  <!-- Device variables definition. -->
   <if-eq a="{$DeviceName$}" b="STM32F401CB">
     <var name="ROMSize" value="128K" />
     <var name="RAMSize" value="64K" />

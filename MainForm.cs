@@ -1,8 +1,8 @@
 ﻿/*
- * Copyright (C) 2018 Maxim Yudin <i@hal.su>. All rights reserved.
- * 
- * This file is a part of the closed source section of LOCM3Gen project.
- * You may NOT use, distribute, copy or modify this file without special author's permission.
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+ * If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/ .
+
+ * Copyright (C) 2018-2019 Maxim Yudin <stibiu@yandex.ru>.
  */
 
 using System;
@@ -31,8 +31,8 @@ namespace LOCM3Gen
         BuildFamiliesList();
         ReadXMLSettings();
 
-        foreach (Control control in this.Controls)
-          control.TextChanged += new System.EventHandler(AllControls_TextChanged);
+        foreach (Control control in Controls)
+          control.TextChanged += AllControls_TextChanged;
         AllControls_TextChanged(null, null);
       }
       catch(Exception exception)
@@ -40,7 +40,7 @@ namespace LOCM3Gen
         CatchException(exception);
       }
     }
-    
+
     /// <summary>
     /// Showing common exception description dialog.
     /// </summary>
@@ -49,7 +49,7 @@ namespace LOCM3Gen
     {
       MessageBox.Show(exception.ToString(), "Exception caught on " + exception.Source, MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
-    
+
     /// <summary>
     /// Filling the list of supported project environments using environment XML files.
     /// </summary>
@@ -209,7 +209,7 @@ namespace LOCM3Gen
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>
     private void ProjectNameInput_TextChanged(object sender, EventArgs e)
-    {   
+    {
       try
       {
         var input = sender as TextBoxBase;
@@ -246,7 +246,7 @@ namespace LOCM3Gen
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>
     private void NumberInputs_TextChanged(object sender, EventArgs e)
-    {   
+    {
       try
       {
         var input = sender as TextBoxBase;
@@ -314,14 +314,14 @@ namespace LOCM3Gen
         generator.variables.Add("Time", DateTime.Now.ToShortTimeString());
         generator.variables.Add("UserName", Environment.UserName);
         generator.variables.Add("MachineName", Environment.MachineName);
-        
+
         // Reading script files.
         generator.RunScript(Path.Combine(Configuration.familiesDirectory, familiesList.Text.Trim() + ".xml"));
         generator.RunScript(Path.Combine(Configuration.environmentsDirectory, environmentsList.Text.Trim() + ".xml"));
 
         // Showing generation success dialog.
         MessageBox.Show("Project \"" + projectNameInput.Text.Trim() + "\" has been successfully created in \"" + projectDirectoryInput.Text.Trim() + "\".",
-          this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+          Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
       catch (Exception exception)
       {
@@ -345,8 +345,8 @@ namespace LOCM3Gen
       try
       {
         MessageBox.Show("libopencm3 Project Generator v" + Configuration.version.ToString(2) + "\n" +
-          "Build " + Configuration.version.Build + "." + Configuration.version.Revision + "\n\n" +       
-          "Copyright (c) 2018 Maxim Yudin <i@hal.su>",
+          "Build " + Configuration.version.Build + "." + Configuration.version.Revision + "\n\n" +
+          "Copyright (c) 2018-2019 Maxim Yudin <stibiu@yandex.ru>",
           "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
       catch (Exception exception)

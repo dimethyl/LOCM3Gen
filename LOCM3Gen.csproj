@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>LOCM3Gen</RootNamespace>
     <AssemblyName>LOCM3Gen</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -194,6 +194,7 @@
     <Content Include="MPL.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="README.md" />
     <Content Include="Templates\project\main.c">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

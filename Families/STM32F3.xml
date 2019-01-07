@@ -2,8 +2,8 @@
 <!--
   This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
   If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/ .
-  
-  Copyright (C) 2018 Maxim Yudin <i@hal.su>. 
+
+  Copyright (C) 2018-2019 Maxim Yudin <stibiu@yandex.ru>.
 -->
 <sourcegen-script version="1.0">
   <!-- Microcontroller family definition. -->
@@ -11,7 +11,7 @@
   <var name="Core"        value="cortex-m4" />
   <var name="FPType"      value="hard" />
   <var name="FPUnit"      value="fpv4-sp-d16" />
-  
+
   <!-- Family-specific libopencm3 copy-routes. -->
   <copy source-dir="{$LOCM3Dir$}/include/libopencm3/cm3"          target-dir="{$ProjectDir$}/libopencm3/cm3"          file-pattern="*.h" />
   <copy source-dir="{$LOCM3Dir$}/include/libopencm3/dispatch"     target-dir="{$ProjectDir$}/libopencm3/dispatch"     file-pattern="*.h" />
@@ -31,7 +31,7 @@
   <list name="Definitions">
     <add value="STM32F3" />
   </list>
-  
+
   <!-- Family's devices list. -->
   <list name="DevicesList">
     <add value="STM32F301C6" />

@@ -1,17 +1,16 @@
 ﻿/*
- * Copyright (C) 2018 Maxim Yudin <i@hal.su>. All rights reserved.
- * 
- * This file is a part of the closed source section of LOCM3Gen project.
- * You may NOT use, distribute, copy or modify this file without special author's permission.
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+ * If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/ .
+
+ * Copyright (C) 2018-2019 Maxim Yudin <stibiu@yandex.ru>.
  */
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Xml.Linq;
 
-namespace SourceGen
+namespace LOCM3Gen.SourceGen
 {
   /// <summary>
   /// Extension for script reader class describing action methods.
@@ -21,7 +20,7 @@ namespace SourceGen
     /// <summary>
     /// Action method for operating variables.
     /// </summary>
-    /// <param name="data">XML element containing action data.</param>
+    /// <param name="actionElement">XML element containing action data.</param>
     [ActionNames("var")]
     public void VarAction(XElement actionElement)
     {
@@ -37,7 +36,7 @@ namespace SourceGen
     /// <summary>
     /// Action method for maintaining lists.
     /// </summary>
-    /// <param name="data">XML element containing action data.</param>
+    /// <param name="actionElement">XML element containing action data.</param>
     [ActionNames("list")]
     public void ListAction(XElement actionElement)
     {
@@ -98,7 +97,7 @@ namespace SourceGen
     /// <summary>
     /// Action method for files copying.
     /// </summary>
-    /// <param name="data">XML element containing action data.</param>
+    /// <param name="actionElement">XML element containing action data.</param>
     [ActionNames("copy")]
     public void CopyAction(XElement actionElement)
     {
@@ -137,7 +136,7 @@ namespace SourceGen
     /// <summary>
     /// Action method for extracting a file from a zip archive.
     /// </summary>
-    /// <param name="data">XML element containing action data.</param>
+    /// <param name="actionElement">XML element containing action data.</param>
     [ActionNames("unzip")]
     public void UnzipAction(XElement actionElement)
     {
@@ -181,7 +180,7 @@ namespace SourceGen
     /// <summary>
     /// Action method for extracting a file from a zip archive.
     /// </summary>
-    /// <param name="data">XML element containing action data.</param>
+    /// <param name="actionElement">XML element containing action data.</param>
     [ActionNames("parse")]
     public void ParseAction(XElement actionElement)
     {
@@ -203,7 +202,7 @@ namespace SourceGen
     /// <summary>
     /// Conditional action method that controls processing of nested actions.
     /// </summary>
-    /// <param name="data">XML element containing action data.</param>
+    /// <param name="actionElement">XML element containing action data.</param>
     [ActionNames("if-eq", "if-neq")]
     public void IfAction(XElement actionElement)
     {

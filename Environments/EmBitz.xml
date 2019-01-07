@@ -2,8 +2,8 @@
 <!--
   This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
   If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/ .
-  
-  Copyright (C) 2018 Maxim Yudin <i@hal.su>. 
+
+  Copyright (C) 2018-2019 Maxim Yudin <stibiu@yandex.ru>.
 -->
 <sourcegen-script version="1.0">
   <!-- Building project files list. -->
@@ -11,7 +11,7 @@
     <add-paths source-dir="{$ProjectDir$}" file-pattern="*.h" relative="true" recursive="true" />
     <add-paths source-dir="{$ProjectDir$}" file-pattern="*.c" relative="true" recursive="true" />
   </list>
-  
+
   <!-- Environment-specific templates used for project generation. -->
   <copy source-dir="{$TemplatesDir$}/EmBitz" target-dir="{$ProjectDir$}" file-pattern="*" parse="true" recursive="true" />
 </sourcegen-script>

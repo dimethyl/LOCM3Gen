@@ -1,8 +1,8 @@
 ﻿/*
- * Copyright (C) 2018 Maxim Yudin <i@hal.su>. All rights reserved.
- * 
- * This file is a part of the closed source section of LOCM3Gen project.
- * You may NOT use, distribute, copy or modify this file without special author's permission.
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+ * If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/ .
+
+ * Copyright (C) 2018-2019 Maxim Yudin <stibiu@yandex.ru>.
  */
 
 namespace LOCM3Gen
@@ -26,7 +26,7 @@ namespace LOCM3Gen
     private System.Windows.Forms.Label familyLabel;
     private System.Windows.Forms.ComboBox familiesList;
     private System.Windows.Forms.Button generateButton;
-    
+
     /// <summary>
     /// Disposes resources used by the form.
     /// </summary>
@@ -40,7 +40,7 @@ namespace LOCM3Gen
       }
       base.Dispose(disposing);
     }
-    
+
     /// <summary>
     /// This method is required for Windows Forms designer support.
     /// Do not change the method contents inside the source code editor. The Forms designer might
@@ -68,10 +68,10 @@ namespace LOCM3Gen
       this.devicesList = new System.Windows.Forms.ComboBox();
       this.deviceLabel = new System.Windows.Forms.Label();
       this.SuspendLayout();
-      // 
+      //
       // locm3DirectoryInput
-      // 
-      this.locm3DirectoryInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      //
+      this.locm3DirectoryInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.locm3DirectoryInput.BackColor = System.Drawing.SystemColors.Window;
       this.locm3DirectoryInput.Location = new System.Drawing.Point(16, 31);
@@ -79,9 +79,9 @@ namespace LOCM3Gen
       this.locm3DirectoryInput.Name = "locm3DirectoryInput";
       this.locm3DirectoryInput.Size = new System.Drawing.Size(387, 22);
       this.locm3DirectoryInput.TabIndex = 1;
-      // 
+      //
       // locm3DirectoryButton
-      // 
+      //
       this.locm3DirectoryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.locm3DirectoryButton.Location = new System.Drawing.Point(405, 30);
       this.locm3DirectoryButton.Margin = new System.Windows.Forms.Padding(4);
@@ -91,9 +91,9 @@ namespace LOCM3Gen
       this.locm3DirectoryButton.Text = "...";
       this.locm3DirectoryButton.UseVisualStyleBackColor = true;
       this.locm3DirectoryButton.Click += new System.EventHandler(this.Locm3DirectoryButton_Click);
-      // 
+      //
       // locm3DirectoryLabel
-      // 
+      //
       this.locm3DirectoryLabel.AutoSize = true;
       this.locm3DirectoryLabel.Location = new System.Drawing.Point(16, 11);
       this.locm3DirectoryLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -101,9 +101,9 @@ namespace LOCM3Gen
       this.locm3DirectoryLabel.Size = new System.Drawing.Size(143, 17);
       this.locm3DirectoryLabel.TabIndex = 0;
       this.locm3DirectoryLabel.Text = "libopencm3 directory:";
-      // 
+      //
       // projectDirectoryLabel
-      // 
+      //
       this.projectDirectoryLabel.AutoSize = true;
       this.projectDirectoryLabel.Location = new System.Drawing.Point(16, 59);
       this.projectDirectoryLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -111,9 +111,9 @@ namespace LOCM3Gen
       this.projectDirectoryLabel.Size = new System.Drawing.Size(115, 17);
       this.projectDirectoryLabel.TabIndex = 3;
       this.projectDirectoryLabel.Text = "Project directory:";
-      // 
+      //
       // projectDirectoryButton
-      // 
+      //
       this.projectDirectoryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.projectDirectoryButton.Location = new System.Drawing.Point(405, 78);
       this.projectDirectoryButton.Margin = new System.Windows.Forms.Padding(4);
@@ -123,19 +123,19 @@ namespace LOCM3Gen
       this.projectDirectoryButton.Text = "...";
       this.projectDirectoryButton.UseVisualStyleBackColor = true;
       this.projectDirectoryButton.Click += new System.EventHandler(this.ProjectDirectoryButton_Click);
-      // 
+      //
       // projectDirectoryInput
-      // 
-      this.projectDirectoryInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      //
+      this.projectDirectoryInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.projectDirectoryInput.Location = new System.Drawing.Point(16, 79);
       this.projectDirectoryInput.Margin = new System.Windows.Forms.Padding(4);
       this.projectDirectoryInput.Name = "projectDirectoryInput";
       this.projectDirectoryInput.Size = new System.Drawing.Size(387, 22);
       this.projectDirectoryInput.TabIndex = 4;
-      // 
+      //
       // projectNameLabel
-      // 
+      //
       this.projectNameLabel.AutoSize = true;
       this.projectNameLabel.Location = new System.Drawing.Point(16, 107);
       this.projectNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -143,10 +143,10 @@ namespace LOCM3Gen
       this.projectNameLabel.Size = new System.Drawing.Size(95, 17);
       this.projectNameLabel.TabIndex = 6;
       this.projectNameLabel.Text = "Project name:";
-      // 
+      //
       // projectNameInput
-      // 
-      this.projectNameInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      //
+      this.projectNameInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.projectNameInput.Location = new System.Drawing.Point(16, 127);
       this.projectNameInput.Margin = new System.Windows.Forms.Padding(4);
@@ -155,9 +155,9 @@ namespace LOCM3Gen
       this.projectNameInput.Size = new System.Drawing.Size(418, 22);
       this.projectNameInput.TabIndex = 7;
       this.projectNameInput.TextChanged += new System.EventHandler(this.ProjectNameInput_TextChanged);
-      // 
+      //
       // projectSubdirectoryCheckbox
-      // 
+      //
       this.projectSubdirectoryCheckbox.AutoSize = true;
       this.projectSubdirectoryCheckbox.Checked = true;
       this.projectSubdirectoryCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -168,9 +168,9 @@ namespace LOCM3Gen
       this.projectSubdirectoryCheckbox.TabIndex = 6;
       this.projectSubdirectoryCheckbox.Text = "Create project subdirectory";
       this.projectSubdirectoryCheckbox.UseVisualStyleBackColor = true;
-      // 
+      //
       // familyLabel
-      // 
+      //
       this.familyLabel.AutoSize = true;
       this.familyLabel.Location = new System.Drawing.Point(16, 235);
       this.familyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -178,10 +178,10 @@ namespace LOCM3Gen
       this.familyLabel.Size = new System.Drawing.Size(145, 17);
       this.familyLabel.TabIndex = 9;
       this.familyLabel.Text = "Microcontroller family:";
-      // 
+      //
       // familiesList
-      // 
-      this.familiesList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      //
+      this.familiesList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.familiesList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.familiesList.FormattingEnabled = true;
@@ -191,10 +191,10 @@ namespace LOCM3Gen
       this.familiesList.Size = new System.Drawing.Size(418, 24);
       this.familiesList.TabIndex = 10;
       this.familiesList.SelectedIndexChanged += new System.EventHandler(this.FamiliesList_SelectedIndexChanged);
-      // 
+      //
       // generateButton
-      // 
-      this.generateButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      //
+      this.generateButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.generateButton.Location = new System.Drawing.Point(14, 343);
       this.generateButton.Margin = new System.Windows.Forms.Padding(4);
@@ -204,10 +204,10 @@ namespace LOCM3Gen
       this.generateButton.Text = "Generate or update project";
       this.generateButton.UseVisualStyleBackColor = true;
       this.generateButton.Click += new System.EventHandler(this.GenerateButton_Click);
-      // 
+      //
       // environmentsList
-      // 
-      this.environmentsList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      //
+      this.environmentsList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.environmentsList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.environmentsList.FormattingEnabled = true;
@@ -216,9 +216,9 @@ namespace LOCM3Gen
       this.environmentsList.Name = "environmentsList";
       this.environmentsList.Size = new System.Drawing.Size(418, 24);
       this.environmentsList.TabIndex = 8;
-      // 
+      //
       // environmentLabel
-      // 
+      //
       this.environmentLabel.AutoSize = true;
       this.environmentLabel.Location = new System.Drawing.Point(16, 183);
       this.environmentLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -226,9 +226,9 @@ namespace LOCM3Gen
       this.environmentLabel.Size = new System.Drawing.Size(138, 17);
       this.environmentLabel.TabIndex = 7;
       this.environmentLabel.Text = "Project environment:";
-      // 
+      //
       // AboutLabel
-      // 
+      //
       this.AboutLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
       this.AboutLabel.AutoSize = true;
       this.AboutLabel.Cursor = System.Windows.Forms.Cursors.Help;
@@ -241,10 +241,10 @@ namespace LOCM3Gen
       this.AboutLabel.Text = "About";
       this.AboutLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
       this.AboutLabel.Click += new System.EventHandler(this.AboutLabel_Click);
-      // 
+      //
       // devicesList
-      // 
-      this.devicesList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      //
+      this.devicesList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.devicesList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.devicesList.FormattingEnabled = true;
@@ -253,9 +253,9 @@ namespace LOCM3Gen
       this.devicesList.Name = "devicesList";
       this.devicesList.Size = new System.Drawing.Size(418, 24);
       this.devicesList.TabIndex = 18;
-      // 
+      //
       // deviceLabel
-      // 
+      //
       this.deviceLabel.AutoSize = true;
       this.deviceLabel.Location = new System.Drawing.Point(16, 287);
       this.deviceLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -263,9 +263,9 @@ namespace LOCM3Gen
       this.deviceLabel.Size = new System.Drawing.Size(55, 17);
       this.deviceLabel.TabIndex = 17;
       this.deviceLabel.Text = "Device:";
-      // 
+      //
       // MainForm
-      // 
+      //
       this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(452, 379);

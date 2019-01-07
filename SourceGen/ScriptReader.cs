@@ -1,8 +1,8 @@
 ﻿/*
- * Copyright (C) 2018 Maxim Yudin <i@hal.su>. All rights reserved.
- * 
- * This file is a part of the closed source section of LOCM3Gen project.
- * You may NOT use, distribute, copy or modify this file without special author's permission.
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+ * If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/ .
+
+ * Copyright (C) 2018-2019 Maxim Yudin <stibiu@yandex.ru>.
  */
 
 using System;
@@ -11,7 +11,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
-namespace SourceGen
+namespace LOCM3Gen.SourceGen
 {
   /// <summary>
   /// Class of the SourceGen script reader.
@@ -44,7 +44,7 @@ namespace SourceGen
         this.actionNames = actionNames;
       }
     }
-    
+
     /// <summary>
     /// Minimal supported SourceGen file version.
     /// </summary>
@@ -87,7 +87,7 @@ namespace SourceGen
     private void BindActionMethods()
     {
       actionMethods = new Dictionary<string, ActionMethod>();
-      foreach (var method in this.GetType().GetMethods())
+      foreach (var method in GetType().GetMethods())
       {
         foreach (var attribute in method.GetCustomAttributes(false))
         {
@@ -124,7 +124,7 @@ namespace SourceGen
       foreach (var action in rootNode.Elements())
         ProcessAction(action);
     }
-    
+
     /// <summary>
     /// Get action's name from the element.
     /// </summary>
@@ -172,8 +172,8 @@ namespace SourceGen
     /// <returns>Replacement string for the pattern.</returns>
     private string ListCallback(Match match)
     {
-      if (this.lists.ContainsKey(match.Groups[2].Value))
-        return match.Groups[1].Value + String.Join(match.Groups[3].Value + match.Groups[1].Value, this.lists[match.Groups[2].Value]) + match.Groups[3].Value;
+      if (lists.ContainsKey(match.Groups[2].Value))
+        return match.Groups[1].Value + String.Join(match.Groups[3].Value + match.Groups[1].Value, lists[match.Groups[2].Value]) + match.Groups[3].Value;
       else
         return "";
     }
@@ -185,8 +185,8 @@ namespace SourceGen
     /// <returns>Replacement string for the pattern.</returns>
     private string VariableCallback(Match match)
     {
-      if (this.variables.ContainsKey(match.Groups[1].Value))
-        return this.variables[match.Groups[1].Value];
+      if (variables.ContainsKey(match.Groups[1].Value))
+        return variables[match.Groups[1].Value];
       else
         return "";
     }

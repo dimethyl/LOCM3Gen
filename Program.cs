@@ -1,8 +1,8 @@
 ﻿/*
- * Copyright (C) 2018 Maxim Yudin <i@hal.su>. All rights reserved.
- * 
- * This file is a part of the closed source section of LOCM3Gen project.
- * You may NOT use, distribute, copy or modify this file without special author's permission.
+ * This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+ * If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/ .
+
+ * Copyright (C) 2018-2019 Maxim Yudin <stibiu@yandex.ru>.
  */
 
 using System;
@@ -24,6 +24,6 @@ namespace LOCM3Gen
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
       Application.Run(new MainForm());
-    }    
+    }
   }
 }

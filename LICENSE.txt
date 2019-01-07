@@ -1,17 +1,12 @@
 libopencm3 Project Generator (LOCM3Gen)
 
-Copyright (C) 2018 Maxim Yudin <i@hal.su>
+Copyright (C) 2018-2019 Maxim Yudin <stibiu@yandex.ru>
 
 This program is subject to a number of licenses:
 
-* Program's binary (.exe file) is free of charge proprietary software that is provided 
-  "as is" and without any warranty.
+* Software is provided "as is" and without any warranty. Program's C# sources, binary files, source generator scripts (.xml files in "Families" and
+  "Environments" subdirectories) and all files included in "Templates" subdirectory are licensed under Mozilla Public License (MPL) version 2.0. You
+  can find the text of the license in "MPL.txt". These files can be freely used, distributed, copied or modified to suit personal needs.
 
-* Source generator scripts (.xml files in "Families" and "Environments" subdirectories)
-  and any files in "Templates" subdirectory are licensed under Mozilla Public License
-  (MPL) version 2.0. You can find the text of the license in "MPL.txt". These files can be
-  freely used, distributed, copied or modified to suit personal needs.
-
-* Device description files (.svd files located inside .zip archives in "SVD" subdirectory)
-  are licensed under licenses provided by their owners. You can find texts of the licenses
-  inside .zip archives with corresponding .svd files.
+* Device description files (.svd files located inside .zip archives in "SVD" subdirectory) are licensed under licenses provided by their owners.
+  You can find texts of the licenses inside .zip archives with corresponding .svd files.

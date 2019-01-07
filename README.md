@@ -1,12 +1,17 @@
 # LOCM3Gen
 
-**LOCM3Gen** is a project generator for **libopencm3** open-source library.
+**LOCM3Gen** is a project generator for **libopencm3** open-source
+library.
 
 # Description
 
-**LOCM3Gen**'s primary task is to create compact self-sufficient microcontroller firmware projects based on the **libopencm3** library.
+**LOCM3Gen**'s primary task is to create compact self-sufficient
+microcontroller firmware projects based on the **libopencm3** library.
 
-It is written on C# and has standard Windows Forms graphical user interface for convenience. Through configuring project settings like library's directory, project location, microcontroller family, etc. the empty but ready-to-compile firmware project will be generated.
+It is written on C# and has standard Windows Forms graphical user
+interface for convenience. Through configuring project settings like
+library's directory, project location, microcontroller family, etc. the
+empty but ready-to-compile firmware project will be generated.
 
 # Features
 
@@ -24,19 +29,23 @@ The generator supports **STM32** microcontrollers of listed families:
 * STM32L1
 * STM32L4
 
-The generator is customizable through the XML files and templates that contain neccessary information to correctly build the project. Through such XML files available support for microcontroller families and environments can be extended. Also it features almost all needed description *.svd* files for firmware debugging.
+The generator is customizable through the XML files and templates that
+contain neccessary information to correctly build the project. Through
+such XML files available support for microcontroller families and
+environments can be extended. Also it features almost all needed
+description *.svd* files for firmware debugging.
 
 # System requirements
 
 To function program requires:
 
 * **Windows 7 SP1** or later
-* **.NET Framework 4.6** installed
+* **.NET Framework 4.6.2** installed
 * The last build of **libopencm3** library installed and compiled
 
 # License
 
-Copyright (C) 2018 Maxim Yudin <<i@hal.su>>
+Copyright (C) 2018-2019 Maxim Yudin <<stibiu@yandex.ru>>
 
 Program's license statement can be found in [LICENSE.txt](LICENSE.txt).
 

@@ -43,6 +43,10 @@ To function program requires:
 * **.NET Framework 4.6.2** installed
 * The last build of **libopencm3** library installed and compiled
 
+# Downloads
+
+You can download compiled packages [here](https://gitlab.com/Egiraht/locm3gen/tags).
+
 # License
 
 Copyright (C) 2018-2019 Maxim Yudin <<stibiu@yandex.ru>>

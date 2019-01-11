@@ -45,10 +45,5 @@ namespace LOCM3Gen
     /// Path of the <i>Templates</i> directory, containing template files.
     /// </summary>
     public static readonly string templatesDirectory = Path.Combine(programDirectory, "Templates");
-
-    /// <summary>
-    /// File extensions delimited by '|' charachter that will be visible in the project file tree.
-    /// </summary>
-    public static readonly string projectFileExtensions = ".c|.h|.cpp|.hpp|.s";
   }
 }

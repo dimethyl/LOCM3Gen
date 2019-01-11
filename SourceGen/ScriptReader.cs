@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -22,56 +23,59 @@ namespace LOCM3Gen.SourceGen
     /// Action method delegate.
     /// </summary>
     /// <param name="actionElement">XML element containing action data.</param>
-    public delegate void ActionMethod(XElement actionElement);
+    protected delegate void ActionMethod(XElement actionElement);
 
     /// <summary>
     /// Attribute that binds the array of action names to the specified method.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method)]
-    public class ActionNamesAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+    protected class ActionNameAttribute : Attribute
     {
       /// <summary>
-      /// Array of action names.
+      /// The action name assigned to the decorated method.
       /// </summary>
-      public readonly string[] actionNames;
+      public readonly string ActionName;
 
       /// <summary>
-      /// Bind action names to the method.
+      /// Assigns the provided action name to the decorated method.
       /// </summary>
-      /// <param name="actionNames">Array or sequence of action names.</param>
-      public ActionNamesAttribute(params string[] actionNames)
+      /// <param name="actionName">Action name.</param>
+      public ActionNameAttribute(string actionName)
       {
-        this.actionNames = actionNames;
+        if (string.IsNullOrWhiteSpace(actionName) || !Regex.IsMatch(actionName, @"^[-\w]+$"))
+          throw new ArgumentNullException(nameof(actionName), "Action name cannot be null and must contain only alphanumeric and hyphen characters.");
+
+        ActionName = actionName;
       }
     }
 
     /// <summary>
     /// Minimal supported SourceGen file version.
     /// </summary>
-    private static readonly Version minVersion = new Version("1.0");
+    protected static readonly Version MinVersion = new Version("1.0");
 
     /// <summary>
     /// Maximal supported SourceGen file version.
     /// </summary>
-    private static readonly Version maxVersion = new Version("1.0");
+    protected static readonly Version MaxVersion = new Version("1.0");
 
     /// <summary>
     /// List of actions' name-to-method bindings.
     /// </summary>
-    public Dictionary<string, ActionMethod> actionMethods;
+    protected Dictionary<string, ActionMethod> ActionMethods;
 
     /// <summary>
     /// List of variables and their values for template lists.
     /// Variables' values are inserted while reading script files and parsing templates.
     /// </summary>
-    public Dictionary<string, string> variables = new Dictionary<string, string>();
+    public readonly Dictionary<string, string> Variables = new Dictionary<string, string>();
 
     /// <summary>
     /// List of key-value pairs for template lists.
     /// Keys represent list names and values represent strings contained in the list.
-    /// Lists are formated and inserted while reading script files and parsing templates.
+    /// Lists are formatted and inserted while reading script files and parsing templates.
     /// </summary>
-    public Dictionary<string, List<string>> lists = new Dictionary<string, List<string>>();
+    public readonly Dictionary<string, List<string>> Lists = new Dictionary<string, List<string>>();
 
     /// <summary>
     /// Script reader class constructor.
@@ -82,32 +86,33 @@ namespace LOCM3Gen.SourceGen
     }
 
     /// <summary>
-    /// Bind action methods with their action names depending on their <i>ActionNames</i> attribute values.
+    /// Binds action methods with their action names depending on their <see cref="ActionNameAttribute" /> values.
     /// </summary>
     private void BindActionMethods()
     {
-      actionMethods = new Dictionary<string, ActionMethod>();
+      ActionMethods = new Dictionary<string, ActionMethod>();
+
       foreach (var method in GetType().GetMethods())
       {
         foreach (var attribute in method.GetCustomAttributes(false))
         {
-          if (attribute is ActionNamesAttribute)
+          if (!(attribute is ActionNameAttribute))
+            continue;
+
+          var actionName = ((ActionNameAttribute) attribute).ActionName;
           {
-            foreach (var actionName in (attribute as ActionNamesAttribute).actionNames)
-            {
-              if (!actionMethods.ContainsKey(actionName))
-                actionMethods.Add(actionName, method.CreateDelegate(typeof(ActionMethod), this) as ActionMethod);
-              else
-                throw new ArgumentException("Can not add action name to the \"" + method.Name + "\" method. " +
-                  "Action name \"" + actionName + "\" is already bound to the \"" + actionMethods[actionName].Method.Name + "\" method.");
-            }
+            if (!ActionMethods.ContainsKey(actionName))
+              ActionMethods.Add(actionName, (ActionMethod) method.CreateDelegate(typeof(ActionMethod), this));
+            else
+              throw new DuplicateNameException($"Cannot bind action name \"{actionName}\" to the method \"{method.Name}\". " +
+                $"It is already bound to the method \"{ActionMethods[actionName].Method.Name}\".");
           }
         }
       }
     }
 
     /// <summary>
-    /// Sequencially run SourceGen XML-based script.
+    /// Executes SourceGen XML-based script tag by tag.
     /// </summary>
     /// <param name="scriptFileName">SourceGen script file name to read.</param>
     public void RunScript(string scriptFileName)
@@ -117,8 +122,8 @@ namespace LOCM3Gen.SourceGen
       if (rootNode == null || rootNode.Name != "sourcegen-script")
         throw new FormatException("Wrong script file format.");
 
-      var scriptVersion = new Version(rootNode.Attribute("version")?.Value?.Trim() ?? "0.0");
-      if (scriptVersion < minVersion || scriptVersion > maxVersion)
+      var scriptVersion = new Version(rootNode.Attribute("version")?.Value.Trim() ?? "0.0");
+      if (scriptVersion < MinVersion || scriptVersion > MaxVersion)
         throw new FormatException("Unknown script file version.");
 
       foreach (var action in rootNode.Elements())
@@ -130,9 +135,9 @@ namespace LOCM3Gen.SourceGen
     /// </summary>
     /// <param name="actionElement"><i>XElement</i> instance to get data from.</param>
     /// <returns>String with the name of the action.</returns>
-    public string GetActionName(XElement actionElement)
+    private string GetActionName(XElement actionElement)
     {
-      return actionElement?.Name?.ToString()?.Trim() ?? "";
+      return actionElement?.Name.ToString().Trim() ?? "";
     }
 
     /// <summary>
@@ -140,12 +145,12 @@ namespace LOCM3Gen.SourceGen
     /// </summary>
     /// <param name="actionElement"><i>XElement</i> instance to get data from.</param>
     /// <param name="parameterName">Name of the parameter to get.</param>
-    /// <param name="parse">Parse the var patterns in the parameter value.</param>
+    /// <param name="parseValue">Parse the var patterns in the parameter value.</param>
     /// <returns>String with the value of the action parameter.</returns>
-    public string GetActionParameter(XElement actionElement, string parameterName, bool parse = false)
+    private string GetActionParameter(XElement actionElement, string parameterName, bool parseValue = false)
     {
-      var value = actionElement?.Attribute(parameterName)?.Value?.Trim() ?? "";
-      if (value != "" && parse)
+      var value = actionElement?.Attribute(parameterName)?.Value.Trim() ?? "";
+      if (value != "" && parseValue)
         value = ParseString(value);
       return value;
     }
@@ -157,8 +162,8 @@ namespace LOCM3Gen.SourceGen
     private void ProcessAction(XElement actionElement)
     {
       var actionName = GetActionName(actionElement);
-      if (actionMethods.ContainsKey(actionName))
-        actionMethods[actionName](actionElement);
+      if (ActionMethods.ContainsKey(actionName))
+        ActionMethods[actionName](actionElement);
       else
       {
         // TODO: Wrong action processing.
@@ -166,55 +171,33 @@ namespace LOCM3Gen.SourceGen
     }
 
     /// <summary>
-    /// Callback for processing list regex pattern.
-    /// </summary>
-    /// <param name="match">Regex match information.</param>
-    /// <returns>Replacement string for the pattern.</returns>
-    private string ListCallback(Match match)
-    {
-      if (lists.ContainsKey(match.Groups[2].Value))
-        return match.Groups[1].Value + String.Join(match.Groups[3].Value + match.Groups[1].Value, lists[match.Groups[2].Value]) + match.Groups[3].Value;
-      else
-        return "";
-    }
-
-    /// <summary>
-    /// Callback for processing variable regex pattern.
-    /// </summary>
-    /// <param name="match">Regex match information.</param>
-    /// <returns>Replacement string for the pattern.</returns>
-    private string VariableCallback(Match match)
-    {
-      if (variables.ContainsKey(match.Groups[1].Value))
-        return variables[match.Groups[1].Value];
-      else
-        return "";
-    }
-
-    /// <summary>
-    /// Parse the patterns within the template string.
+    /// Parses the patterns within the template string.
     /// </summary>
     /// <param name="str">String to parse.</param>
     /// <returns>Parsed string with all patterns being replaced.</returns>
-    public string ParseString(string str)
+    private string ParseString(string str)
     {
       //Removing {%...%} patterns of comments.
       var result = Regex.Replace(str, @"\{\%(.*?)\%\}", "", RegexOptions.Compiled);
 
       //Processing {#...{@...@}...#} patterns of lists.
-      result = Regex.Replace(result, @"\{\#(.*?)\{\@(\w*)\@\}(.*?)\#\}", ListCallback, RegexOptions.Compiled | RegexOptions.Singleline);
+      result = Regex.Replace(result, @"\{\#(.*?)\{\@(\w*)\@\}(.*?)\#\}",
+        match => Lists.ContainsKey(match.Groups[2].Value)
+          ? match.Groups[1].Value + string.Join(match.Groups[3].Value + match.Groups[1].Value, Lists[match.Groups[2].Value]) + match.Groups[3].Value
+          : "", RegexOptions.Compiled | RegexOptions.Singleline);
 
       //Processing {$...$} patterns of variables.
-      result = Regex.Replace(result, @"\{\$(\w*)\$\}", VariableCallback, RegexOptions.Compiled);
+      result = Regex.Replace(result, @"\{\$(\w*)\$\}", match => Variables.ContainsKey(match.Groups[1].Value) ? Variables[match.Groups[1].Value] : "",
+        RegexOptions.Compiled);
 
       return result;
     }
 
     /// <summary>
-    /// Parse the patterns within the template file.
+    /// Parses the patterns within the template file.
     /// </summary>
     /// <param name="fileName">Name of the file to parse.</param>
-    public void ParseFile(string fileName)
+    private void ParseFile(string fileName)
     {
       if (File.Exists(fileName))
       {

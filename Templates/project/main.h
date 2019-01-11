@@ -7,14 +7,7 @@
  * Target device: {$DeviceName$}
  */
 
-#include "main.h"
+#include "libopencm3/stm32/rcc.h"
+#include "libopencm3/stm32/gpio.h"
 
-int main(void)
-{
-  // Initialization code
-
-  while(1)
-  {
-    // Main loop code
-  }
-}
+int main(void);

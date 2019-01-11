@@ -13,7 +13,8 @@ using System.Xml.Linq;
 namespace LOCM3Gen.SourceGen
 {
   /// <summary>
-  /// Extension for script reader class describing action methods.
+  /// Extension for <see cref="ScriptReader"/> class containing available action methods.
+  /// Action methods are bound to their action names (names of root-nested XML tags) using <see cref="ActionNameAttribute" />.
   /// </summary>
   public partial class ScriptReader
   {
@@ -21,12 +22,12 @@ namespace LOCM3Gen.SourceGen
     /// Action method for operating variables.
     /// </summary>
     /// <param name="actionElement">XML element containing action data.</param>
-    [ActionNames("var")]
+    [ActionName("var")]
     public void VarAction(XElement actionElement)
     {
       var name = GetActionParameter(actionElement, "name");
       if (name != "")
-        variables.Add(name, GetActionParameter(actionElement, "value", true));
+        Variables.Add(name, GetActionParameter(actionElement, "value", true));
       else
       {
         // TODO: Wrong variable name.
@@ -37,68 +38,71 @@ namespace LOCM3Gen.SourceGen
     /// Action method for maintaining lists.
     /// </summary>
     /// <param name="actionElement">XML element containing action data.</param>
-    [ActionNames("list")]
+    [ActionName("list")]
     public void ListAction(XElement actionElement)
     {
       var listName = GetActionParameter(actionElement, "name");
-      if (listName != "")
+      if (listName == "")
+        return;
+
+      var list = new List<string>();
+      foreach (var commandElement in actionElement.Elements())
       {
-        var list = new List<string>();
-        foreach (var commandElement in actionElement.Elements())
+        switch (GetActionName(commandElement))
         {
-          switch (GetActionName(commandElement))
+          case "add":
           {
-            case "add":
-            {
-              list.Add(GetActionParameter(commandElement, "value", true));
-            }
-            break;
-
-            case "remove":
-            {
-              list.Remove(GetActionParameter(commandElement, "value", true));
-            }
-            break;
-
-            case "add-paths":
-            {
-              var sourcePath = Path.GetFullPath(GetActionParameter(commandElement, "source-dir", true));
-              if (sourcePath != "" && Directory.Exists(sourcePath))
-              {
-                var fileNamePattern = GetActionParameter(commandElement, "file-pattern");
-                var recursive       = GetActionParameter(commandElement, "recursive").ToLower() == "true";
-                var relative        = GetActionParameter(commandElement, "relative").ToLower() == "true";
-
-                foreach (var fileName in Directory.EnumerateFiles(sourcePath, fileNamePattern, recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
-                  list.Add(relative ? fileName.Replace(sourcePath, ".") : fileName);
-              }
-              else
-              {
-                // TODO: Wrong source path.
-              }
-            }
-            break;
-
-            default:
-            {
-              // TODO: Wrong child action processing.
-            }
-            break;
+            list.Add(GetActionParameter(commandElement, "value", true));
           }
-        }
+          break;
 
-        if (lists.ContainsKey(listName))
-          lists[listName].AddRange(list);
-        else
-          lists.Add(listName, list);
+          case "remove":
+          {
+            list.Remove(GetActionParameter(commandElement, "value", true));
+          }
+          break;
+
+          case "add-paths":
+          {
+            var sourcePath = Path.GetFullPath(GetActionParameter(commandElement, "source-dir", true));
+            if (sourcePath != "" && Directory.Exists(sourcePath))
+            {
+              var fileNamePattern = GetActionParameter(commandElement, "file-pattern");
+              var recursive       = GetActionParameter(commandElement, "recursive").ToLower() == "true";
+              var relative        = GetActionParameter(commandElement, "relative").ToLower() == "true";
+
+              foreach (var fileName in Directory.EnumerateFiles(sourcePath, fileNamePattern,
+                recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+              {
+                list.Add(relative ? fileName.Replace(sourcePath, ".") : fileName);
+              }
+            }
+            else
+            {
+              // TODO: Wrong source path.
+            }
+          }
+          break;
+
+          default:
+          {
+            // TODO: Wrong child action processing.
+          }
+          break;
+        }
       }
+
+      if (Lists.ContainsKey(listName))
+        Lists[listName].AddRange(list);
+      else
+        Lists.Add(listName, list);
     }
 
     /// <summary>
     /// Action method for files copying.
     /// </summary>
     /// <param name="actionElement">XML element containing action data.</param>
-    [ActionNames("copy")]
+    [ActionName("copy")]
     public void CopyAction(XElement actionElement)
     {
       var sourcePath = Path.GetFullPath(GetActionParameter(actionElement, "source-dir", true));
@@ -110,21 +114,25 @@ namespace LOCM3Gen.SourceGen
         var keepExistingFiles = GetActionParameter(actionElement, "keep-existing").ToLower() == "true";
         var parseFiles        = GetActionParameter(actionElement, "parse").ToLower() == "true";
 
-        foreach (var fileName in Directory.EnumerateFiles(sourcePath, fileNamePattern, recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+        foreach (var fileName in Directory.EnumerateFiles(sourcePath, fileNamePattern,
+          recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
         {
           var destinationFileName = fileName.Replace(sourcePath, destinationPath);
           var destinationDirectory = Path.GetDirectoryName(destinationFileName);
 
           if (!Directory.Exists(destinationDirectory))
-            Directory.CreateDirectory(destinationDirectory);
-
-          if (!File.Exists(destinationFileName) || !keepExistingFiles)
           {
-            File.Copy(fileName, destinationFileName, true);
-
-            if (parseFiles)
-              ParseFile(destinationFileName);
+            // ReSharper disable once AssignNullToNotNullAttribute
+            Directory.CreateDirectory(destinationDirectory);
           }
+
+          if (keepExistingFiles && File.Exists(destinationFileName))
+            continue;
+
+          File.Copy(fileName, destinationFileName, true);
+
+          if (parseFiles)
+            ParseFile(destinationFileName);
         }
       }
       else
@@ -137,7 +145,7 @@ namespace LOCM3Gen.SourceGen
     /// Action method for extracting a file from a zip archive.
     /// </summary>
     /// <param name="actionElement">XML element containing action data.</param>
-    [ActionNames("unzip")]
+    [ActionName("unzip")]
     public void UnzipAction(XElement actionElement)
     {
       var archivePath = Path.GetFullPath(GetActionParameter(actionElement, "archive", true));
@@ -156,13 +164,13 @@ namespace LOCM3Gen.SourceGen
             if (!Directory.Exists(destinationPath))
               Directory.CreateDirectory(destinationPath);
 
-            if (!File.Exists(destinationFileName) || !keepExistingFiles)
+            if (keepExistingFiles && File.Exists(destinationFileName))
+              return;
+
+            using (var svdFile = new StreamWriter(destinationFileName))
             {
-              using (var svdFile = new StreamWriter(destinationFileName))
-              {
-                svdStream.Open().CopyTo(svdFile.BaseStream);
-                svdFile.Flush();
-              }
+              svdStream.Open().CopyTo(svdFile.BaseStream);
+              svdFile.Flush();
             }
           }
           else
@@ -181,17 +189,20 @@ namespace LOCM3Gen.SourceGen
     /// Action method for extracting a file from a zip archive.
     /// </summary>
     /// <param name="actionElement">XML element containing action data.</param>
-    [ActionNames("parse")]
+    [ActionName("parse")]
     public void ParseAction(XElement actionElement)
     {
       var sourcePath = Path.GetFullPath(GetActionParameter(actionElement, "source-dir", true));
       if (sourcePath != "" && Directory.Exists(sourcePath))
       {
         var fileNamePattern = GetActionParameter(actionElement, "file-pattern");
-        var recursive       = GetActionParameter(actionElement, "recursive").ToLower() == "true";
+        var recursive = GetActionParameter(actionElement, "recursive").ToLower() == "true";
 
-        foreach (var fileName in Directory.EnumerateFiles(sourcePath, fileNamePattern, recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+        foreach (var fileName in Directory.EnumerateFiles(sourcePath, fileNamePattern,
+          recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+        {
           ParseFile(fileName);
+        }
       }
       else
       {
@@ -203,18 +214,19 @@ namespace LOCM3Gen.SourceGen
     /// Conditional action method that controls processing of nested actions.
     /// </summary>
     /// <param name="actionElement">XML element containing action data.</param>
-    [ActionNames("if-eq", "if-neq")]
+    [ActionName("if-eq")]
+    [ActionName("if-neq")]
     public void IfAction(XElement actionElement)
     {
-      var a       = GetActionParameter(actionElement, "a", true);
-      var b       = GetActionParameter(actionElement, "b", true);
-      var negate  = GetActionName(actionElement) == "if-neq";
+      var a = GetActionParameter(actionElement, "a", true);
+      var b = GetActionParameter(actionElement, "b", true);
+      var negate = GetActionName(actionElement) == "if-neq";
 
-      if ((a == b && !negate) || (a != b && negate))
-      {
-        foreach (var nestedElement in actionElement.Elements())
-          ProcessAction(nestedElement);
-      }
+      if ((!negate && a != b) || (negate && a == b))
+        return;
+
+      foreach (var nestedElement in actionElement.Elements())
+        ProcessAction(nestedElement);
     }
   }
 }

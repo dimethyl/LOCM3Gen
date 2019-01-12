@@ -8,10 +8,10 @@
 <sourcegen-script version="1.0">
   <!-- Building project files list. -->
   <list name="ProjectFiles">
-    <add-paths source-dir="{$ProjectDir$}" file-pattern="*.h" relative="true" recursive="true" />
-    <add-paths source-dir="{$ProjectDir$}" file-pattern="*.c" relative="true" recursive="true" />
+    <add-paths source-dir="{$ProjectDir$}" file-pattern="*.h" recursive="true" relative="true" />
+    <add-paths source-dir="{$ProjectDir$}" file-pattern="*.c" recursive="true" relative="true" />
   </list>
 
   <!-- Environment-specific templates used for project generation. -->
-  <copy source-dir="{$TemplatesDir$}/EmBitz" target-dir="{$ProjectDir$}" file-pattern="*" parse="true" recursive="true" />
+  <copy source-dir="{$TemplatesDir$}/EmBitz" target-dir="{$ProjectDir$}" file-pattern="*" parse="true" keep-existing="false" recursive="true" />
 </sourcegen-script>

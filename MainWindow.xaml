@@ -1,42 +1,56 @@
 ﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        x:Class="LOCM3Gen.MainWindow" Title="libopencm3 Project Generator" Background="Silver" SizeToContent="Height" Height="400" Width="350"
-        Icon="LOCM3Gen.ico" Closing="MainWindow_OnClosing">
-  <StackPanel Name="ControlsStack" Margin="8">
+        xmlns:local="clr-namespace:LOCM3Gen" mc:Ignorable="d" x:Class="LOCM3Gen.MainWindow"
+        Title="libopencm3 Project Generator" Background="Silver" SizeToContent="Height" Height="400" Width="350" Icon="LOCM3Gen.ico"
+        Closing="MainWindow_OnClosing">
+
+  <!-- XAML resources. -->
+  <Window.Resources>
+    <local:GeneratorModel x:Key="Generator" />
+  </Window.Resources>
+
+  <!-- Main user interface panel. -->
+  <StackPanel Name="ControlsStack" DataContext="{StaticResource Generator}" Margin="8">
+    <!-- libopencm3 directory input and "About" button. -->
     <DockPanel>
       <Label Name="AboutLabel" DockPanel.Dock="Right" Content="About" Foreground="Blue" Cursor="Hand" Padding="0, 4, 0, 4"
              MouseUp="AboutLabel_OnMouseUp" />
       <Label Name="Locm3DirectoryLabel" Content="libopencm3 directory:" Padding="0, 4, 0, 4" />
     </DockPanel>
-
     <DockPanel Height="20">
       <Button Name="Locm3DirectoryButton" DockPanel.Dock="Right" Content="  ...  " Click="Locm3DirectoryButton_OnClick" />
-      <TextBox Name="Locm3DirectoryInput" TextChanged="MainWindow_OnValuesValidation" />
+      <TextBox Name="Locm3DirectoryInput" Text="{Binding Locm3Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     </DockPanel>
 
+    <!-- Project directory input. -->
     <Label Name="ProjectDirectoryLabel" Content="Project directory:" Padding="0, 4, 0, 4" />
-
     <DockPanel Height="20">
       <Button Name="ProjectDirectoryButton" DockPanel.Dock="Right" Content="  ...  " Click="ProjectDirectoryButton_OnClick" />
-      <TextBox Name="ProjectDirectoryInput" TextChanged="MainWindow_OnValuesValidation" />
+      <TextBox Name="ProjectDirectoryInput" Text="{Binding ProjectDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     </DockPanel>
 
+    <!-- Project name input. -->
     <Label Name="ProjectNameLabel" Content="Project name:" Padding="0, 4, 0, 4" />
-    <TextBox Name="ProjectNameInput" Height="20" PreviewTextInput="ProjectNameInput_OnPreviewTextInput"
-             PreviewKeyDown="ProjectNameInput_OnPreviewKeyDown" TextChanged="MainWindow_OnValuesValidation" />
+    <TextBox Name="ProjectNameInput" Height="20" Text="{Binding ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+             PreviewTextInput="ProjectNameInput_OnPreviewTextInput" PreviewKeyDown="ProjectNameInput_OnPreviewKeyDown" />
 
-    <CheckBox Name="ProjectSubdirectoryCheckbox" Content="Create project subdirectory" Margin="0, 8, 0, 0" />
+    <!-- Project subdirectory checkbox. -->
+    <CheckBox Name="ProjectSubdirectoryCheckbox" Content="Create project subdirectory" Margin="0, 8, 0, 0"
+              IsChecked="{Binding CreateProjectSubdirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-    <Label Name="EnvironmentsLabel" Content="Project environment:" Padding="0, 4, 0, 4" />
-    <ComboBox Name="EnvironmentsList" SelectionChanged="MainWindow_OnValuesValidation" />
+    <!-- Target environment selector. -->
+    <Label Name="EnvironmentsLabel" Content="Project's target environment:" Padding="0, 4, 0, 4" />
+    <ComboBox Name="EnvironmentsList" SelectedItem="{Binding EnvironmentName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
+    <!-- Microcontroller family selector. -->
     <Label Name="FamiliesLabel" Content="Microcontroller family:" Padding="0, 4, 0, 4" />
-    <ComboBox Name="FamiliesList" SelectionChanged="McFamilyList_OnSelectionChanged" />
+    <ComboBox Name="FamiliesList" SelectedItem="{Binding FamilyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
+    <!-- Microcontroller device selector. -->
     <Label Name="DevicesLabel" Content="Microcontroller device:" Padding="0, 4, 0, 4" />
-    <ComboBox Name="DevicesList" SelectionChanged="MainWindow_OnValuesValidation" />
+    <ComboBox Name="DevicesList" SelectedItem="{Binding DeviceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-    <Button Name="GenerateButton" Content="Generate or update project" Margin="0, 8, 0, 0" Click="GenerateButton_OnClick" />
+    <!-- Generation button. -->
+    <Button Name="GenerationButton" Content="Generate or update the project" Margin="0, 8, 0, 0" Click="GenerationButton_OnClick" />
   </StackPanel>
 </Window>

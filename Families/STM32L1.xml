@@ -7,24 +7,32 @@
 -->
 <sourcegen-script version="1.0">
   <!-- Microcontroller family definition. -->
-  <var name="FamilyName"  value="STM32L1" />
-  <var name="Core"        value="cortex-m3" />
-  <var name="FPType"      value="soft" />
-  <var name="FPUnit"      value="" />
+  <var name="FamilyName" value="STM32L1" />
+  <var name="Core" value="cortex-m3" />
+  <var name="FPType" value="soft" />
+  <var name="FPUnit" value="" />
 
   <!-- Family-specific libopencm3 copy-routes. -->
-  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/cm3"          target-dir="{$ProjectDir$}/libopencm3/cm3"          file-pattern="*.h" />
-  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/dispatch"     target-dir="{$ProjectDir$}/libopencm3/dispatch"     file-pattern="*.h" />
-  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/usb"          target-dir="{$ProjectDir$}/libopencm3/usb"          file-pattern="*.h"                   recursive="true" />
-  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/stm32"        target-dir="{$ProjectDir$}/libopencm3/stm32"        file-pattern="*.h" />
-  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/stm32/common" target-dir="{$ProjectDir$}/libopencm3/stm32/common" file-pattern="*.h" />
-  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/stm32/l1"     target-dir="{$ProjectDir$}/libopencm3/stm32/l1"     file-pattern="*.h" />
-  <copy source-dir="{$LOCM3Dir$}/lib"                             target-dir="{$ProjectDir$}/libopencm3"              file-pattern="cortex-m-generic.ld" />
-  <copy source-dir="{$LOCM3Dir$}/lib"                             target-dir="{$ProjectDir$}/libopencm3"              file-pattern="libopencm3_stm32l1.a" />
+  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/cm3" target-dir="{$ProjectDir$}/libopencm3/cm3" file-pattern="*.h" parse="false"
+        keep-existing="false" recursive="false" />
+  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/dispatch" target-dir="{$ProjectDir$}/libopencm3/dispatch" file-pattern="*.h" parse="false"
+        keep-existing="false" recursive="false" />
+  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/usb" target-dir="{$ProjectDir$}/libopencm3/usb" file-pattern="*.h" parse="false"
+        keep-existing="false" recursive="true" />
+  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/stm32" target-dir="{$ProjectDir$}/libopencm3/stm32" file-pattern="*.h" parse="false"
+        keep-existing="false" recursive="false" />
+  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/stm32/common" target-dir="{$ProjectDir$}/libopencm3/stm32/common" file-pattern="*.h" parse="false"
+        keep-existing="false" recursive="false" />
+  <copy source-dir="{$LOCM3Dir$}/include/libopencm3/stm32/l1" target-dir="{$ProjectDir$}/libopencm3/stm32/l1" file-pattern="*.h" parse="false"
+        keep-existing="false" recursive="false" />
+  <copy source-dir="{$LOCM3Dir$}/lib" target-dir="{$ProjectDir$}/libopencm3" file-pattern="cortex-m-generic.ld" parse="false" keep-existing="false"
+        recursive="false" />
+  <copy source-dir="{$LOCM3Dir$}/lib" target-dir="{$ProjectDir$}/libopencm3" file-pattern="libopencm3_stm32l1.a" parse="false" keep-existing="false"
+        recursive="false" />
 
   <!-- Compiled libraries. -->
   <list name="Libraries">
-    <add-paths source-dir="{$ProjectDir$}" file-pattern="libopencm3/*.a" relative="true" />
+    <add-paths source-dir="{$ProjectDir$}" file-pattern="libopencm3/*.a" recursive="false" relative="true" />
   </list>
 
   <!-- Compiler definitions. -->
@@ -544,10 +552,11 @@
 
   <!-- Unzipping SVD file. -->
   <if-neq a="{$SVDFile$}" b="">
-    <unzip archive="{$ProgramDir$}/SVD/{$FamilyName$}.zip" entry="{$SVDFile$}" target-dir="{$ProjectDir$}" />
+    <unzip archive="{$ProgramDir$}/SVD/{$FamilyName$}.zip" entry="{$SVDFile$}" target-dir="{$ProjectDir$}" keep-existing="false" />
   </if-neq>
 
   <!-- Common templates. -->
-  <copy source-dir="{$TemplatesDir$}"          target-dir="{$ProjectDir$}"         file-pattern="linker.ld"  parse="true" />
-  <copy source-dir="{$TemplatesDir$}/project"  target-dir="{$ProjectDir$}/project" file-pattern="*"          parse="true" keep-existing="true" recursive="true" />
+  <copy source-dir="{$TemplatesDir$}" target-dir="{$ProjectDir$}" file-pattern="linker.ld" parse="true" keep-existing="false" recursive="false" />
+  <copy source-dir="{$TemplatesDir$}/project" target-dir="{$ProjectDir$}/project" file-pattern="*" parse="true" keep-existing="true"
+        recursive="true" />
 </sourcegen-script>

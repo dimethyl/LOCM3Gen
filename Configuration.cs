@@ -19,31 +19,31 @@ namespace LOCM3Gen
     /// <summary>
     /// Application version object.
     /// </summary>
-    public static readonly Version version = AssemblyName.GetAssemblyName(Assembly.GetExecutingAssembly().Location).Version;
+    public static readonly Version Version = AssemblyName.GetAssemblyName(Assembly.GetExecutingAssembly().Location).Version;
 
     /// <summary>
     /// Path of the program root directory.
     /// </summary>
-    public static readonly string programDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+    public static readonly string ProgramDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
     /// <summary>
     /// Path of the application data directory.
     /// </summary>
-    public static readonly string appDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LOCM3Gen");
+    public static readonly string AppDataDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LOCM3Gen");
 
     /// <summary>
     /// Path of the <i>Environments</i> directory, containing project environments XML files.
     /// </summary>
-    public static readonly string environmentsDirectory = Path.Combine(programDirectory, "Environments");
+    public static readonly string EnvironmentsDirectory = Path.Combine(ProgramDirectory, "Environments");
 
     /// <summary>
     /// Path of the <i>Families</i> directory, containing microcontroller family XML files.
     /// </summary>
-    public static readonly string familiesDirectory = Path.Combine(programDirectory, "Families");
+    public static readonly string FamiliesDirectory = Path.Combine(ProgramDirectory, "Families");
 
     /// <summary>
     /// Path of the <i>Templates</i> directory, containing template files.
     /// </summary>
-    public static readonly string templatesDirectory = Path.Combine(programDirectory, "Templates");
+    public static readonly string TemplatesDirectory = Path.Combine(ProgramDirectory, "Templates");
   }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,10 +15,15 @@ using MessageBox = System.Windows.Forms.MessageBox;
 namespace LOCM3Gen
 {
   /// <summary>
-  /// Main window class with interaction logic for <i>MainWindow.xaml</i> file.
+  /// Main window view model for <i>MainWindow.xaml</i> file.
   /// </summary>
   public partial class MainWindow
   {
+    /// <summary>
+    /// Project generator model instance.
+    /// </summary>
+    private readonly GeneratorModel _generator;
+
     /// <summary>
     /// Main window constructor.
     /// </summary>
@@ -24,13 +31,20 @@ namespace LOCM3Gen
     {
       try
       {
+        // Initializing window with compiled XAML code.
         InitializeComponent();
 
+        // Getting generator model instance defined in XAML resources.
+        _generator = (GeneratorModel) Resources["Generator"];
+
+        // Filling window with data.
+        _generator.ReadXmlSettings();
         BuildEnvironmentsList();
         BuildFamiliesList();
-        ReadXmlSettings();
+        BuildDevicesList(_generator.FamilyName);
 
-        MainWindow_OnValuesValidation(this, new EventArgs());
+        // Adding a callback for rebuilding of the devices list on microcontroller family change.
+        FamiliesList.SelectionChanged += FamiliesList_OnSelectionChanged;
       }
       catch(Exception exception)
       {
@@ -52,13 +66,18 @@ namespace LOCM3Gen
     /// </summary>
     private void BuildEnvironmentsList()
     {
-      if (Directory.Exists(Configuration.environmentsDirectory))
+      if (Directory.Exists(Configuration.EnvironmentsDirectory))
       {
-        foreach (var environmentXmlFile in Directory.EnumerateFiles(Configuration.environmentsDirectory, "*.xml", SearchOption.TopDirectoryOnly))
+        foreach (var environmentXmlFile in Directory.EnumerateFiles(Configuration.EnvironmentsDirectory, "*.xml", SearchOption.TopDirectoryOnly))
           EnvironmentsList.Items.Add(Path.GetFileNameWithoutExtension(environmentXmlFile));
       }
       else
-        Directory.CreateDirectory(Configuration.environmentsDirectory);
+        Directory.CreateDirectory(Configuration.EnvironmentsDirectory);
+
+      if (EnvironmentsList.Items.Contains(_generator.EnvironmentName))
+        EnvironmentsList.SelectedItem = _generator.EnvironmentName;
+      else
+        EnvironmentsList.SelectedIndex = 0;
     }
 
     /// <summary>
@@ -66,13 +85,18 @@ namespace LOCM3Gen
     /// </summary>
     private void BuildFamiliesList()
     {
-      if (Directory.Exists(Configuration.familiesDirectory))
+      if (Directory.Exists(Configuration.FamiliesDirectory))
       {
-        foreach (var familyXmlFile in Directory.EnumerateFiles(Configuration.familiesDirectory, "*.xml", SearchOption.TopDirectoryOnly))
+        foreach (var familyXmlFile in Directory.EnumerateFiles(Configuration.FamiliesDirectory, "*.xml", SearchOption.TopDirectoryOnly))
           FamiliesList.Items.Add(Path.GetFileNameWithoutExtension(familyXmlFile));
       }
       else
-        Directory.CreateDirectory(Configuration.familiesDirectory);
+        Directory.CreateDirectory(Configuration.FamiliesDirectory);
+
+      if (FamiliesList.Items.Contains(_generator.FamilyName))
+        FamiliesList.SelectedItem = _generator.FamilyName;
+      else
+        FamiliesList.SelectedIndex = 0;
     }
 
     /// <summary>
@@ -83,13 +107,13 @@ namespace LOCM3Gen
     {
       DevicesList.Items.Clear();
 
-      if (familyName == "")
+      if (string.IsNullOrWhiteSpace(familyName))
         return;
 
-      var familyFileName = Path.Combine(Configuration.familiesDirectory, familyName + ".xml");
+      var familyFileName = Path.Combine(Configuration.FamiliesDirectory, familyName + ".xml");
       if (File.Exists(familyFileName))
       {
-        var rootNode = XDocument.Load(Path.Combine(Configuration.familiesDirectory, familyName + ".xml")).Root;
+        var rootNode = XDocument.Load(Path.Combine(Configuration.FamiliesDirectory, familyName + ".xml")).Root;
         foreach (var element in rootNode?.Elements("list") ?? new XElement[0])
         {
           if (element.Attribute("name")?.Value.Trim() != "DevicesList")
@@ -104,69 +128,10 @@ namespace LOCM3Gen
         }
       }
 
-      if (DevicesList.Items.Count > 0)
+      if (DevicesList.Items.Contains(_generator.DeviceName))
+        DevicesList.SelectedItem = _generator.DeviceName;
+      else
         DevicesList.SelectedIndex = 0;
-    }
-
-    /// <summary>
-    /// Reads saved program settings from <i>Settings.xml</i> file.
-    /// </summary>
-    private void ReadXmlSettings()
-    {
-      var configFileName = Path.Combine(Configuration.appDataDirectory, "Settings.xml");
-      var selectedDevice = "";
-      if (File.Exists(configFileName))
-      {
-        var settings = XDocument.Load(configFileName).Element("settings");
-        Locm3DirectoryInput.Text = settings?.Element("locm3-directory")?.Value.Trim() ?? "";
-        ProjectDirectoryInput.Text = settings?.Element("project-directory")?.Value.Trim() ?? "";
-        ProjectNameInput.Text = settings?.Element("project-name")?.Value.Trim() ?? "";
-        ProjectSubdirectoryCheckbox.IsChecked = settings?.Element("create-subdirectory")?.Value.Trim().ToLower() == "true";
-        EnvironmentsList.SelectedItem = settings?.Element("project-environment")?.Value.Trim() ?? "";
-        FamiliesList.SelectedItem = settings?.Element("selected-family")?.Value.Trim() ?? "";
-        selectedDevice = settings?.Element("selected-device")?.Value.Trim() ?? "";
-      }
-
-      if (EnvironmentsList.SelectedIndex < 0 && EnvironmentsList.Items.Count > 0)
-        EnvironmentsList.SelectedIndex = 0;
-      if (FamiliesList.SelectedIndex < 0 && FamiliesList.Items.Count > 0)
-        FamiliesList.SelectedIndex = 0;
-
-      BuildDevicesList(FamiliesList.Text);
-      DevicesList.SelectedItem = selectedDevice;
-      if (DevicesList.SelectedIndex < 0 && DevicesList.Items.Count > 0)
-        DevicesList.SelectedIndex = 0;
-    }
-
-    /// <summary>
-    /// Writes current program settings to <i>Settings.xml</i> file.
-    /// </summary>
-    private void WriteXmlSettings()
-    {
-      if (!Directory.Exists(Configuration.appDataDirectory))
-        Directory.CreateDirectory(Configuration.appDataDirectory);
-
-      var settings = new XDocument(new XDeclaration("1.0", "utf-8", null), new XElement("settings",
-        new XElement("locm3-directory",     Locm3DirectoryInput.Text.Trim()),
-        new XElement("project-directory",   ProjectDirectoryInput.Text.Trim()),
-        new XElement("project-name",        ProjectNameInput.Text.Trim()),
-        new XElement("create-subdirectory", ProjectSubdirectoryCheckbox.IsChecked.ToString()),
-        new XElement("project-environment", EnvironmentsList.Text.Trim()),
-        new XElement("selected-family",     FamiliesList.Text.Trim()),
-        new XElement("selected-device",     DevicesList.Text.Trim())
-      ));
-      settings.Save(Path.Combine(Configuration.appDataDirectory, "Settings.xml"));
-    }
-
-    /// <summary>
-    /// Validates the entered values.
-    /// </summary>
-    /// <returns><c>true</c> if validation succeeded, otherwise <c>false</c>.</returns>
-    private bool ValidateValues()
-    {
-      return Directory.Exists(Locm3DirectoryInput.Text.Trim()) && ProjectDirectoryInput.Text.Trim().Length > 0 &&
-             Regex.IsMatch(ProjectNameInput.Text.Trim(), @"^\w+$") && EnvironmentsList.SelectedIndex >= 0 && FamiliesList.SelectedIndex >= 0 &&
-             DevicesList.SelectedIndex >= 0;
     }
 
     /// <summary>
@@ -253,16 +218,15 @@ namespace LOCM3Gen
     }
 
     /// <summary>
-    /// Devices list rebuilding on microcontroller family selection change.
+    /// Rebuilds the devices list on microcontroller family selection change.
     /// </summary>
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>
-    private void McFamilyList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void FamiliesList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
       try
       {
         BuildDevicesList(FamiliesList.SelectedItem as string ?? "");
-        MainWindow_OnValuesValidation(sender, e);
       }
       catch(Exception exception)
       {
@@ -271,57 +235,32 @@ namespace LOCM3Gen
     }
 
     /// <summary>
-    /// Changes <i>IsEnabled</i> state of <see cref="GenerateButton" /> after validation of entered values.
+    /// Project generation on <see cref="GenerationButton" /> button click.
     /// </summary>
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>
-    private void MainWindow_OnValuesValidation(object sender, EventArgs e)
+    private void GenerationButton_OnClick(object sender, RoutedEventArgs e)
     {
       try
       {
-        GenerateButton.IsEnabled = ValidateValues();
-      }
-      catch (Exception exception)
-      {
-        CatchException(exception);
-      }
-    }
+        GenerationButton.IsEnabled = false;
 
-    /// <summary>
-    /// Project generation on <see cref="GenerateButton" /> button click.
-    /// </summary>
-    /// <param name="sender">Event sender object.</param>
-    /// <param name="e">Event arguments.</param>
-    private void GenerateButton_OnClick(object sender, RoutedEventArgs e)
-    {
-      try
-      {
-        GenerateButton.IsEnabled = false;
+        // Validating generator model.
+        if (_generator.IsValid)
+        {
+          _generator.GenerateProject();
 
-        // Filling general variables.
-        var generator = new SourceGen.ScriptReader();
-        generator.Variables.Add("ProgramDir", Configuration.programDirectory);
-        generator.Variables.Add("TemplatesDir", Configuration.templatesDirectory);
-        generator.Variables.Add("FamiliesDir", Configuration.familiesDirectory);
-        generator.Variables.Add("EnvironmentsDir", Configuration.environmentsDirectory);
-        generator.Variables.Add("LOCM3Dir", Locm3DirectoryInput.Text.Trim());
-        generator.Variables.Add("ProjectDir", ProjectSubdirectoryCheckbox.IsChecked ?? false
-          ? Path.Combine(ProjectDirectoryInput.Text.Trim(), ProjectNameInput.Text.Trim())
-          : ProjectDirectoryInput.Text.Trim());
-        generator.Variables.Add("ProjectName", ProjectNameInput.Text.Trim());
-        generator.Variables.Add("DeviceName", DevicesList.Text.Trim());
-        generator.Variables.Add("Date", DateTime.Now.ToShortDateString());
-        generator.Variables.Add("Time", DateTime.Now.ToShortTimeString());
-        generator.Variables.Add("UserName", Environment.UserName);
-        generator.Variables.Add("MachineName", Environment.MachineName);
+          MessageBox.Show($"Project \"{_generator.ProjectName}\" has been successfully created in \"{_generator.ProjectDirectory}\".",
+            Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        else
+        {
+          var errorMessage = new StringBuilder("Cannot generate a project:");
+          foreach (var error in _generator.Validate(new ValidationContext(_generator)))
+            errorMessage.Append($"\n - {error.ErrorMessage}");
 
-        // Reading script files.
-        generator.RunScript(Path.Combine(Configuration.familiesDirectory, FamiliesList.Text.Trim() + ".xml"));
-        generator.RunScript(Path.Combine(Configuration.environmentsDirectory, EnvironmentsList.Text.Trim() + ".xml"));
-
-        // Showing generation success dialog.
-        MessageBox.Show($"Project \"{generator.Variables["ProjectName"]}\" has been successfully created in \"{generator.Variables["ProjectDir"]}\".",
-          Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+          MessageBox.Show(errorMessage.ToString(), Title,MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
       }
       catch (Exception exception)
       {
@@ -330,7 +269,7 @@ namespace LOCM3Gen
       finally
       {
         GC.Collect();
-        GenerateButton.IsEnabled = true;
+        GenerationButton.IsEnabled = true;
       }
     }
 
@@ -343,8 +282,8 @@ namespace LOCM3Gen
     {
       try
       {
-        MessageBox.Show("libopencm3 Project Generator v" + Configuration.version.ToString(2) + "\n" +
-          "Build " + Configuration.version.Build + "." + Configuration.version.Revision + "\n\n" +
+        MessageBox.Show("libopencm3 Project Generator v" + Configuration.Version.ToString(2) + "\n" +
+          "Build " + Configuration.Version.Build + "." + Configuration.Version.Revision + "\n\n" +
           "Copyright (c) 2018-2019 Maxim Yudin <stibiu@yandex.ru>",
           "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
@@ -363,7 +302,7 @@ namespace LOCM3Gen
     {
       try
       {
-        WriteXmlSettings();
+        _generator.WriteXmlSettings();
       }
       catch (Exception exception)
       {

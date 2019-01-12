@@ -9,10 +9,10 @@ Description
 **LOCM3Gen**'s primary task is to create compact self-sufficient
 microcontroller firmware projects based on the **libopencm3** library.
 
-It is written on C# and has standard Windows Forms graphical user
-interface for convenience. Through configuring project settings like
-library's directory, project location, microcontroller family, etc. the
-empty but ready-to-compile firmware project will be generated.
+It is written on C# and has graphical user interface for convenience. Through
+configuring project settings like library's directory, project location,
+microcontroller family, etc. the empty but ready-to-compile firmware project
+will be generated.
 
 Features
 --------

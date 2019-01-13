@@ -229,20 +229,20 @@ namespace LOCM3Gen
 
       // Filling general variables.
       var sourceGen = new ScriptReader();
-      sourceGen.Variables.Add("ProgramDir", Configuration.ProgramDirectory);
-      sourceGen.Variables.Add("TemplatesDir", Configuration.TemplatesDirectory);
-      sourceGen.Variables.Add("FamiliesDir", Configuration.FamiliesDirectory);
-      sourceGen.Variables.Add("EnvironmentsDir", Configuration.EnvironmentsDirectory);
-      sourceGen.Variables.Add("LOCM3Dir", Locm3Directory.Trim());
-      sourceGen.Variables.Add("ProjectDir",
+      sourceGen.DataContext.Variables.Add("ProgramDir", Configuration.ProgramDirectory);
+      sourceGen.DataContext.Variables.Add("TemplatesDir", Configuration.TemplatesDirectory);
+      sourceGen.DataContext.Variables.Add("FamiliesDir", Configuration.FamiliesDirectory);
+      sourceGen.DataContext.Variables.Add("EnvironmentsDir", Configuration.EnvironmentsDirectory);
+      sourceGen.DataContext.Variables.Add("LOCM3Dir", Locm3Directory.Trim());
+      sourceGen.DataContext.Variables.Add("ProjectDir",
         CreateProjectSubdirectory ? Path.Combine(ProjectDirectory.Trim(), ProjectName.Trim()) : ProjectDirectory.Trim());
-      sourceGen.Variables.Add("ProjectName", ProjectName.Trim());
-      sourceGen.Variables.Add("EnvironmentName", EnvironmentName.Trim());
-      sourceGen.Variables.Add("DeviceName", DeviceName.Trim());
-      sourceGen.Variables.Add("Date", DateTime.Now.ToShortDateString());
-      sourceGen.Variables.Add("Time", DateTime.Now.ToShortTimeString());
-      sourceGen.Variables.Add("UserName", Environment.UserName);
-      sourceGen.Variables.Add("MachineName", Environment.MachineName);
+      sourceGen.DataContext.Variables.Add("ProjectName", ProjectName.Trim());
+      sourceGen.DataContext.Variables.Add("EnvironmentName", EnvironmentName.Trim());
+      sourceGen.DataContext.Variables.Add("DeviceName", DeviceName.Trim());
+      sourceGen.DataContext.Variables.Add("Date", DateTime.Now.ToShortDateString());
+      sourceGen.DataContext.Variables.Add("Time", DateTime.Now.ToShortTimeString());
+      sourceGen.DataContext.Variables.Add("UserName", Environment.UserName);
+      sourceGen.DataContext.Variables.Add("MachineName", Environment.MachineName);
 
       // Running family and environment script files.
       sourceGen.RunScript(Path.Combine(Configuration.FamiliesDirectory, $"{FamilyName.Trim()}.xml"));

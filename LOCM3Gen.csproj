@@ -75,7 +75,16 @@
     <ApplicationDefinition Include="App.xaml" />
     <Compile Include="App.xaml.cs" />
     <Compile Include="GeneratorModel.cs" />
-    <Compile Include="SourceGen\ActionMethods.cs" />
+    <Compile Include="SourceGen\ActionParameterAttribute.cs" />
+    <Compile Include="SourceGen\ScriptAction.cs" />
+    <Compile Include="SourceGen\ActionNameAttribute.cs" />
+    <Compile Include="SourceGen\ScriptActions\Copy.cs" />
+    <Compile Include="SourceGen\ScriptActions\If.cs" />
+    <Compile Include="SourceGen\ScriptActions\List.cs" />
+    <Compile Include="SourceGen\ScriptActions\Parse.cs" />
+    <Compile Include="SourceGen\ScriptActions\Unzip.cs" />
+    <Compile Include="SourceGen\ScriptActions\Var.cs" />
+    <Compile Include="SourceGen\ScriptDataContext.cs" />
     <Compile Include="SourceGen\ScriptReader.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

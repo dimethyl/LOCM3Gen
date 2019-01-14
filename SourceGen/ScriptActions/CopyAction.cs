@@ -3,31 +3,57 @@ using System.Xml.Linq;
 
 namespace LOCM3Gen.SourceGen.ScriptActions
 {
+  /// <summary>
+  /// Script action for copying files matching the file pattern from one directory to another.
+  /// </summary>
   [ActionName("copy")]
-  public class Copy : ScriptAction
+  public class CopyAction : ScriptAction
   {
+    /// <summary>
+    /// Source directory where to copy files from.
+    /// Parameter is parsed.
+    /// </summary>
     [ActionParameter("source-dir", true)]
     public string SourceDirectory { get; set; }
 
+    /// <summary>
+    /// Target directory where to copy files to.
+    /// Parameter is parsed.
+    /// </summary>
     [ActionParameter("target-dir", true)]
     public string TargetDirectory { get; set; }
 
-    [ActionParameter("file-pattern")]
+    /// <summary>
+    /// File pattern for choosing the files to be copied.
+    /// </summary>
+    [ActionParameter("file-pattern", false)]
     public string FilePattern { get; set; }
 
-    [ActionParameter("recursive")]
+    /// <summary>
+    /// If "true" search files in subdirectories, otherwise search only the top level directory.
+    /// </summary>
+    [ActionParameter("recursive", false)]
     public string Recursive { get; set; }
 
-    [ActionParameter("parse")]
+    /// <summary>
+    /// If "true" parse every file during copying.
+    /// </summary>
+    [ActionParameter("parse", false)]
     public string Parse { get; set; }
 
-    [ActionParameter("keep-existing")]
+    /// <summary>
+    /// If "true" existing files will not be overwritten during copying.
+    /// </summary>
+    [ActionParameter("keep-existing", false)]
     public string KeepExistingFiles { get; set; }
 
-    public Copy(XElement element, ScriptDataContext dataContext) : base(element, dataContext)
+    /// <inheritdoc />
+    public CopyAction(XElement actionXmlElement, ScriptDataContext dataContext, ScriptAction parentAction)
+      : base(actionXmlElement, dataContext, parentAction)
     {
     }
 
+    /// <inheritdoc />
     public override void Invoke()
     {
       var sourceDirectory = Path.GetFullPath(SourceDirectory);

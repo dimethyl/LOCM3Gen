@@ -4,25 +4,46 @@ using System.Xml.Linq;
 
 namespace LOCM3Gen.SourceGen.ScriptActions
 {
+  /// <summary>
+  /// Script action for unzipping a file from the archive.
+  /// </summary>
   [ActionName("unzip")]
-  public class Unzip : ScriptAction
+  public class UnzipAction : ScriptAction
   {
+    /// <summary>
+    /// Path to the zip-archive file.
+    /// Parameter is parsed.
+    /// </summary>
     [ActionParameter("archive", true)]
     public string ArchivePath { get; set; }
 
+    /// <summary>
+    /// Internal path in the archive of the file to be extracted.
+    /// Parameter is parsed.
+    /// </summary>
     [ActionParameter("entry", true)]
     public string EntryPath { get; set; }
 
+    /// <summary>
+    /// Target directory where the file will be extracted.
+    /// Parameter is parsed.
+    /// </summary>
     [ActionParameter("target-dir", true)]
     public string TargetDirectory { get; set; }
 
-    [ActionParameter("keep-existing")]
+    /// <summary>
+    /// If "true" existing file will not be overwritten during extraction.
+    /// </summary>
+    [ActionParameter("keep-existing", false)]
     public string KeepExistingFiles { get; set; }
 
-    public Unzip(XElement element, ScriptDataContext dataContext) : base(element, dataContext)
+    /// <inheritdoc />
+    public UnzipAction(XElement actionXmlElement, ScriptDataContext dataContext, ScriptAction parentAction)
+      : base(actionXmlElement, dataContext, parentAction)
     {
     }
 
+    /// <inheritdoc />
     public override void Invoke()
     {
       var archivePath = Path.GetFullPath(ArchivePath);

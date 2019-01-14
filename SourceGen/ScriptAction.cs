@@ -26,6 +26,11 @@ namespace LOCM3Gen.SourceGen
     protected readonly ScriptDataContext DataContext;
 
     /// <summary>
+    /// Parent script action this action depends on.
+    /// </summary>
+    protected readonly ScriptAction ParentAction;
+
+    /// <summary>
     /// Nested XML elements enumeration.
     /// </summary>
     protected readonly IEnumerable<XElement> NestedXmlElements;
@@ -33,16 +38,18 @@ namespace LOCM3Gen.SourceGen
     /// <summary>
     /// Script action constructor.
     /// </summary>
-    /// <param name="element">XML element used to configure the script action.</param>
+    /// <param name="actionXmlElement">Action's XML element used to configure the script action.</param>
     /// <param name="dataContext">Script data context instance with variables and lists used on parsing.</param>
-    public ScriptAction(XElement element, ScriptDataContext dataContext)
+    /// <param name="parentAction">Parent script action this XML element is nested to. Can be null.</param>
+    public ScriptAction(XElement actionXmlElement, ScriptDataContext dataContext, ScriptAction parentAction = null)
     {
-      if (element == null)
-        throw new ArgumentNullException(nameof(element));
+      if (actionXmlElement == null)
+        throw new ArgumentNullException(nameof(actionXmlElement));
 
-      ActionName = element.Name.ToString();
+      ActionName = actionXmlElement.Name.ToString();
       DataContext = dataContext ?? new ScriptDataContext();
-      NestedXmlElements = element.Descendants();
+      ParentAction = parentAction;
+      NestedXmlElements = actionXmlElement.Descendants();
 
       // Setting the values of member properties decorated with ActionParameterAttribute.
       foreach (var property in GetType().GetProperties())
@@ -51,7 +58,7 @@ namespace LOCM3Gen.SourceGen
         if (parameterAttribute == null)
           continue;
 
-        var propertyValue = element.Attribute(parameterAttribute.ActionParameterName)?.Value ?? "";
+        var propertyValue = actionXmlElement.Attribute(parameterAttribute.ActionParameterName)?.Value ?? "";
         if (parameterAttribute.ParseParameterValue)
           propertyValue = ParseText(propertyValue);
         property.SetValue(this, propertyValue);

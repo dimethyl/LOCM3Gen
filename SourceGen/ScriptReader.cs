@@ -68,15 +68,16 @@ namespace LOCM3Gen.SourceGen
     /// <summary>
     /// Creates an instance of the necessary <see cref="ScriptAction" />-derived class and executes its <see cref="ScriptAction.Invoke" /> method.
     /// </summary>
-    /// <param name="element">XML element containing script action data.</param>
+    /// <param name="actionXmlElement">Action's XML element containing script action data.</param>
     /// <param name="dataContext">Script data context instance.</param>
-    public static void ExecuteElement(XElement element, ScriptDataContext dataContext)
+    /// <param name="parentAction">Parent script action this XML element is nested to. Can be null.</param>
+    public static void ExecuteElement(XElement actionXmlElement, ScriptDataContext dataContext, ScriptAction parentAction = null)
     {
-      var actionName = element.Name.ToString();
+      var actionName = actionXmlElement.Name.ToString();
       if (!ScriptActions.ContainsKey(actionName))
         return;
 
-      var scriptAction = (ScriptAction) Activator.CreateInstance(ScriptActions[actionName], element, dataContext);
+      var scriptAction = (ScriptAction) Activator.CreateInstance(ScriptActions[actionName], actionXmlElement, dataContext, parentAction);
       scriptAction.Invoke();
     }
 

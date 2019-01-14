@@ -3,22 +3,38 @@ using System.Xml.Linq;
 
 namespace LOCM3Gen.SourceGen.ScriptActions
 {
+  /// <summary>
+  /// Script action for parsing the files matching the file pattern.
+  /// </summary>
   [ActionName("parse")]
-  public class Parse : ScriptAction
+  public class ParseAction : ScriptAction
   {
+    /// <summary>
+    /// Source directory where the files will be searched.
+    /// Parameter is parsed.
+    /// </summary>
     [ActionParameter("source-dir", true)]
     public string SourceDirectory { get; set; }
 
-    [ActionParameter("file-pattern")]
+    /// <summary>
+    /// File pattern for choosing the files to be parsed.
+    /// </summary>
+    [ActionParameter("file-pattern", false)]
     public string FilePattern { get; set; }
 
-    [ActionParameter("recursive")]
+    /// <summary>
+    /// If "true" search files in subdirectories, otherwise search only the top level directory.
+    /// </summary>
+    [ActionParameter("recursive", false)]
     public string Recursive { get; set; }
 
-    public Parse(XElement element, ScriptDataContext dataContext) : base(element, dataContext)
+    /// <inheritdoc />
+    public ParseAction(XElement actionXmlElement, ScriptDataContext dataContext, ScriptAction parentAction)
+      : base(actionXmlElement, dataContext, parentAction)
     {
     }
 
+    /// <inheritdoc />
     public override void Invoke()
     {
       var sourceDirectory = Path.GetFullPath(SourceDirectory);

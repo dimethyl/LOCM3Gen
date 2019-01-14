@@ -5,7 +5,7 @@ namespace LOCM3Gen.SourceGen
 {
   /// <summary>
   /// Attribute that assigns the action parameter name to the property of the <see cref="ScriptAction" />-derived class.
-  /// The decorated property will be automatically set to the value on XML element reading.
+  /// The decorated property will be automatically set to the value provided by the action's XML element.
   /// </summary>
   [AttributeUsage(AttributeTargets.Property)]
   public class ActionParameterAttribute : Attribute
@@ -25,7 +25,7 @@ namespace LOCM3Gen.SourceGen
     /// </summary>
     /// <param name="actionParameterName">Action parameter name being assigned.</param>
     /// <param name="parseParameterValue">Defines whether to parse the parameter's value during property setting.</param>
-    public ActionParameterAttribute(string actionParameterName, bool parseParameterValue = false)
+    public ActionParameterAttribute(string actionParameterName, bool parseParameterValue)
     {
       if (string.IsNullOrWhiteSpace(actionParameterName) || !Regex.IsMatch(actionParameterName, @"^[-\w]+$"))
         throw new ArgumentNullException(nameof(actionParameterName),

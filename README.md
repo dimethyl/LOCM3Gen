@@ -52,7 +52,8 @@ To function program requires:
 Downloads
 ---------
 
-You can download compiled packages [here](https://gitlab.com/Egiraht/locm3gen/tags).
+You can download the source code and compiled packages
+[here](https://gitlab.com/Egiraht/locm3gen/releases).
 
 License
 -------

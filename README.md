@@ -17,8 +17,6 @@ will be generated.
 Features
 --------
 
-As for now the only supported target environment is **EmBitz** IDE.
-
 The generator supports **STM32** microcontrollers of listed families:
 
 * STM32F0
@@ -31,11 +29,16 @@ The generator supports **STM32** microcontrollers of listed families:
 * STM32L1
 * STM32L4
 
-The generator is customizable through the XML files and templates that
-contain necessary information to correctly build the project. Through
-such XML files available support for microcontroller families and
-environments can be extended. Also it features almost all needed
-description *.svd* files for firmware debugging.
+Supported target environments for projects:
+
+* **EmBitz** IDE
+* None (only necessary files are created)
+
+The generator is customizable through special SourceGen scripts and templates
+that contain all the data for successful project creation. Through them the
+available support for microcontroller families and target environments can be
+extended. Also the generator includes the packages of hardware description
+*.svd* files necessary for firmware debugging.
 
 System requirements
 -------------------

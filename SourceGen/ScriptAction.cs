@@ -31,6 +31,11 @@ namespace LOCM3Gen.SourceGen
     protected readonly ScriptAction ParentAction;
 
     /// <summary>
+    /// Script action XML element.
+    /// </summary>
+    protected readonly XElement ActionXmlElement;
+
+    /// <summary>
     /// Nested XML elements enumeration.
     /// </summary>
     protected readonly IEnumerable<XElement> NestedXmlElements;
@@ -49,6 +54,7 @@ namespace LOCM3Gen.SourceGen
       ActionName = actionXmlElement.Name.ToString();
       DataContext = dataContext ?? new ScriptDataContext();
       ParentAction = parentAction;
+      ActionXmlElement = actionXmlElement;
       NestedXmlElements = actionXmlElement.Descendants();
 
       // Setting the values of member properties decorated with ActionParameterAttribute.
@@ -61,7 +67,24 @@ namespace LOCM3Gen.SourceGen
         var propertyValue = actionXmlElement.Attribute(parameterAttribute.ActionParameterName)?.Value ?? "";
         if (parameterAttribute.ParseParameterValue)
           propertyValue = ParseText(propertyValue);
-        property.SetValue(this, propertyValue);
+
+        if (property.PropertyType == typeof(string))
+          property.SetValue(this, propertyValue);
+        else if (property.PropertyType == typeof(bool))
+          property.SetValue(this, propertyValue.ToLower() == "true");
+        else if (property.PropertyType == typeof(int))
+        {
+          property.SetValue(this,
+            int.TryParse(propertyValue, out var intValue)
+              ? intValue
+              : throw new InvalidCastException(
+                $"Unable to cast string value \"{propertyValue}\" for property \"{property.Name}\" of type \"{property.PropertyType.Name}\"."));
+        }
+        else
+        {
+          throw new InvalidCastException(
+            $"Unable to cast string value \"{propertyValue}\" for property \"{property.Name}\" of type \"{property.PropertyType.Name}\".");
+        }
       }
     }
 

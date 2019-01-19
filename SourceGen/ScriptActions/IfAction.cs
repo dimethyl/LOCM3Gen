@@ -15,14 +15,14 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// Parameter is parsed.
     /// </summary>
     [ActionParameter("a", true)]
-    public string ArgumentA { get; set; }
+    public string ArgumentA { get; set; } = "";
 
     /// <summary>
     /// Argument B.
     /// Parameter is parsed.
     /// </summary>
     [ActionParameter("b", true)]
-    public string ArgumentB { get; set; }
+    public string ArgumentB { get; set; } = "";
 
     /// <inheritdoc />
     public IfAction(XElement actionXmlElement, ScriptDataContext dataContext, ScriptAction parentAction)

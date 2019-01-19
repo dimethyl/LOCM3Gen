@@ -15,27 +15,27 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// Parameter is parsed.
     /// </summary>
     [ActionParameter("archive", true)]
-    public string ArchivePath { get; set; }
+    public string ArchivePath { get; set; } = "";
 
     /// <summary>
     /// Internal path in the archive of the file to be extracted.
     /// Parameter is parsed.
     /// </summary>
     [ActionParameter("entry", true)]
-    public string EntryPath { get; set; }
+    public string EntryPath { get; set; } = "";
 
     /// <summary>
     /// Target directory where the file will be extracted.
     /// Parameter is parsed.
     /// </summary>
     [ActionParameter("target-dir", true)]
-    public string TargetDirectory { get; set; }
+    public string TargetDirectory { get; set; } = "";
 
     /// <summary>
     /// If "true" existing file will not be overwritten during extraction.
     /// </summary>
     [ActionParameter("keep-existing", false)]
-    public string KeepExistingFiles { get; set; }
+    public bool KeepExistingFiles { get; set; }
 
     /// <inheritdoc />
     public UnzipAction(XElement actionXmlElement, ScriptDataContext dataContext, ScriptAction parentAction)
@@ -46,27 +46,23 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// <inheritdoc />
     public override void Invoke()
     {
-      var archivePath = Path.GetFullPath(ArchivePath);
-      if (string.IsNullOrWhiteSpace(archivePath) || !File.Exists(archivePath))
-      {
-        // TODO: Wrong zip archive path processing.
-        return;
-      }
+      if (string.IsNullOrWhiteSpace(ArchivePath) || !File.Exists(ArchivePath))
+        throw new ScriptException($"Invalid archive path: \"{ArchivePath}\".", ActionXmlElement, "archive");
 
-      using (var archive = ZipFile.OpenRead(archivePath))
+      if (string.IsNullOrWhiteSpace(TargetDirectory))
+        throw new ScriptException("Empty target directory provided.", ActionXmlElement, "target-dir");
+
+      using (var archive = ZipFile.OpenRead(Path.GetFullPath(ArchivePath)))
       {
         var entryStream = archive.GetEntry(EntryPath);
         if (entryStream == null)
-        {
-          // TODO: Wrong zip archive entry path.
-          return;
-        }
+          throw new ScriptException($"Invalid entry path \"{EntryPath}\" provided for the archive \"{ArchivePath}\".", ActionXmlElement, "entry");
 
         if (!Directory.Exists(TargetDirectory))
           Directory.CreateDirectory(TargetDirectory);
 
         var targetFileName = Path.Combine(TargetDirectory, Path.GetFileName(EntryPath));
-        if (KeepExistingFiles.ToLower() == "true" && File.Exists(targetFileName))
+        if (KeepExistingFiles && File.Exists(targetFileName))
           return;
 
         using (var targetFile = new StreamWriter(targetFileName))

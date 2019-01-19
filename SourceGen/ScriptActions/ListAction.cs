@@ -14,7 +14,7 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// List name.
     /// </summary>
     [ActionParameter("name", false)]
-    public string Name { get; set; }
+    public string Name { get; set; } = "";
 
     /// <summary>
     /// List of values that can be accessible by the nested actions.
@@ -31,10 +31,7 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     public override void Invoke()
     {
       if (string.IsNullOrEmpty(Name))
-      {
-        // TODO: Wrong list name processing.
-        return;
-      }
+        throw new ScriptException("Empty list name provided.", ActionXmlElement, "name");
 
       if (!DataContext.Lists.ContainsKey(Name))
         DataContext.Lists.Add(Name, new List<string>());

@@ -22,7 +22,7 @@ namespace LOCM3Gen
     /// <summary>
     /// Project generator model instance.
     /// </summary>
-    private readonly GeneratorModel _generator;
+    public GeneratorModel Generator { get; } = new GeneratorModel();
 
     /// <summary>
     /// Main window constructor.
@@ -34,14 +34,11 @@ namespace LOCM3Gen
         // Initializing window with compiled XAML code.
         InitializeComponent();
 
-        // Getting generator model instance defined in XAML resources.
-        _generator = (GeneratorModel) Resources["Generator"];
-
         // Filling window with data.
-        _generator.ReadXmlSettings();
+        Generator.ReadXmlSettings();
         BuildEnvironmentsList();
         BuildFamiliesList();
-        BuildDevicesList(_generator.FamilyName);
+        BuildDevicesList(Generator.FamilyName);
 
         // Adding a callback for rebuilding of the devices list on microcontroller family change.
         FamiliesList.SelectionChanged += FamiliesList_OnSelectionChanged;
@@ -58,7 +55,7 @@ namespace LOCM3Gen
     /// <param name="exception">Exception instance being described.</param>
     private static void CatchException(Exception exception)
     {
-      MessageBox.Show(exception.ToString(), $"Exception caught on {exception.Source}.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      MessageBox.Show(exception.Message, $"Exception caught on {exception.Source}.", MessageBoxButtons.OK, MessageBoxIcon.Error);
     }
 
     /// <summary>
@@ -74,8 +71,8 @@ namespace LOCM3Gen
       else
         Directory.CreateDirectory(Configuration.EnvironmentsDirectory);
 
-      if (EnvironmentsList.Items.Contains(_generator.EnvironmentName))
-        EnvironmentsList.SelectedItem = _generator.EnvironmentName;
+      if (EnvironmentsList.Items.Contains(Generator.EnvironmentName))
+        EnvironmentsList.SelectedItem = Generator.EnvironmentName;
       else
         EnvironmentsList.SelectedIndex = 0;
     }
@@ -93,8 +90,8 @@ namespace LOCM3Gen
       else
         Directory.CreateDirectory(Configuration.FamiliesDirectory);
 
-      if (FamiliesList.Items.Contains(_generator.FamilyName))
-        FamiliesList.SelectedItem = _generator.FamilyName;
+      if (FamiliesList.Items.Contains(Generator.FamilyName))
+        FamiliesList.SelectedItem = Generator.FamilyName;
       else
         FamiliesList.SelectedIndex = 0;
     }
@@ -128,8 +125,8 @@ namespace LOCM3Gen
         }
       }
 
-      if (DevicesList.Items.Contains(_generator.DeviceName))
-        DevicesList.SelectedItem = _generator.DeviceName;
+      if (DevicesList.Items.Contains(Generator.DeviceName))
+        DevicesList.SelectedItem = Generator.DeviceName;
       else
         DevicesList.SelectedIndex = 0;
     }
@@ -246,17 +243,17 @@ namespace LOCM3Gen
         GenerationButton.IsEnabled = false;
 
         // Validating generator model.
-        if (_generator.IsValid)
+        if (Generator.IsValid)
         {
-          _generator.GenerateProject();
+          Generator.GenerateProject();
 
-          MessageBox.Show($"Project \"{_generator.ProjectName}\" has been successfully created in \"{_generator.ProjectDirectory}\".",
+          MessageBox.Show($"Project \"{Generator.ProjectName}\" has been successfully created in \"{Generator.ProjectDirectory}\".",
             Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
           var errorMessage = new StringBuilder("Cannot generate a project:");
-          foreach (var error in _generator.Validate(new ValidationContext(_generator)))
+          foreach (var error in Generator.Validate(new ValidationContext(Generator)))
             errorMessage.Append($"\n - {error.ErrorMessage}");
 
           MessageBox.Show(errorMessage.ToString(), Title,MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -302,7 +299,7 @@ namespace LOCM3Gen
     {
       try
       {
-        _generator.WriteXmlSettings();
+        Generator.WriteXmlSettings();
       }
       catch (Exception exception)
       {

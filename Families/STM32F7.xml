@@ -12,6 +12,10 @@
   <var name="FPType" value="hard" />
   <var name="FPUnit" value="fpv5-sp-d16" />
 
+  <!-- Recycling old libopencm3 directory and .svd file. -->
+  <delete source-dir="{$ProjectDir$}" pattern="libopencm3" search-files="false" search-dirs="true" recursive="false" permanently="false" />
+  <delete source-dir="{$ProjectDir$}" pattern="*.svd" search-files="true" search-dirs="false" recursive="false" permanently="false" />
+
   <!-- Family-specific libopencm3 copy-routes. -->
   <copy source-dir="{$LOCM3Dir$}/include/libopencm3/cm3" target-dir="{$ProjectDir$}/libopencm3/cm3" file-pattern="*.h" parse="false"
         keep-existing="false" recursive="false" />

@@ -90,19 +90,26 @@ namespace LOCM3Gen.SourceGen
     /// <exception cref="VersionNotFoundException">Unknown script file version.</exception>
     public void RunScript(string scriptFileName)
     {
-      if (string.IsNullOrWhiteSpace(scriptFileName) || !File.Exists(scriptFileName))
-        throw new FileNotFoundException($"Script \"{scriptFileName}\" was not found.", scriptFileName);
+      try
+      {
+        if (string.IsNullOrWhiteSpace(scriptFileName) || !File.Exists(scriptFileName))
+          throw new FileNotFoundException($"Script \"{scriptFileName}\" was not found.", scriptFileName);
 
-      var rootNode = XDocument.Load(scriptFileName).Root;
-      if (rootNode == null || rootNode.Name != "sourcegen-script")
-        throw new FormatException("Invalid script file header.");
+        var rootNode = XDocument.Load(scriptFileName).Root;
+        if (rootNode == null || rootNode.Name != "sourcegen-script")
+          throw new ScriptException("Invalid script file header.");
 
-      var scriptVersion = new Version(rootNode.Attribute("version")?.Value.Trim() ?? "0.0");
-      if (scriptVersion < MinVersion || scriptVersion > MaxVersion)
-        throw new VersionNotFoundException($"Unknown script file version: {scriptVersion}.");
+        var scriptVersion = new Version(rootNode.Attribute("version")?.Value.Trim() ?? "0.0");
+        if (scriptVersion < MinVersion || scriptVersion > MaxVersion)
+          throw new ScriptException($"Unknown script file version {scriptVersion}.");
 
-      foreach (var scriptAction in rootNode.Elements())
-        ExecuteElement(scriptAction, DataContext);
+        foreach (var scriptAction in rootNode.Elements())
+          ExecuteElement(scriptAction, DataContext);
+      }
+      catch (ScriptException e)
+      {
+        throw new ScriptException(e.ErrorMessage, e.ActionXmlElement, e.ActionParameter, scriptFileName);
+      }
     }
   }
 }

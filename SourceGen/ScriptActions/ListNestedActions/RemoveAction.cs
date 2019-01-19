@@ -14,7 +14,7 @@ namespace LOCM3Gen.SourceGen.ScriptActions.ListNestedActions
     /// Parameter is parsed.
     /// </summary>
     [ActionParameter("value", true)]
-    public string Value { get; set; }
+    public string Value { get; set; } = "";
 
     /// <inheritdoc />
     public RemoveAction(XElement actionXmlElement, ScriptDataContext dataContext, ScriptAction parentAction)
@@ -26,10 +26,7 @@ namespace LOCM3Gen.SourceGen.ScriptActions.ListNestedActions
     public override void Invoke()
     {
       if (!(ParentAction is ListAction))
-      {
-        // TODO: No parent list processing.
-        return;
-      }
+        throw new ScriptException("No parent \"list\" action provided.", ActionXmlElement);
 
       var list = ((ListAction) ParentAction).ListValues;
       list.Remove(Value);

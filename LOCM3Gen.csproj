@@ -52,6 +52,7 @@
     <ApplicationIcon>LOCM3Gen.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -79,15 +80,18 @@
     <Compile Include="SourceGen\ScriptAction.cs" />
     <Compile Include="SourceGen\ActionNameAttribute.cs" />
     <Compile Include="SourceGen\ScriptActions\CopyAction.cs" />
+    <Compile Include="SourceGen\ScriptActions\DeleteAction.cs" />
     <Compile Include="SourceGen\ScriptActions\IfAction.cs" />
     <Compile Include="SourceGen\ScriptActions\ListAction.cs" />
     <Compile Include="SourceGen\ScriptActions\ListNestedActions\AddAction.cs" />
     <Compile Include="SourceGen\ScriptActions\ListNestedActions\AddPathsAction.cs" />
     <Compile Include="SourceGen\ScriptActions\ListNestedActions\RemoveAction.cs" />
+    <Compile Include="SourceGen\ScriptActions\ListNestedActions\RemovePathsAction.cs" />
     <Compile Include="SourceGen\ScriptActions\ParseAction.cs" />
     <Compile Include="SourceGen\ScriptActions\UnzipAction.cs" />
     <Compile Include="SourceGen\ScriptActions\VarAction.cs" />
     <Compile Include="SourceGen\ScriptDataContext.cs" />
+    <Compile Include="SourceGen\ScriptException.cs" />
     <Compile Include="SourceGen\ScriptReader.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -142,9 +146,7 @@
     <Content Include="LICENSE.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="LOCM3Gen.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="LOCM3Gen.ico" />
     <Content Include="MPL.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

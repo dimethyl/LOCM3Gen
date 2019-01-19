@@ -12,14 +12,14 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// Name of the variable.
     /// </summary>
     [ActionParameter("name", false)]
-    public string Name { get; set; }
+    public string Name { get; set; } = "";
 
     /// <summary>
     /// Value of the variable.
     /// Parameter is parsed.
     /// </summary>
     [ActionParameter("value", true)]
-    public string Value { get; set; }
+    public string Value { get; set; } = "";
 
     /// <inheritdoc />
     public VarAction(XElement actionXmlElement, ScriptDataContext dataContext, ScriptAction parentAction)
@@ -31,10 +31,7 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     public override void Invoke()
     {
       if (string.IsNullOrEmpty(Name))
-      {
-        // TODO: Wrong variable name processing.
-        return;
-      }
+        throw new ScriptException("Empty variable name provided.", ActionXmlElement, "name");
 
       DataContext.Variables.Add(Name, Value);
     }

@@ -14,19 +14,19 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// Parameter is parsed.
     /// </summary>
     [ActionParameter("source-dir", true)]
-    public string SourceDirectory { get; set; }
+    public string SourceDirectory { get; set; } = "";
 
     /// <summary>
     /// File pattern for choosing the files to be parsed.
     /// </summary>
     [ActionParameter("file-pattern", false)]
-    public string FilePattern { get; set; }
+    public string FilePattern { get; set; } = "";
 
     /// <summary>
     /// If "true" search files in subdirectories, otherwise search only the top level directory.
     /// </summary>
     [ActionParameter("recursive", false)]
-    public string Recursive { get; set; }
+    public bool Recursive { get; set; }
 
     /// <inheritdoc />
     public ParseAction(XElement actionXmlElement, ScriptDataContext dataContext, ScriptAction parentAction)
@@ -37,15 +37,11 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// <inheritdoc />
     public override void Invoke()
     {
-      var sourceDirectory = Path.GetFullPath(SourceDirectory);
-      if (string.IsNullOrWhiteSpace(sourceDirectory) || !Directory.Exists(sourceDirectory))
-      {
-        // TODO: Wrong parse source path processing.
-        return;
-      }
+      if (string.IsNullOrWhiteSpace(SourceDirectory) || !Directory.Exists(SourceDirectory))
+        throw new ScriptException($"Invalid source directory: \"{SourceDirectory}\".", ActionXmlElement, "source-dir");
 
-      foreach (var fileName in Directory.EnumerateFiles(sourceDirectory, FilePattern,
-        Recursive.ToLower() == "true" ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
+      foreach (var fileName in Directory.EnumerateFiles(Path.GetFullPath(SourceDirectory), FilePattern,
+        Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
       {
         ParseFile(fileName);
       }

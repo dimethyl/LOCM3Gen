@@ -53,7 +53,7 @@ Downloads
 ---------
 
 You can download the source code and compiled packages
-[here](https://gitlab.com/Egiraht/locm3gen/releases).
+[here](https://github.com/Egiraht/LOCM3Gen/releases).
 
 License
 -------
@@ -65,6 +65,6 @@ Program's license statement can be found in [LICENSE.txt](LICENSE.txt).
 Links
 -----
 
-* **LOCM3Gen** project GitLab page: https://gitlab.com/Egiraht/locm3gen
+* **LOCM3Gen** project GitHub page: https://github.com/Egiraht/LOCM3Gen
 * **libopencm3** library: <https://github.com/libopencm3/libopencm3>
 * **EmBitz** IDE: <https://www.embitz.org/>

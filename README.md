@@ -65,5 +65,6 @@ Program's license statement can be found in [LICENSE.txt](LICENSE.txt).
 Links
 -----
 
+* **LOCM3Gen** project GitLab page: https://gitlab.com/Egiraht/locm3gen
 * **libopencm3** library: <https://github.com/libopencm3/libopencm3>
 * **EmBitz** IDE: <https://www.embitz.org/>

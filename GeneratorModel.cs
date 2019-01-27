@@ -238,6 +238,7 @@ namespace LOCM3Gen
         CreateProjectSubdirectory ? Path.Combine(ProjectDirectory.Trim(), ProjectName.Trim()) : ProjectDirectory.Trim());
       sourceGen.DataContext.Variables.Add("ProjectName", ProjectName.Trim());
       sourceGen.DataContext.Variables.Add("EnvironmentName", EnvironmentName.Trim());
+      sourceGen.DataContext.Variables.Add("FamilyName", FamilyName.Trim());
       sourceGen.DataContext.Variables.Add("DeviceName", DeviceName.Trim());
       sourceGen.DataContext.Variables.Add("Date", DateTime.Now.ToShortDateString());
       sourceGen.DataContext.Variables.Add("Time", DateTime.Now.ToShortTimeString());

@@ -35,7 +35,10 @@ namespace LOCM3Gen.SourceGen.ScriptActions
         throw new ScriptException("Invalid variable name provided. Name cannot be empty and must contain only alphanumeric characters and underscores.",
           ActionXmlElement, "name");
 
-      DataContext.Variables.Add(Name, Value);
+      if (DataContext.Variables.ContainsKey(Name))
+        DataContext.Variables[Name] = Value;
+      else
+        DataContext.Variables.Add(Name, Value);
     }
   }
 }

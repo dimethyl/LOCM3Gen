@@ -7,7 +7,6 @@
 -->
 <sourcegen-script version="1.0">
   <!-- Microcontroller family definition. -->
-  <var name="FamilyName" value="STM32L0" />
   <var name="Core" value="cortex-m0plus" />
   <var name="FPType" value="soft" />
   <var name="FPUnit" value="" />
@@ -140,6 +139,8 @@
   </list>
 
   <!-- Device variables definition. -->
+  <var name="ROMSize" value="8K" />
+  <var name="RAMSize" value="2K" />
   <if-eq a="{$DeviceName$}" b="STM32L011D3">
     <var name="ROMSize" value="8K" />
     <var name="RAMSize" value="2K" />

@@ -7,7 +7,6 @@
 -->
 <sourcegen-script version="1.0">
   <!-- Microcontroller family definition. -->
-  <var name="FamilyName" value="STM32F3" />
   <var name="Core" value="cortex-m4" />
   <var name="FPType" value="hard" />
   <var name="FPUnit" value="fpv4-sp-d16" />
@@ -118,6 +117,8 @@
   </list>
 
   <!-- Device variables definition. -->
+  <var name="ROMSize" value="16K" />
+  <var name="RAMSize" value="16K" />
   <if-eq a="{$DeviceName$}" b="STM32F301C6">
     <var name="ROMSize" value="32K" />
     <var name="RAMSize" value="16K" />

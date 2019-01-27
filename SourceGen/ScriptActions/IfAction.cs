@@ -38,7 +38,7 @@ namespace LOCM3Gen.SourceGen.ScriptActions
         return;
 
       foreach (var nestedXmlElement in NestedXmlElements)
-        ScriptReader.ExecuteElement(nestedXmlElement, DataContext, this);
+        ScriptReader.ExecuteElement(nestedXmlElement, DataContext, ParentAction);
     }
   }
 }

@@ -4,7 +4,7 @@ namespace LOCM3Gen.SourceGen.ScriptActions.ListNestedActions
 {
   /// <summary>
   /// Nested script action for the <see cref="ListAction" />.
-  /// Adds the value from the list.
+  /// Adds the value to the list.
   /// </summary>
   [ActionName("add")]
   public class AddAction : ScriptAction

@@ -49,6 +49,11 @@ To function program requires:
 * **.NET Framework 4.6.2** installed
 * The last build of **libopencm3** library installed and compiled
 
+Documentation
+-------------
+
+Software documentation is available in the project's [wiki](https://github.com/Egiraht/LOCM3Gen/wiki).
+
 Downloads
 ---------
 

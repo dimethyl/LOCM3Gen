@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace LOCM3Gen.SourceGen.ScriptActions
@@ -30,8 +31,9 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// <inheritdoc />
     public override void Invoke()
     {
-      if (string.IsNullOrEmpty(Name))
-        throw new ScriptException("Empty variable name provided.", ActionXmlElement, "name");
+      if (!Regex.IsMatch(Name, @"^\w+$"))
+        throw new ScriptException("Invalid variable name provided. Name cannot be empty and must contain only alphanumeric characters and underscores.",
+          ActionXmlElement, "name");
 
       DataContext.Variables.Add(Name, Value);
     }

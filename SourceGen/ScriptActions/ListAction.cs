@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace LOCM3Gen.SourceGen.ScriptActions
@@ -30,8 +31,9 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// <inheritdoc />
     public override void Invoke()
     {
-      if (string.IsNullOrEmpty(Name))
-        throw new ScriptException("Empty list name provided.", ActionXmlElement, "name");
+      if (!Regex.IsMatch(Name, @"^\w+$"))
+        throw new ScriptException("Invalid list name provided. Name cannot be empty and must contain only alphanumeric characters and underscores.",
+          ActionXmlElement, "name");
 
       if (!DataContext.Lists.ContainsKey(Name))
         DataContext.Lists.Add(Name, new List<string>());

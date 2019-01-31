@@ -78,7 +78,19 @@ namespace LOCM3Gen.SourceGen
         return;
 
       var scriptAction = (ScriptAction) Activator.CreateInstance(ScriptActions[actionName], actionXmlElement, dataContext, parentAction);
-      scriptAction.Invoke();
+
+      try
+      {
+        scriptAction.Invoke();
+      }
+      catch (ScriptException)
+      {
+        throw;
+      }
+      catch (Exception e)
+      {
+        throw new ScriptException(e.Message, actionXmlElement);
+      }
     }
 
     /// <summary>

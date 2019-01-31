@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace LOCM3Gen.SourceGen.ScriptActions
@@ -13,38 +14,38 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// Source directory where to copy files from.
     /// Parameter is parsed.
     /// </summary>
-    [ActionParameter("source-dir", true)]
+    [ActionParameter("source-dir")]
     public string SourceDirectory { get; set; } = "";
 
     /// <summary>
     /// Target directory where to copy files to.
     /// Parameter is parsed.
     /// </summary>
-    [ActionParameter("target-dir", true)]
+    [ActionParameter("target-dir")]
     public string TargetDirectory { get; set; } = "";
 
     /// <summary>
     /// File pattern for choosing the files to be copied.
     /// </summary>
-    [ActionParameter("file-pattern", false)]
+    [ActionParameter("file-pattern")]
     public string FilePattern { get; set; } = "";
 
     /// <summary>
     /// If "true" search files in subdirectories, otherwise search only the top level directory.
     /// </summary>
-    [ActionParameter("recursive", false)]
+    [ActionParameter("recursive")]
     public bool Recursive { get; set; }
 
     /// <summary>
     /// If "true" parse every file during copying.
     /// </summary>
-    [ActionParameter("parse", false)]
+    [ActionParameter("parse")]
     public bool Parse { get; set; }
 
     /// <summary>
     /// If "true" existing files will not be overwritten during copying.
     /// </summary>
-    [ActionParameter("keep-existing", false)]
+    [ActionParameter("keep-existing")]
     public bool KeepExistingFiles { get; set; }
 
     /// <inheritdoc />
@@ -62,7 +63,14 @@ namespace LOCM3Gen.SourceGen.ScriptActions
       if (string.IsNullOrWhiteSpace(TargetDirectory))
         throw new ScriptException("Empty target directory provided.", ActionXmlElement, "target-dir");
 
+      // Checking for "*" and "?" wildcards in directory names, invalid characters and parent directory ".." links.
+      if (Regex.IsMatch(FilePattern, @"[*?].*[/\\]|[""|<>:]|(?<=[/\\]|^)\.\.(?=[/\\]|$)"))
+        throw new ScriptException("Invalid file pattern provided.", ActionXmlElement, "file-pattern");
+
       var sourceDirectory = Path.GetFullPath(SourceDirectory);
+      if (!Directory.Exists(Path.GetDirectoryName(Path.Combine(sourceDirectory, FilePattern))))
+        return;
+
       foreach (var fileName in Directory.EnumerateFiles(sourceDirectory, FilePattern,
         Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
       {

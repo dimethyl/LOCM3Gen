@@ -30,7 +30,7 @@
              PreviewTextInput="ProjectNameInput_OnPreviewTextInput" PreviewKeyDown="ProjectNameInput_OnPreviewKeyDown" />
 
     <!-- Project subdirectory checkbox. -->
-    <CheckBox Name="ProjectSubdirectoryCheckbox" Content="Create project subdirectory" Margin="0, 8, 0, 0"
+    <CheckBox Name="ProjectSubdirectoryCheckbox" Content="Create subdirectory for the project" Margin="0, 8, 0, 0"
               IsChecked="{Binding CreateProjectSubdirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
     <!-- Target environment selector. -->

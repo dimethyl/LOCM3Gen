@@ -14,27 +14,27 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// Path to the zip-archive file.
     /// Parameter is parsed.
     /// </summary>
-    [ActionParameter("archive", true)]
+    [ActionParameter("archive")]
     public string ArchivePath { get; set; } = "";
 
     /// <summary>
     /// Internal path in the archive of the file to be extracted.
     /// Parameter is parsed.
     /// </summary>
-    [ActionParameter("entry", true)]
+    [ActionParameter("entry")]
     public string EntryPath { get; set; } = "";
 
     /// <summary>
     /// Target directory where the file will be extracted.
     /// Parameter is parsed.
     /// </summary>
-    [ActionParameter("target-dir", true)]
+    [ActionParameter("target-dir")]
     public string TargetDirectory { get; set; } = "";
 
     /// <summary>
     /// If "true" existing file will not be overwritten during extraction.
     /// </summary>
-    [ActionParameter("keep-existing", false)]
+    [ActionParameter("keep-existing")]
     public bool KeepExistingFiles { get; set; }
 
     /// <inheritdoc />

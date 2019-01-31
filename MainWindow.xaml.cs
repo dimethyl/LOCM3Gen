@@ -8,7 +8,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Threading;
 using System.Xml.Linq;
+using LOCM3Gen.SourceGen;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using MessageBox = System.Windows.Forms.MessageBox;
 
@@ -29,33 +31,20 @@ namespace LOCM3Gen
     /// </summary>
     public MainWindow()
     {
-      try
-      {
-        // Initializing window with compiled XAML code.
-        InitializeComponent();
+      // Initializing window with compiled XAML code.
+      InitializeComponent();
 
-        // Filling window with data.
-        Generator.ReadXmlSettings();
-        BuildEnvironmentsList();
-        BuildFamiliesList();
-        BuildDevicesList(Generator.FamilyName);
+      // Setting default exception handler.
+      Dispatcher.UnhandledException += Dispatcher_OnUnhandledException;
 
-        // Adding a callback for rebuilding of the devices list on microcontroller family change.
-        FamiliesList.SelectionChanged += FamiliesList_OnSelectionChanged;
-      }
-      catch(Exception exception)
-      {
-        CatchException(exception);
-      }
-    }
+      // Filling window with data.
+      Generator.ReadXmlSettings();
+      BuildEnvironmentsList();
+      BuildFamiliesList();
+      BuildDevicesList(Generator.FamilyName);
 
-    /// <summary>
-    /// Shows common exception description dialog.
-    /// </summary>
-    /// <param name="exception">Exception instance being described.</param>
-    private static void CatchException(Exception exception)
-    {
-      MessageBox.Show(exception.Message, $"Exception caught on {exception.Source}.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      // Adding a callback for rebuilding of the devices list on microcontroller family change.
+      FamiliesList.SelectionChanged += FamiliesList_OnSelectionChanged;
     }
 
     /// <summary>
@@ -98,8 +87,8 @@ namespace LOCM3Gen
 
     /// <summary>
     /// Fills the list of available devices within the specified family.
-    /// <param name="familyName">Name of the family.</param>
     /// </summary>
+    /// <param name="familyName">Name of the family.</param>
     private void BuildDevicesList(string familyName)
     {
       DevicesList.Items.Clear();
@@ -132,28 +121,38 @@ namespace LOCM3Gen
     }
 
     /// <summary>
+    /// Default exception handling routine.
+    /// Shows common exception description dialog.
+    /// </summary>
+    /// <param name="sender">Event sender object.</param>
+    /// <param name="e">Event arguments.</param>
+    private void Dispatcher_OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    {
+      e.Handled = true;
+
+      if (e.Exception is ScriptException scriptError)
+        MessageBox.Show(scriptError.Message, "Script error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+      else
+        MessageBox.Show($"[{e.GetType().Name}] {e.Exception.Message}", $"Unhandled exception on {e.Exception.Source}", MessageBoxButtons.OK,
+          MessageBoxIcon.Error);
+    }
+
+    /// <summary>
     /// Shows libopencm3 directory selector dialog.
     /// </summary>
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>
     private void Locm3DirectoryButton_OnClick(object sender, RoutedEventArgs e)
     {
-      try
+      using (var directorySelector = new FolderBrowserDialog
       {
-        using (var directorySelector = new FolderBrowserDialog
-        {
-          SelectedPath = Locm3DirectoryInput.Text.Trim(),
-          Description = "Select libopencm3 directory:",
-          ShowNewFolderButton = false
-        })
-        {
-          if (directorySelector.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            Locm3DirectoryInput.Text = directorySelector.SelectedPath;
-        }
-      }
-      catch (Exception exception)
+        SelectedPath = Locm3DirectoryInput.Text.Trim(),
+        Description = "Select libopencm3 directory:",
+        ShowNewFolderButton = false
+      })
       {
-        CatchException(exception);
+        if (directorySelector.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+          Locm3DirectoryInput.Text = directorySelector.SelectedPath;
       }
     }
 
@@ -164,22 +163,15 @@ namespace LOCM3Gen
     /// <param name="e">Event arguments.</param>
     private void ProjectDirectoryButton_OnClick(object sender, RoutedEventArgs e)
     {
-      try
+      using (var directorySelector = new FolderBrowserDialog
       {
-        using (var directorySelector = new FolderBrowserDialog
-        {
-          SelectedPath = ProjectDirectoryInput.Text.Trim(),
-          Description = "Select project directory:",
-          ShowNewFolderButton = true
-        })
-        {
-          if (directorySelector.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            ProjectDirectoryInput.Text = directorySelector.SelectedPath;
-        }
-      }
-      catch (Exception exception)
+        SelectedPath = ProjectDirectoryInput.Text.Trim(),
+        Description = "Select project directory:",
+        ShowNewFolderButton = true
+      })
       {
-        CatchException(exception);
+        if (directorySelector.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+          ProjectDirectoryInput.Text = directorySelector.SelectedPath;
       }
     }
 
@@ -191,15 +183,8 @@ namespace LOCM3Gen
     /// <param name="e">Event arguments.</param>
     private void ProjectNameInput_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
     {
-      try
-      {
-        if (!Regex.IsMatch(e.Text, @"^\w+$"))
-          e.Handled = true;
-      }
-      catch(Exception exception)
-      {
-        CatchException(exception);
-      }
+      if (!Regex.IsMatch(e.Text, @"^\w+$"))
+        e.Handled = true;
     }
 
     /// <summary>
@@ -221,14 +206,7 @@ namespace LOCM3Gen
     /// <param name="e">Event arguments.</param>
     private void FamiliesList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-      try
-      {
-        BuildDevicesList(FamiliesList.SelectedItem as string ?? "");
-      }
-      catch(Exception exception)
-      {
-        CatchException(exception);
-      }
+      BuildDevicesList(FamiliesList.SelectedItem as string ?? "");
     }
 
     /// <summary>
@@ -259,10 +237,6 @@ namespace LOCM3Gen
           MessageBox.Show(errorMessage.ToString(), Title,MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
       }
-      catch (Exception exception)
-      {
-        CatchException(exception);
-      }
       finally
       {
         GC.Collect();
@@ -277,17 +251,10 @@ namespace LOCM3Gen
     /// <param name="e">Event arguments.</param>
     private void AboutLabel_OnMouseUp(object sender, MouseButtonEventArgs e)
     {
-      try
-      {
-        MessageBox.Show("libopencm3 Project Generator v" + Configuration.Version.ToString(2) + "\n" +
-          "Build " + Configuration.Version.Build + "." + Configuration.Version.Revision + "\n\n" +
-          "Copyright (c) 2018-2019 Maxim Yudin <stibiu@yandex.ru>",
-          "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
-      }
-      catch (Exception exception)
-      {
-        CatchException(exception);
-      }
+      MessageBox.Show(
+        $"LOCM3Gen v{Configuration.Version.ToString(2)} Build {Configuration.Version.Build}\n" +
+        "libopencm3 Project Generator\n\n" +
+        "Copyright (c) 2018-2019 Maxim Yudin <stibiu@yandex.ru>", "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     /// <summary>
@@ -297,14 +264,7 @@ namespace LOCM3Gen
     /// <param name="e">Event arguments.</param>
     private void MainWindow_OnClosing(object sender, CancelEventArgs e)
     {
-      try
-      {
-        Generator.WriteXmlSettings();
-      }
-      catch (Exception exception)
-      {
-        CatchException(exception);
-      }
+      Generator.WriteXmlSettings();
     }
   }
 }

@@ -12,14 +12,14 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// <summary>
     /// Name of the variable.
     /// </summary>
-    [ActionParameter("name", false)]
+    [ActionParameter("name")]
     public string Name { get; set; } = "";
 
     /// <summary>
     /// Value of the variable.
     /// Parameter is parsed.
     /// </summary>
-    [ActionParameter("value", true)]
+    [ActionParameter("value")]
     public string Value { get; set; } = "";
 
     /// <inheritdoc />

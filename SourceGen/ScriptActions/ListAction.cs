@@ -14,7 +14,7 @@ namespace LOCM3Gen.SourceGen.ScriptActions
     /// <summary>
     /// List name.
     /// </summary>
-    [ActionParameter("name", false)]
+    [ActionParameter("name")]
     public string Name { get; set; } = "";
 
     /// <summary>

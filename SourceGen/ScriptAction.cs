@@ -64,10 +64,7 @@ namespace LOCM3Gen.SourceGen
         if (parameterAttribute == null)
           continue;
 
-        var propertyValue = actionXmlElement.Attribute(parameterAttribute.ActionParameterName)?.Value ?? "";
-        if (parameterAttribute.ParseParameterValue)
-          propertyValue = ParseText(propertyValue);
-
+        var propertyValue = ParseText(actionXmlElement.Attribute(parameterAttribute.ActionParameterName)?.Value ?? "");
         if (property.PropertyType == typeof(string))
           property.SetValue(this, propertyValue);
         else if (property.PropertyType == typeof(bool))

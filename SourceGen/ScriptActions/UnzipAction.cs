@@ -12,21 +12,18 @@ namespace LOCM3Gen.SourceGen.ScriptActions
   {
     /// <summary>
     /// Path to the zip-archive file.
-    /// Parameter is parsed.
     /// </summary>
     [ActionParameter("archive")]
     public string ArchivePath { get; set; } = "";
 
     /// <summary>
     /// Internal path in the archive of the file to be extracted.
-    /// Parameter is parsed.
     /// </summary>
     [ActionParameter("entry")]
     public string EntryPath { get; set; } = "";
 
     /// <summary>
     /// Target directory where the file will be extracted.
-    /// Parameter is parsed.
     /// </summary>
     [ActionParameter("target-dir")]
     public string TargetDirectory { get; set; } = "";

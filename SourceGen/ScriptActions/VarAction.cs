@@ -17,7 +17,6 @@ namespace LOCM3Gen.SourceGen.ScriptActions
 
     /// <summary>
     /// Value of the variable.
-    /// Parameter is parsed.
     /// </summary>
     [ActionParameter("value")]
     public string Value { get; set; } = "";

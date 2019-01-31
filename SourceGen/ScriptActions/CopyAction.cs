@@ -12,14 +12,12 @@ namespace LOCM3Gen.SourceGen.ScriptActions
   {
     /// <summary>
     /// Source directory where to copy files from.
-    /// Parameter is parsed.
     /// </summary>
     [ActionParameter("source-dir")]
     public string SourceDirectory { get; set; } = "";
 
     /// <summary>
     /// Target directory where to copy files to.
-    /// Parameter is parsed.
     /// </summary>
     [ActionParameter("target-dir")]
     public string TargetDirectory { get; set; } = "";

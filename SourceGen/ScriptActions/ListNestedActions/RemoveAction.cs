@@ -11,7 +11,6 @@ namespace LOCM3Gen.SourceGen.ScriptActions.ListNestedActions
   {
     /// <summary>
     /// The value to remove from the list.
-    /// Parameter is parsed.
     /// </summary>
     [ActionParameter("value")]
     public string Value { get; set; } = "";

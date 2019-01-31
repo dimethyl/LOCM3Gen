@@ -12,14 +12,12 @@ namespace LOCM3Gen.SourceGen.ScriptActions
   {
     /// <summary>
     /// Argument A.
-    /// Parameter is parsed.
     /// </summary>
     [ActionParameter("a")]
     public string ArgumentA { get; set; } = "";
 
     /// <summary>
     /// Argument B.
-    /// Parameter is parsed.
     /// </summary>
     [ActionParameter("b")]
     public string ArgumentB { get; set; } = "";

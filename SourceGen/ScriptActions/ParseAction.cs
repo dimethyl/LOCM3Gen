@@ -12,7 +12,6 @@ namespace LOCM3Gen.SourceGen.ScriptActions
   {
     /// <summary>
     /// Source directory where the files will be searched.
-    /// Parameter is parsed.
     /// </summary>
     [ActionParameter("source-dir")]
     public string SourceDirectory { get; set; } = "";

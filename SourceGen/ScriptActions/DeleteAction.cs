@@ -14,7 +14,6 @@ namespace LOCM3Gen.SourceGen.ScriptActions
   {
     /// <summary>
     /// Source directory where to delete entries from.
-    /// Parameter is parsed.
     /// </summary>
     [ActionParameter("source-dir")]
     public string SourceDirectory { get; set; } = "";

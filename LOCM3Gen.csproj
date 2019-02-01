@@ -85,6 +85,7 @@
     <Compile Include="SourceGen\ScriptActions\ListNestedActions\RemoveAction.cs" />
     <Compile Include="SourceGen\ScriptActions\ListNestedActions\RemovePathsAction.cs" />
     <Compile Include="SourceGen\ScriptActions\ParseAction.cs" />
+    <Compile Include="SourceGen\ScriptActions\RunAction.cs" />
     <Compile Include="SourceGen\ScriptActions\UnzipAction.cs" />
     <Compile Include="SourceGen\ScriptActions\VarAction.cs" />
     <Compile Include="SourceGen\ScriptDataContext.cs" />

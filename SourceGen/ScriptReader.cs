@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Xml.Linq;
 
@@ -16,28 +15,22 @@ namespace LOCM3Gen.SourceGen
   /// <summary>
   /// Class of the SourceGen script reader.
   /// </summary>
-  public class ScriptReader
+  public static class ScriptReader
   {
     /// <summary>
     /// Minimal supported SourceGen file version.
     /// </summary>
-    protected static readonly Version MinVersion = new Version("1.0");
+    private static readonly Version MinVersion = new Version("1.0");
 
     /// <summary>
     /// Maximal supported SourceGen file version.
     /// </summary>
-    protected static readonly Version MaxVersion = new Version("1.0");
+    private static readonly Version MaxVersion = new Version("1.0");
 
     /// <summary>
     /// Dictionary of <see cref="ScriptAction" />-derived types with script action names as keys.
     /// </summary>
-    public static readonly Dictionary<string, Type> ScriptActions = new Dictionary<string, Type>();
-
-    /// <summary>
-    /// Script data context of the script reader.
-    /// Contains variables and lists for parsing.
-    /// </summary>
-    public readonly ScriptDataContext DataContext = new ScriptDataContext();
+    private static readonly Dictionary<string, Type> ScriptActions = new Dictionary<string, Type>();
 
     /// <summary>
     /// Script reader static constructor.
@@ -71,6 +64,7 @@ namespace LOCM3Gen.SourceGen
     /// <param name="actionXmlElement">Action's XML element containing script action data.</param>
     /// <param name="dataContext">Script data context instance.</param>
     /// <param name="parentAction">Parent script action this XML element is nested to. Can be null.</param>
+    /// <exception cref="ScriptException">Script processing error occured.</exception>
     public static void ExecuteElement(XElement actionXmlElement, ScriptDataContext dataContext, ScriptAction parentAction = null)
     {
       var actionName = actionXmlElement.Name.ToString();
@@ -97,30 +91,32 @@ namespace LOCM3Gen.SourceGen
     /// Executes SourceGen XML-based script interpreting root-nested nodes into script actions.
     /// </summary>
     /// <param name="scriptFileName">SourceGen script file name to read.</param>
-    /// <exception cref="FileNotFoundException">Script file was not found.</exception>
-    /// <exception cref="FormatException">Invalid script file header.</exception>
-    /// <exception cref="VersionNotFoundException">Unknown script file version.</exception>
-    public void RunScript(string scriptFileName)
+    /// <param name="dataContext">Script data context instance.</param>
+    /// <exception cref="ScriptException">Script processing error occured.</exception>
+    public static void RunScript(string scriptFileName, ScriptDataContext dataContext)
     {
+      if (string.IsNullOrWhiteSpace(scriptFileName) || !File.Exists(scriptFileName))
+        throw new ScriptException("Script file does not exist.", scriptName: scriptFileName);
+
+      var rootNode = XDocument.Load(scriptFileName).Root;
+      if (rootNode == null || rootNode.Name != "sourcegen-script")
+        throw new ScriptException("Invalid script file header.", scriptName: scriptFileName);
+
+      var scriptVersion = new Version(rootNode.Attribute("version")?.Value.Trim() ?? "0.0");
+      if (scriptVersion < MinVersion || scriptVersion > MaxVersion)
+        throw new ScriptException($"Unknown script file version {scriptVersion}.", scriptName: scriptFileName);
+
       try
       {
-        if (string.IsNullOrWhiteSpace(scriptFileName) || !File.Exists(scriptFileName))
-          throw new FileNotFoundException($"Script \"{scriptFileName}\" was not found.", scriptFileName);
-
-        var rootNode = XDocument.Load(scriptFileName).Root;
-        if (rootNode == null || rootNode.Name != "sourcegen-script")
-          throw new ScriptException("Invalid script file header.");
-
-        var scriptVersion = new Version(rootNode.Attribute("version")?.Value.Trim() ?? "0.0");
-        if (scriptVersion < MinVersion || scriptVersion > MaxVersion)
-          throw new ScriptException($"Unknown script file version {scriptVersion}.");
-
         foreach (var scriptAction in rootNode.Elements())
-          ExecuteElement(scriptAction, DataContext);
+          ExecuteElement(scriptAction, dataContext);
       }
       catch (ScriptException e)
       {
-        throw new ScriptException(e.ErrorMessage, e.ActionXmlElement, e.ActionParameter, scriptFileName);
+        if (e.ScriptName == null)
+          throw new ScriptException(e.ErrorMessage, e.ActionXmlElement, e.ActionParameter, scriptFileName);
+
+        throw;
       }
     }
   }

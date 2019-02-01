@@ -5,45 +5,42 @@
         Closing="MainWindow_OnClosing">
 
   <!-- Main user interface panel. -->
-  <StackPanel Name="ControlsStack" DataContext="{Binding ElementName=GeneratorWindow, Path=Generator}" Margin="8">
+  <StackPanel DataContext="{Binding ElementName=GeneratorWindow, Path=Generator}" Margin="8">
     <!-- libopencm3 directory input and "About" button. -->
     <DockPanel>
-      <Label Name="AboutLabel" DockPanel.Dock="Right" Content="About" Foreground="Blue" Cursor="Hand" Padding="0, 4, 0, 4"
-             MouseUp="AboutLabel_OnMouseUp" />
-      <Label Name="Locm3DirectoryLabel" Content="libopencm3 directory:" Padding="0, 4, 0, 4" />
+      <Label DockPanel.Dock="Right" Content="About" Foreground="Blue" Cursor="Hand" Padding="0, 4, 0, 4" MouseUp="AboutLabel_OnMouseUp" />
+      <Label Content="libopencm3 directory:" Padding="0, 4, 0, 4" />
     </DockPanel>
-    <DockPanel Height="20">
-      <Button Name="Locm3DirectoryButton" DockPanel.Dock="Right" Content="  ...  " Click="Locm3DirectoryButton_OnClick" />
-      <TextBox Name="Locm3DirectoryInput" Text="{Binding Locm3Directory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    <DockPanel>
+      <Button DockPanel.Dock="Right" Content="  ...  " Click="Locm3DirectoryButton_OnClick" />
+      <TextBox Text="{Binding Locm3Directory, Mode=TwoWay}" />
     </DockPanel>
 
     <!-- Project directory input. -->
-    <Label Name="ProjectDirectoryLabel" Content="Project directory:" Padding="0, 4, 0, 4" />
-    <DockPanel Height="20">
-      <Button Name="ProjectDirectoryButton" DockPanel.Dock="Right" Content="  ...  " Click="ProjectDirectoryButton_OnClick" />
-      <TextBox Name="ProjectDirectoryInput" Text="{Binding ProjectDirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    <Label Content="Project directory:" Padding="0, 4, 0, 4" />
+    <DockPanel>
+      <Button DockPanel.Dock="Right" Content="  ...  " Click="ProjectDirectoryButton_OnClick" />
+      <TextBox Text="{Binding ProjectDirectory, Mode=TwoWay}" />
     </DockPanel>
 
     <!-- Project name input. -->
-    <Label Name="ProjectNameLabel" Content="Project name:" Padding="0, 4, 0, 4" />
-    <TextBox Name="ProjectNameInput" Height="20" Text="{Binding ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-             PreviewTextInput="ProjectNameInput_OnPreviewTextInput" PreviewKeyDown="ProjectNameInput_OnPreviewKeyDown" />
+    <Label Content="Project name:" Padding="0, 4, 0, 4" />
+    <TextBox Text="{Binding ProjectName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
     <!-- Project subdirectory checkbox. -->
-    <CheckBox Name="ProjectSubdirectoryCheckbox" Content="Create subdirectory for the project" Margin="0, 8, 0, 0"
-              IsChecked="{Binding CreateProjectSubdirectory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    <CheckBox Content="Create subdirectory for the project" Margin="0, 8, 0, 0" IsChecked="{Binding CreateProjectSubdirectory, Mode=TwoWay}" />
 
     <!-- Target environment selector. -->
-    <Label Name="EnvironmentsLabel" Content="Project's target environment:" Padding="0, 4, 0, 4" />
-    <ComboBox Name="EnvironmentsList" SelectedItem="{Binding EnvironmentName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    <Label Content="Project's target environment:" Padding="0, 4, 0, 4" />
+    <ComboBox Name="EnvironmentsList" SelectedItem="{Binding EnvironmentName, Mode=TwoWay}" />
 
     <!-- Microcontroller family selector. -->
-    <Label Name="FamiliesLabel" Content="Microcontroller family:" Padding="0, 4, 0, 4" />
-    <ComboBox Name="FamiliesList" SelectedItem="{Binding FamilyName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    <Label Content="Microcontroller family:" Padding="0, 4, 0, 4" />
+    <ComboBox Name="FamiliesList" SelectedItem="{Binding FamilyName, Mode=TwoWay}" />
 
     <!-- Microcontroller device selector. -->
-    <Label Name="DevicesLabel" Content="Microcontroller device:" Padding="0, 4, 0, 4" />
-    <ComboBox Name="DevicesList" SelectedItem="{Binding DeviceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+    <Label Content="Microcontroller device:" Padding="0, 4, 0, 4" />
+    <ComboBox Name="DevicesList" SelectedItem="{Binding DeviceName, Mode=TwoWay}" />
 
     <!-- Generation button. -->
     <Button Name="GenerationButton" Content="Generate or update the project" Margin="0, 8, 0, 0" Click="GenerationButton_OnClick" />

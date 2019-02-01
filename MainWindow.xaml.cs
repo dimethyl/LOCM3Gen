@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -11,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using System.Xml.Linq;
 using LOCM3Gen.SourceGen;
-using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace LOCM3Gen
@@ -146,13 +144,13 @@ namespace LOCM3Gen
     {
       using (var directorySelector = new FolderBrowserDialog
       {
-        SelectedPath = Locm3DirectoryInput.Text.Trim(),
+        SelectedPath = Generator.Locm3Directory,
         Description = "Select libopencm3 directory:",
         ShowNewFolderButton = false
       })
       {
         if (directorySelector.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-          Locm3DirectoryInput.Text = directorySelector.SelectedPath;
+          Generator.Locm3Directory = directorySelector.SelectedPath;
       }
     }
 
@@ -165,38 +163,14 @@ namespace LOCM3Gen
     {
       using (var directorySelector = new FolderBrowserDialog
       {
-        SelectedPath = ProjectDirectoryInput.Text.Trim(),
+        SelectedPath = Generator.ProjectDirectory,
         Description = "Select project directory:",
         ShowNewFolderButton = true
       })
       {
         if (directorySelector.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-          ProjectDirectoryInput.Text = directorySelector.SelectedPath;
+          Generator.ProjectDirectory = directorySelector.SelectedPath;
       }
-    }
-
-    /// <summary>
-    /// Project name input filtering to <c>^\w+$</c> pattern.
-    /// Spaces are not filtered, they are filtered by <see cref="ProjectNameInput_OnPreviewKeyDown"/> method.
-    /// </summary>
-    /// <param name="sender">Event sender object.</param>
-    /// <param name="e">Event arguments.</param>
-    private void ProjectNameInput_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
-    {
-      if (!Regex.IsMatch(e.Text, @"^\w+$"))
-        e.Handled = true;
-    }
-
-    /// <summary>
-    /// Project name input filtering to <c>^\w+$</c> pattern.
-    /// Only spaces are filtered, other characters are filtered by <see cref="ProjectNameInput_OnPreviewTextInput"/> method.
-    /// </summary>
-    /// <param name="sender">Event sender object.</param>
-    /// <param name="e">Event arguments.</param>
-    private void ProjectNameInput_OnPreviewKeyDown(object sender, KeyEventArgs e)
-    {
-      if (e.Key == Key.Space)
-        e.Handled = true;
     }
 
     /// <summary>
@@ -225,8 +199,10 @@ namespace LOCM3Gen
         {
           Generator.GenerateProject();
 
-          MessageBox.Show($"Project \"{Generator.ProjectName}\" has been successfully created in \"{Generator.ProjectDirectory}\".",
-            Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+          var projectDirectory =
+            Generator.CreateProjectSubdirectory ? Path.Combine(Generator.ProjectDirectory, Generator.ProjectName) : Generator.ProjectDirectory;
+          MessageBox.Show($"Project \"{Generator.ProjectName}\" has been successfully created in \"{projectDirectory}\".", Title,
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         else
         {
@@ -245,7 +221,7 @@ namespace LOCM3Gen
     }
 
     /// <summary>
-    /// Shows program info on <see cref="AboutLabel" /> label click.
+    /// Shows program info on "About" label click.
     /// </summary>
     /// <param name="sender">Event sender object.</param>
     /// <param name="e">Event arguments.</param>

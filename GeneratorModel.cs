@@ -60,7 +60,7 @@ namespace LOCM3Gen
       get => _locm3Directory;
       set
       {
-        _locm3Directory = value;
+        _locm3Directory = value.Trim();
         OnPropertyChanged(nameof(Locm3Directory));
       }
     }
@@ -73,7 +73,7 @@ namespace LOCM3Gen
       get => _projectDirectory;
       set
       {
-        _projectDirectory = value;
+        _projectDirectory = value.Trim();
         OnPropertyChanged(nameof(ProjectDirectory));
       }
     }
@@ -86,7 +86,7 @@ namespace LOCM3Gen
       get => _projectName;
       set
       {
-        _projectName = value;
+        _projectName = Regex.Replace(value, @"\W", "");
         OnPropertyChanged(nameof(ProjectName));
       }
     }
@@ -112,7 +112,7 @@ namespace LOCM3Gen
       get => _environmentName;
       set
       {
-        _environmentName = value;
+        _environmentName = value.Trim();
         OnPropertyChanged(nameof(EnvironmentName));
       }
     }
@@ -125,7 +125,7 @@ namespace LOCM3Gen
       get => _familyName;
       set
       {
-        _familyName = value;
+        _familyName = value.Trim();
         OnPropertyChanged(nameof(FamilyName));
       }
     }
@@ -138,7 +138,7 @@ namespace LOCM3Gen
       get => _deviceName;
       set
       {
-        _deviceName = value;
+        _deviceName = value.Trim();
         OnPropertyChanged(nameof(DeviceName));
       }
     }
@@ -172,13 +172,13 @@ namespace LOCM3Gen
 
       var settings = new XDocument(new XDeclaration("1.0", "utf-8", null),
         new XElement("settings",
-          new XElement("locm3-directory", Locm3Directory.Trim()),
-          new XElement("project-directory", ProjectDirectory.Trim()),
-          new XElement("project-name", ProjectName.Trim()),
+          new XElement("locm3-directory", Locm3Directory),
+          new XElement("project-directory", ProjectDirectory),
+          new XElement("project-name", ProjectName),
           new XElement("create-subdirectory", CreateProjectSubdirectory.ToString().ToLower()),
-          new XElement("project-environment", EnvironmentName.Trim()),
-          new XElement("selected-family", FamilyName.Trim()),
-          new XElement("selected-device", DeviceName.Trim())
+          new XElement("project-environment", EnvironmentName),
+          new XElement("selected-family", FamilyName),
+          new XElement("selected-device", DeviceName)
         ));
 
       settings.Save(Path.Combine(Configuration.AppDataDirectory, "Settings.xml"));
@@ -193,19 +193,19 @@ namespace LOCM3Gen
     {
       var errors = new Collection<ValidationResult>();
 
-      if (!Directory.Exists(Locm3Directory.Trim()))
+      if (!Directory.Exists(Locm3Directory))
         errors.Add(new ValidationResult("libopencm3 directory does not exist."));
 
       if (string.IsNullOrWhiteSpace(ProjectDirectory))
         errors.Add(new ValidationResult("Project directory path cannot be empty."));
 
-      if (!Regex.IsMatch(ProjectName.Trim(), @"^\w+$"))
+      if (!Regex.IsMatch(ProjectName, @"^\w+$"))
         errors.Add(new ValidationResult("Project name may only contain alphanumeric characters and underscores."));
 
-      if (!File.Exists(Path.Combine(Configuration.FamiliesDirectory, $"{FamilyName.Trim()}.xml")))
+      if (!File.Exists(Path.Combine(Configuration.FamiliesDirectory, $"{FamilyName}.xml")))
         errors.Add(new ValidationResult("Unknown microcontroller family specified."));
 
-      if (!File.Exists(Path.Combine(Configuration.EnvironmentsDirectory, $"{EnvironmentName.Trim()}.xml")))
+      if (!File.Exists(Path.Combine(Configuration.EnvironmentsDirectory, $"{EnvironmentName}.xml")))
         errors.Add(new ValidationResult("Unknown target environment specified."));
 
       return errors;
@@ -228,26 +228,25 @@ namespace LOCM3Gen
         return;
 
       // Filling general variables.
-      var sourceGen = new ScriptReader();
-      sourceGen.DataContext.Variables.Add("ProgramDir", Configuration.ProgramDirectory);
-      sourceGen.DataContext.Variables.Add("TemplatesDir", Configuration.TemplatesDirectory);
-      sourceGen.DataContext.Variables.Add("FamiliesDir", Configuration.FamiliesDirectory);
-      sourceGen.DataContext.Variables.Add("EnvironmentsDir", Configuration.EnvironmentsDirectory);
-      sourceGen.DataContext.Variables.Add("LOCM3Dir", Locm3Directory.Trim());
-      sourceGen.DataContext.Variables.Add("ProjectDir",
-        CreateProjectSubdirectory ? Path.Combine(ProjectDirectory.Trim(), ProjectName.Trim()) : ProjectDirectory.Trim());
-      sourceGen.DataContext.Variables.Add("ProjectName", ProjectName.Trim());
-      sourceGen.DataContext.Variables.Add("EnvironmentName", EnvironmentName.Trim());
-      sourceGen.DataContext.Variables.Add("FamilyName", FamilyName.Trim());
-      sourceGen.DataContext.Variables.Add("DeviceName", DeviceName.Trim());
-      sourceGen.DataContext.Variables.Add("Date", DateTime.Now.ToShortDateString());
-      sourceGen.DataContext.Variables.Add("Time", DateTime.Now.ToShortTimeString());
-      sourceGen.DataContext.Variables.Add("UserName", Environment.UserName);
-      sourceGen.DataContext.Variables.Add("MachineName", Environment.MachineName);
+      var projectData = new ScriptDataContext();
+      projectData.Variables.Add("ProgramDir", Configuration.ProgramDirectory);
+      projectData.Variables.Add("TemplatesDir", Configuration.TemplatesDirectory);
+      projectData.Variables.Add("FamiliesDir", Configuration.FamiliesDirectory);
+      projectData.Variables.Add("EnvironmentsDir", Configuration.EnvironmentsDirectory);
+      projectData.Variables.Add("LOCM3Dir", Locm3Directory);
+      projectData.Variables.Add("ProjectDir", CreateProjectSubdirectory ? Path.Combine(ProjectDirectory, ProjectName) : ProjectDirectory);
+      projectData.Variables.Add("ProjectName", ProjectName);
+      projectData.Variables.Add("EnvironmentName", EnvironmentName);
+      projectData.Variables.Add("FamilyName", FamilyName);
+      projectData.Variables.Add("DeviceName", DeviceName);
+      projectData.Variables.Add("Date", DateTime.Now.ToShortDateString());
+      projectData.Variables.Add("Time", DateTime.Now.ToShortTimeString());
+      projectData.Variables.Add("UserName", Environment.UserName);
+      projectData.Variables.Add("MachineName", Environment.MachineName);
 
       // Running family and environment script files.
-      sourceGen.RunScript(Path.Combine(Configuration.FamiliesDirectory, $"{FamilyName.Trim()}.xml"));
-      sourceGen.RunScript(Path.Combine(Configuration.EnvironmentsDirectory, $"{EnvironmentName.Trim()}.xml"));
+      ScriptReader.RunScript(Path.Combine(Configuration.FamiliesDirectory, $"{FamilyName}.xml"), projectData);
+      ScriptReader.RunScript(Path.Combine(Configuration.EnvironmentsDirectory, $"{EnvironmentName}.xml"), projectData);
     }
 
     /// <summary>

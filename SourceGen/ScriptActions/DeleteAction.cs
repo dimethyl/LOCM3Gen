@@ -61,16 +61,15 @@ namespace LOCM3Gen.SourceGen.ScriptActions
         return;
 
       // Checking for "*" and "?" wildcards in directory names, invalid characters and parent directory ".." links.
-      if (Regex.IsMatch(EntryPattern, @"[*?].*[/\\]|[""|<>:]|(?<=[/\\]|^)\.\.(?=[/\\]|$)"))
+      if (Regex.IsMatch(EntryPattern, @"[*?].*[/\\]|[""|<>:]|(?<=[/\\]|^)\.\.(?=[/\\]|$)", RegexOptions.Compiled))
         throw new ScriptException("Invalid entry pattern provided.", ActionXmlElement, "pattern");
 
-      var sourceDirectory = Path.GetFullPath(SourceDirectory);
-      if (!Directory.Exists(Path.GetDirectoryName(Path.Combine(sourceDirectory, EntryPattern))))
+      if (!Directory.Exists(Path.GetDirectoryName(Path.Combine(SourceDirectory, EntryPattern))))
         return;
 
       if (SearchFiles)
       {
-        foreach (var fileName in Directory.EnumerateFiles(sourceDirectory, EntryPattern,
+        foreach (var fileName in Directory.EnumerateFiles(SourceDirectory, EntryPattern,
           Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
         {
           FileSystem.DeleteFile(fileName, UIOption.OnlyErrorDialogs,
@@ -80,7 +79,7 @@ namespace LOCM3Gen.SourceGen.ScriptActions
 
       if (SearchDirectories)
       {
-        foreach (var directoryName in Directory.EnumerateDirectories(sourceDirectory, EntryPattern,
+        foreach (var directoryName in Directory.EnumerateDirectories(SourceDirectory, EntryPattern,
           Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
         {
           FileSystem.DeleteDirectory(directoryName, UIOption.OnlyErrorDialogs,

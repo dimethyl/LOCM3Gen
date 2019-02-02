@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
@@ -93,19 +94,39 @@ namespace LOCM3Gen.SourceGen
     protected string ParseText(string text)
     {
       // Removing {%...%} patterns of comments.
-      var result = Regex.Replace(text, @"\{\%(.*?)\%\}", "", RegexOptions.Compiled);
-
-      // Parsing {#...{@...@}...#} patterns of lists.
-      result = Regex.Replace(result, @"\{\#(.*?)\{\@(\w*)\@\}(.*?)\#\}",
-        match => DataContext.Lists.ContainsKey(match.Groups[2].Value)
-          ? match.Groups[1].Value + string.Join(match.Groups[3].Value + match.Groups[1].Value, DataContext.Lists[match.Groups[2].Value]) +
-            match.Groups[3].Value
-          : "", RegexOptions.Compiled | RegexOptions.Singleline);
+      var result = Regex.Replace(text, @"\{\%(.*?)\%\}", "", RegexOptions.Compiled | RegexOptions.Singleline);
 
       // Parsing {$...$} patterns of variables.
-      result = Regex.Replace(result, @"\{\$(\w*)\$\}",
-        match => DataContext.Variables.ContainsKey(match.Groups[1].Value) ? DataContext.Variables[match.Groups[1].Value] : "",
-        RegexOptions.Compiled);
+      result = Regex.Replace(result, @"\{\$(\w*)\$\}", match =>
+        DataContext.Variables.ContainsKey(match.Groups[1].Value) ? DataContext.Variables[match.Groups[1].Value] : "", RegexOptions.Compiled);
+
+      // Parsing {#...#} patterns of iterators.
+      result = Regex.Replace(result, @"\{\#(.*?)\#\}", match =>
+        {
+          // Checking the specified lists for the maximal iteration count.
+          var iteratorString = match.Groups[1].Value;
+          var iterations = 0;
+          foreach (Match listMatch in Regex.Matches(iteratorString, @"\{\@(\w*)\@\}"))
+          {
+            var listName = listMatch.Groups[1].Value;
+            if (!DataContext.Lists.ContainsKey(listName))
+              continue;
+
+            iterations = Math.Max(iterations, DataContext.Lists[listName].Count);
+          }
+
+          // Iteratively parsing {@...@} patterns of lists.
+          var content = new StringBuilder(iterations);
+          for (var index = 0; index < iterations; index++)
+          {
+            // ReSharper disable AccessToModifiedClosure
+            content.Append(Regex.Replace(iteratorString, @"\{\@(\w*)\@\}",
+              listMatch => DataContext.Lists.TryGetValue(listMatch.Groups[1].Value, out var list) && index < list.Count ? list[index] : ""));
+            // ReSharper restore AccessToModifiedClosure
+          }
+
+          return content.ToString();
+        }, RegexOptions.Compiled | RegexOptions.Singleline);
 
       return result;
     }

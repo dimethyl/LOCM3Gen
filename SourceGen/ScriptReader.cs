@@ -38,7 +38,6 @@ namespace LOCM3Gen.SourceGen
     /// </summary>
     static ScriptReader()
     {
-      // ReSharper disable once PossibleNullReferenceException
       foreach (var type in typeof(ScriptReader).Assembly.GetTypes())
       {
         if (!type.IsSubclassOf(typeof(ScriptAction)))

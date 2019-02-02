@@ -41,14 +41,13 @@ namespace LOCM3Gen.SourceGen.ScriptActions
         throw new ScriptException($"Invalid source directory: \"{SourceDirectory}\".", ActionXmlElement, "source-dir");
 
       // Checking for "*" and "?" wildcards in directory names, invalid characters and parent directory ".." links.
-      if (Regex.IsMatch(FilePattern, @"[*?].*[/\\]|[""|<>:]|(?<=[/\\]|^)\.\.(?=[/\\]|$)"))
+      if (Regex.IsMatch(FilePattern, @"[*?].*[/\\]|[""|<>:]|(?<=[/\\]|^)\.\.(?=[/\\]|$)", RegexOptions.Compiled))
         throw new ScriptException("Invalid file pattern provided.", ActionXmlElement, "file-pattern");
 
-      var sourceDirectory = Path.GetFullPath(SourceDirectory);
-      if (!Directory.Exists(Path.GetDirectoryName(Path.Combine(sourceDirectory, FilePattern))))
+      if (!Directory.Exists(Path.GetDirectoryName(Path.Combine(SourceDirectory, FilePattern))))
         return;
 
-      foreach (var fileName in Directory.EnumerateFiles(sourceDirectory, FilePattern,
+      foreach (var fileName in Directory.EnumerateFiles(SourceDirectory, FilePattern,
         Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly))
       {
         ParseFile(fileName);

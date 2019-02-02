@@ -49,7 +49,7 @@ namespace LOCM3Gen.SourceGen.ScriptActions
       if (string.IsNullOrWhiteSpace(TargetDirectory))
         throw new ScriptException("Empty target directory provided.", ActionXmlElement, "target-dir");
 
-      using (var archive = ZipFile.OpenRead(Path.GetFullPath(ArchivePath)))
+      using (var archive = ZipFile.OpenRead(ArchivePath))
       {
         var entryStream = archive.GetEntry(EntryPath);
         if (entryStream == null)

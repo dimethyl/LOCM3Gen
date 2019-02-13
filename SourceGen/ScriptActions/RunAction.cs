@@ -9,7 +9,7 @@ namespace LOCM3Gen.SourceGen.ScriptActions
   public class RunAction : ScriptAction
   {
     /// <summary>
-    /// Argument A.
+    /// Path to the script file to run.
     /// </summary>
     [ActionParameter("script-path")]
     public string ScriptPath { get; set; } = "";

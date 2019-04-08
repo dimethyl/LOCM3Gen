@@ -5,7 +5,6 @@
  * Copyright (C) 2018-2019 Maxim Yudin <stibiu@yandex.ru>.
  */
 
-using System.Resources;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -31,5 +30,4 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can use the default the Revision and
 // Build Numbers by using the '*' as shown below:
-[assembly: AssemblyVersion("1.4.*")]
-[assembly: NeutralResourcesLanguage("en")]
+[assembly: AssemblyVersion("1.5.*")]

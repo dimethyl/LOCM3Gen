@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+  If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/ .
+
+  Copyright (C) 2018-2019 Maxim Yudin <stibiu@yandex.ru>.
+-->
+<sourcegen-script version="1.0">
+  <!-- Deleting CMake cache. -->
+  <delete source-dir="{$ProjectDir$}" pattern="CMakeFiles" search-files="false" search-dirs="true" recursive="true" permanently="false" />
+  <delete source-dir="{$ProjectDir$}" pattern="CMakeCache.txt" search-files="true" search-dirs="false" recursive="true" permanently="false" />
+  <delete source-dir="{$ProjectDir$}" pattern="*.cmake" search-files="true" search-dirs="false" recursive="true" permanently="false" />
+  <delete source-dir="{$ProjectDir$}" pattern="Makefile" search-files="true" search-dirs="false" recursive="true" permanently="false" />
+
+  <!-- Formatting FPU compiler option. -->
+  <if-neq a="{$FPUnit$}" b="">
+    <var name="FPUnitOption" value="-mfpu={$FPUnit$}" />
+  </if-neq>
+
+  <!-- Building project files list. -->
+  <list name="ProjectFiles">
+    <add-paths source-dir="{$ProjectDir$}" file-pattern="libopencm3/*.h" recursive="true" relative="true" />
+    <add-paths source-dir="{$ProjectDir$}" file-pattern="project/*.h" recursive="true" relative="true" />
+    <add-paths source-dir="{$ProjectDir$}" file-pattern="project/*.c" recursive="true" relative="true" />
+  </list>
+
+  <!-- Environment-specific templates used for project generation. -->
+  <copy source-dir="{$TemplatesDir$}/CMake" target-dir="{$ProjectDir$}" file-pattern="*" parse="true" keep-existing="false" recursive="true" />
+</sourcegen-script>

@@ -8,8 +8,9 @@
 <sourcegen-script version="1.0">
   <!-- Building project files list. -->
   <list name="ProjectFiles">
-    <add-paths source-dir="{$ProjectDir$}" file-pattern="*.h" recursive="true" relative="true" />
-    <add-paths source-dir="{$ProjectDir$}" file-pattern="*.c" recursive="true" relative="true" />
+    <add-paths source-dir="{$ProjectDir$}" file-pattern="libopencm3/*.h" recursive="true" relative="true" />
+    <add-paths source-dir="{$ProjectDir$}" file-pattern="project/*.h" recursive="true" relative="true" />
+    <add-paths source-dir="{$ProjectDir$}" file-pattern="project/*.c" recursive="true" relative="true" />
   </list>
 
   <!-- Environment-specific templates used for project generation. -->

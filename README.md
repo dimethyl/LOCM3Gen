@@ -32,6 +32,7 @@ The generator supports **STM32** microcontrollers of listed families:
 Supported target environments for projects:
 
 * **EmBitz** IDE
+* **CMake** (**CLion** IDE)
 * None (only necessary files are created)
 
 The generator is customizable through special SourceGen scripts and templates
@@ -73,3 +74,5 @@ Links
 * **LOCM3Gen** project GitHub page: https://github.com/Egiraht/LOCM3Gen
 * **libopencm3** library: <https://github.com/libopencm3/libopencm3>
 * **EmBitz** IDE: <https://www.embitz.org/>
+* **CMake**: <https://cmake.org/>
+* **CLion** IDE: <https://www.jetbrains.com/clion/>

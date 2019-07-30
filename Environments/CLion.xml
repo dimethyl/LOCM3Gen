@@ -24,6 +24,39 @@
     <add-paths source-dir="{$ProjectDir$}" file-pattern="project/*.c" recursive="true" relative="true" />
   </list>
 
+  <!-- Defining family-specific OpenOCD script file. -->
+  <var name="OCDConfigurationFile" value="target/stm32_stlink.cfg" />
+  <if-eq a="{$FamilyName$}" b="STM32F0">
+    <var name="OCDConfigurationFile" value="target/stm32f0x.cfg" />
+  </if-eq>
+  <if-eq a="{$FamilyName$}" b="STM32F1">
+    <var name="OCDConfigurationFile" value="target/stm32f1x.cfg" />
+  </if-eq>
+  <if-eq a="{$FamilyName$}" b="STM32F2">
+    <var name="OCDConfigurationFile" value="target/stm32f2x.cfg" />
+  </if-eq>
+  <if-eq a="{$FamilyName$}" b="STM32F3">
+    <var name="OCDConfigurationFile" value="target/stm32f3x.cfg" />
+  </if-eq>
+  <if-eq a="{$FamilyName$}" b="STM32F4">
+    <var name="OCDConfigurationFile" value="target/stm32f4x.cfg" />
+  </if-eq>
+  <if-eq a="{$FamilyName$}" b="STM32F7">
+    <var name="OCDConfigurationFile" value="target/stm32f7x.cfg" />
+  </if-eq>
+  <if-eq a="{$FamilyName$}" b="STM32G0">
+    <var name="OCDConfigurationFile" value="target/stm32g0x.cfg" />
+  </if-eq>
+  <if-eq a="{$FamilyName$}" b="STM32L0">
+    <var name="OCDConfigurationFile" value="target/stm32l0x.cfg" />
+  </if-eq>
+  <if-eq a="{$FamilyName$}" b="STM32L1">
+    <var name="OCDConfigurationFile" value="target/stm32l1x.cfg" />
+  </if-eq>
+  <if-eq a="{$FamilyName$}" b="STM32L4">
+    <var name="OCDConfigurationFile" value="target/stm32l4x.cfg" />
+  </if-eq>
+
   <!-- Environment-specific templates used for project generation. -->
-  <copy source-dir="{$TemplatesDir$}/CMake" target-dir="{$ProjectDir$}" file-pattern="*" parse="true" keep-existing="false" recursive="true" />
+  <copy source-dir="{$TemplatesDir$}/CLion" target-dir="{$ProjectDir$}" file-pattern="*" parse="true" keep-existing="false" recursive="true" />
 </sourcegen-script>

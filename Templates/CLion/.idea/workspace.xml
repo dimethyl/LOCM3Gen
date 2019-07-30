@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="{$ProjectName$}" targetName="{$ProjectName$}.elf" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="EmbeddedSvdWindowState">
+    <option name="loadedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/{$SVDFile$}" />
+      </list>
+    </option>
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="RunManager" selected="OpenOCD Download &amp; Run.Firmware">
+    <configuration name="Firmware" type="com.jetbrains.cidr.embedded.openocd.conf.type" factoryName="com.jetbrains.cidr.embedded.openocd.conf.factory" PASS_PARENT_ENVS_2="true" PROJECT_NAME="{$ProjectName$}" TARGET_NAME="{$ProjectName$}.elf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="{$ProjectName$}" RUN_TARGET_NAME="{$ProjectName$}.elf">
+      <openocd gdb-port="3333" telnet-port="4444" board-config="$PROJECT_DIR$/openocd.cfg" reset-type="INIT" download-type="UPDATED_ONLY" />
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+</project>
